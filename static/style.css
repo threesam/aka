@@ -1,9 +1,8 @@
 :root {
   /* define colors as colors */
-  --green: #14dd90;
   --red: #831b2d;
   --trueRed: rgb(219, 25, 25);
-  --yellow: #fde24f;
+  --purple: #8f62aa;
   --black: #161f2b;
   --trueBlack: #000;
   --darkBlue: #00214d;
@@ -187,6 +186,13 @@ h6 {font-size: var(--h6);}
 small, .text_small {font-size: var(--smallText);}
 
 /* End type-scale */
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
 
 blockquote {
   margin: 1em 0;
