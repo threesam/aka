@@ -5,7 +5,6 @@ import BlockContent from '@movingbrands/svelte-portable-text';
 import urlBuilder from '@sanity/image-url';
 import client from '../sanityClient';
 import Image from './Image.svelte';
-import Code from './Code.svelte';
 import Author from './Author.svelte';
 import Link from './Link.svelte';
 
@@ -20,7 +19,7 @@ export default {
     }),
   },
   types: {
-    mainImage: ({ node, children }) => ({
+    featuredMedia: ({ node, children }) => ({
       component: Image,
       childNodes: children,
       props: {
