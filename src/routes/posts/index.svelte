@@ -53,6 +53,9 @@
 </script>
 
 <style>
+	a:hover {
+		color: var(--primary);
+	}
 	em {
 		color: var(--primary);
 	}
@@ -80,7 +83,7 @@
 <ul>
 	{#each filteredPosts.filter(post => searchList(post, query)).slice(0, more) as {slug, title, excerpt, publishedAt}}
 	<li>
-		<a href="blog/{slug}">
+		<a href="posts/{slug}">
 			<h2>{title}</h2>
 			<p>{excerpt}</p>
 			<p>published: {format(parseISO(publishedAt), 'yyyy-MM-dd')}</p>
