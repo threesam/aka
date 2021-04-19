@@ -25,5 +25,5 @@ iframe {
 </style>
 
 <div>
-  <iframe {width} height="auto" use:parentWidth src={url} frameborder="0" allowfullscreen/>
+  <iframe src={url} frameborder="0" allowfullscreen/>
 </div>
