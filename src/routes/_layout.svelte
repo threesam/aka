@@ -7,7 +7,7 @@
 	main {
 		position: relative;
 		top: var(--headerHeight);
-		padding: 3rem var(--containerPadding) 0 var(--containerPadding);
+		width: 100%;
 		max-width: 56em;
 		margin: 0 auto;
 	}
