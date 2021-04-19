@@ -6,6 +6,7 @@ import urlBuilder from '@sanity/image-url';
 import client from '../sanityClient';
 import Image from './Image.svelte';
 import Author from './Author.svelte';
+import Video from './Video.svelte';
 import Link from './Link.svelte';
 
 const urlFor = source => urlBuilder(client).image(source);
@@ -27,12 +28,11 @@ export default {
         alt: node.alt,
       },
     }),
-    code: ({ node: { code, language } }) => ({
-      component: Code,
-      childNodes: [],
+    videoUrl: ({ node, children }) => ({
+      component: Video,
+      childNodes: children,
       props: {
-        code,
-        language,
+        url: node.url
       },
     }),
     authorReference: ({ children, node: { author } }) => ({
