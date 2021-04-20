@@ -41,6 +41,8 @@
 
 	import {format, parseISO} from 'date-fns'
 	import SEO from '../../components/SEO.svelte'
+	import Search from '../../components/icons/Search.svelte'
+	import Categories from '../../components/icons/Categories.svelte'
 
 	let selected = ""
 	let value = ""
@@ -50,49 +52,97 @@
 	function searchList(list, query) {
 		return list.title.toLowerCase().match(query) || list.excerpt.toLowerCase().match(query)
 	}
+
+	let showSearch = false
+	let showCategories = false
 </script>
 
 <style>
+	section {
+		padding: 0 var(--containerPadding);
+		max-width: 40rem;
+		margin: 0 auto;
+	}
+
+	h2 {
+		font-size: var(--h5);
+		font-weight: bold;
+	}
+
+	span {
+		font-size: var(--h3);
+	}
+
+	.flex {
+		justify-content: flex-start;
+		flex-wrap: wrap;
+	}
+	.flex li {
+		margin: 0 0.5rem 0.5rem 0;
+	}
 	a:hover {
 		color: var(--primary);
 	}
 	em {
 		color: var(--primary);
 	}
+
+	.empty-button {
+		background: none;
+		border: none;
+		outline: none;
+		padding: 0;
+		margin: 0 0.25rem 0 0;
+		box-shadow: none;
+		color: inherit;
+		display: block;
+	}
+
+	.empty-button:focus {
+		color: var(--primary);
+	}
 </style>
 
-<SEO {...settings} />
+<SEO title="Posts" description="Content" {...settings} />
 
-{#if selected}
-	<h1>Posts in <em>{selected}</em></h1>
-{:else}
-	<h1>Posts</h1>
-{/if}
-<ul class="flex">
-	<li><button on:click={() => selected = ""}>All</button></li>
-	{#each categories as {slug, title}, i}
-		<li><button on:click={() => selected = slug}>{title}</button></li>
-	{/each}
-</ul>
-
-<label for="search">
-	Search
-	<input type="text" bind:value />
-</label>
-
-<ul>
-	{#each filteredPosts.filter(post => searchList(post, query)).slice(0, more) as {slug, title, excerpt, publishedAt}}
-	<li>
-		<a href="posts/{slug}">
-			<h2>{title}</h2>
-			<p>{excerpt}</p>
-			<p>published: {format(parseISO(publishedAt), 'yyyy-MM-dd')}</p>
-			<hr>
-		</a>
-	</li>
+<section>
+	{#if selected}
+	<h1>Posts <span>in <em>{selected}</em></span></h1>
 	{:else}
-	<li>No Posts to Display</li>
-	{/each}
-</ul>
-<button on:click={() => more += 10}>show more</button>
+	<h1>Posts</h1>
+	{/if}
+	<button class="empty-button" on:click={() => showSearch = !showSearch}><Search size="30"/></button>
 
+	<ul class="flex">
+		<li><button on:click={() => selected = ""}>All</button></li>
+		{#each categories as {slug, title}}
+		<li><button on:click={() => selected = slug}>{title}</button></li>
+		{/each}
+	</ul>
+	
+	{#if showSearch}
+		<label for="search">
+			Search
+			<input type="text" bind:value />
+		</label>
+	{/if}
+</section>
+	
+<section>
+	<ul>
+		{#each filteredPosts.filter(post => searchList(post, query)).slice(0, more) as {slug, title, excerpt, publishedAt}}
+		<li>
+			<a href="posts/{slug}">
+				<hr>
+				<h2>{title}</h2>
+				<p>{excerpt}</p>
+				<p><em>{format(parseISO(publishedAt), 'yyyy-MM-dd')}</em></p>
+			</a>
+		</li>
+		{:else}
+		<li>No Posts to Display</li>
+		{/each}
+	</ul>
+	<button on:click={() => more += 10}>show more</button>
+</section>
+	

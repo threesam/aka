@@ -1,5 +1,5 @@
 <script>
-  let darkMode = true
+  let darkMode = false
   function changeTheme() {
     // grab body
     const body = document.querySelector('body')
@@ -8,10 +8,8 @@
     if(darkMode === false) {
       body.classList.add('dark')
       darkMode = true
-      console.log(body)
     } else {
       body.classList.remove('dark')
-      console.log(body)
       darkMode = false
     }
   }
@@ -20,7 +18,6 @@
 <style>
   svg {
     cursor: pointer;
-    text-shadow: 0 0 5px red;
   }
 </style>
 

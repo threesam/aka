@@ -1,20 +1,27 @@
 <script>
 	import Nav from '../components/Nav.svelte';
-
+	import Theme from '../components/Theme.svelte'
+	import Footer from '../components/Footer.svelte'
 </script>
 
 <style>
-	main {
-		position: relative;
-		top: var(--headerHeight);
-		width: 100%;
-		max-width: 56em;
-		margin: 0 auto;
+	div {
+		position: fixed;
+		z-index: 10;
+		padding: 0.5rem;
+		padding-bottom: 0;
+		bottom: var(--containerPadding);
+		right: var(--containerPadding);
+		opacity: 0.8;
 	}
 </style>
 
 <Nav />
 
-<main>
-	<slot/>
-</main>
+<slot/>
+
+<div>
+	<Theme />
+</div>
+
+<Footer />

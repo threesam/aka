@@ -1,6 +1,7 @@
 :root {
   /* define colors as colors */
   --red: #831b2d;
+  --pink: #d11030;
   --trueRed: rgb(219, 25, 25);
   --purple: #8f62aa;
   --black: #161f2b;
@@ -187,7 +188,6 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 {
-  margin-top: 3rem;
   font-size: var(--h1);
 }
 
@@ -358,6 +358,7 @@ button.small {
 
 /* themes */
 .dark {
+  --primary: var(--pink);
   --cardBg: var(--darkGrey);
   --background: var(--trueBlack);
   --textColor: var(--lightGrey);

@@ -30,7 +30,7 @@
       article: {
       publishedTime: publishedAt,
       authors: [
-        "https://www.threesam.com/about"
+        "https://www.artkillingapathy.com/about"
       ],
       tags,
     },
