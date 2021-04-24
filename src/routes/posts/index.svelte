@@ -51,7 +51,7 @@
 		} else {
 			return post
 		}
-	})
+	}).filter(post => searchList(post, query))
 
 	function focus(node) {
 		return node.focus()
@@ -200,10 +200,10 @@
 		<!-- SEARCH -->
 		<div class="search">
 			{#if !showSearch}
-				<button in:fade class="empty-button" on:click={() => showSearch = !showSearch}><Search size="30"/></button>
+				<button in:fade={{delay: 400}} class="empty-button" on:click={() => showSearch = !showSearch}><Search size="30"/></button>
 			{:else}
 				<label use:parentWidth for="search">
-					<input use:focus style="width: ${width};" in:slide type="text" bind:value placeholder="search" />
+					<input use:focus style="width: ${width};" transition:slide={{duration: 400}} type="text" bind:value placeholder="search" />
 				</label>
 			{/if}
 		</div>
@@ -227,11 +227,11 @@
 		</ul>
 		
 		<!-- SEARCH RESULTS -->
-		{#if value && filterPosts(posts).filter(post => searchList(post, query)).length}
+		{#if value && filterPosts(posts).length}
 			{#if selected.slug}
-				<p transition:slide>{filterPosts(posts).filter(post => searchList(post, query)).length} posts match "{value}" in <em>{selected.title}</em></p>	
+				<p transition:slide>{filterPosts(posts).length} posts match "{value}" in <em>{selected.title}</em></p>	
 			{:else}
-				<p transition:slide>{filterPosts(posts).filter(post => searchList(post, query)).length} posts match "{value}"</p>
+				<p transition:slide>{filterPosts(posts).length} posts match "{value}"</p>
 			{/if}
 		{/if}
 	</section>
@@ -239,7 +239,7 @@
 	<!-- POSTS -->
 	<section>
 		<ul>
-			{#each filterPosts(posts).filter(post => searchList(post, query)).slice(0, more) as post, i (post.id)}
+			{#each filterPosts(posts).slice(0, more) as post, i (post.id)}
 				<ListCard data={post} {i} />
 			{:else}
 				{#if selected.slug && !value}
