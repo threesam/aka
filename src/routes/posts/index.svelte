@@ -189,7 +189,7 @@
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: baseline;
-		margin: 3rem 0 0 0;
+		margin: 3rem 0 0.5rem 0;
 	}
 
 	h1 {
