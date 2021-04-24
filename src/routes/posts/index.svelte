@@ -10,10 +10,10 @@
 			publishedAt,
 			"categories": categories[]->slug.current,
 			"excerpt": excerpt[0].children[0].text,
-			"image": featuredMedia.asset->url,
-			"alt": featuredMedia.alt
+			// "image": featuredMedia.asset->url,
+			// "alt": featuredMedia.alt
 		}`
-		const categories = /* groq */`*[_type == "category"]|order(order asc){"slug": slug.current, title}`
+		const categories = /* groq */`*[_type == "category"]|order(order asc){"slug": slug.current, title, order}`
 
 
 		const query = `{
@@ -34,30 +34,45 @@
 	export let data
 	const {settings, posts, categories} = data
 
+	
+	import {slide, fade} from 'svelte/transition'
+	import SEO from '../../components/SEO.svelte'
+	import ListCard from '../../components/ListCard.svelte'
+	import Search from '../../components/icons/Search.svelte'
+	
+	let selected = {
+		slug: '',
+		title: ''
+	}
+
 	$: filterPosts = (posts) => posts.filter(post => {
-		if(selected) {
-			return post.categories.includes(selected)
+		if(selected.slug) {
+			return post.categories.includes(selected.slug)
 		} else {
 			return post
 		}
 	})
 
-	import {slide} from 'svelte/transition'
-	import SEO from '../../components/SEO.svelte'
-	import ListCard from '../../components/ListCard.svelte'
-	import Search from '../../components/icons/Search.svelte'
+	function focus(node) {
+		return node.focus()
+	} 
 
-	let selected = ""
 	let value = ""
 	$: query = new RegExp(value, 'g')
+
 	$: more = 10
 
 	function searchList(list, query) {
 		return list.title.toLowerCase().match(query) || list.excerpt.toLowerCase().match(query)
 	}
 
-	// let showSearch = false
+	let showSearch = false
 	// let showCategories = false
+
+	let width
+  function parentWidth(node) {
+    width = node.parentElement.clientWidth;
+  }
 </script>
 
 <style>
@@ -86,20 +101,29 @@
 	.flex li {
 		margin: 0 0.5rem 0.5rem 0;
 	}
-	/* .empty-button {
+
+	.search {
+		display: relative;
+		height: 2rem;
+		width: 100%;
+	}
+	.empty-button {
 		background: none;
 		border: none;
 		outline: none;
 		padding: 0;
-		margin: 0 0.25rem 0 0;
+		/* margin: 0 0.25rem 0 0; */
 		box-shadow: none;
 		color: inherit;
-		display: block;
+		/* display: block; */
+		position: absolute;
+
+		z-index: 20;
 	}
 
 	.empty-button:focus {
 		color: var(--primary);
-	} */
+	}
 
 	ul.flex {
 		margin: 0.5rem 0;
@@ -120,26 +144,31 @@
 	.selected {
 		transition: all 0.3s ease-in-out;
 		border-bottom: 0.125rem solid var(--primary);
+		/* border-left: 0.125rem dashed var(--primary);
+		border-right: 0.125rem solid var(--primary); */
 	}
 
-	/* label {
-		width: 100%;
+	label {
+		max-width: 40rem;
 		height: 100%;
-	} */
+		position: relative;
+	}
 
-	/* input {
-		border: 0.125rem solid transparent;
+	input {
+		border: 0.125rem solid var(--textColor);
 		font-size: 1.2rem;
 		border-radius: 0;
-		background: var(--textColor);
+		background: var(--background);
+		color: var(--textColor);
 		padding: 0.28rem; 
-	} */
+	}
 	/* magic number to match svg search icon */
 
-	/* input:focus {
+	input:focus {
+		border: 0.125rem solid transparent;
 		outline: 0.125rem solid var(--primary);
 		outline-style: groove;
-	} */
+	}
 
 	.flex {
 		justify-content: space-between;
@@ -161,41 +190,66 @@
 <main>
 
 	<section>
-		{#if selected}
-		<h1>Posts <span>in <em>{selected}</em></span></h1>
+		<!-- TITLE -->
+		{#if selected.slug}
+		<h1>Posts <span>in <em>{selected.title}</em></span></h1>
 		{:else}
 		<h1>Posts</h1>
 		{/if}
 		
-		<!-- <div class="search">
+		<!-- SEARCH -->
+		<div class="search">
 			{#if !showSearch}
-				<button class="empty-button" on:click={() => showSearch = !showSearch}><Search size="30"/></button>
+				<button in:fade class="empty-button" on:click={() => showSearch = !showSearch}><Search size="30"/></button>
 			{:else}
-				<label for="search">
-					<input type="text" bind:value placeholder="search" />
+				<label use:parentWidth for="search">
+					<input use:focus style="width: ${width};" in:slide type="text" bind:value placeholder="search" />
 				</label>
 			{/if}
-		</div> -->
+		</div>
 
+		<!-- CATEGORIES -->
 		<ul class="flex">
-			<li><button class={!selected ? 'selected' : ''} on:click={() => selected = ""}>all</button></li>
+			<li><button class={!selected.slug ? 'selected' : ''} on:click={() => {
+				selected.slug = ""
+				selected.title = ""
+				value = ""
+				showSearch = false
+				}}>all</button></li>
 			{#each categories.filter(category => category.slug !== 'uncategorized') as {slug, title}}
-				<li><button class={selected === slug ? 'selected' : ''} on:click={() => selected = slug}>{title.toLowerCase()}</button></li>
+				<li><button class={selected.slug === slug ? 'selected' : ''} on:click={() => {
+					selected.slug = slug
+					selected.title = title
+					value = ""
+					showSearch = false
+					}}>{title.toLowerCase()}</button></li>
 			{/each}
 		</ul>
 		
+		<!-- SEARCH RESULTS -->
+		{#if value && filterPosts(posts).filter(post => searchList(post, query)).length}
+			{#if selected.slug}
+				<p transition:slide>{filterPosts(posts).filter(post => searchList(post, query)).length} posts match "{value}" in <em>{selected.title}</em></p>	
+			{:else}
+				<p transition:slide>{filterPosts(posts).filter(post => searchList(post, query)).length} posts match "{value}"</p>
+			{/if}
+		{/if}
 	</section>
 	
+	<!-- POSTS -->
 	<section>
 		<ul>
-			<!-- {#each filteredPosts.filter(post => searchList(post, query)).slice(0, more) as post, i} -->
-			{#each filterPosts(posts).slice(0, more) as post, i (post.id)}
+			{#each filterPosts(posts).filter(post => searchList(post, query)).slice(0, more) as post, i (post.id)}
 				<ListCard data={post} {i} />
 			{:else}
-				<li>No posts match</li>
+				{#if selected.slug && !value}
+					<li>No posts in <em>{selected.title}</em></li>
+				{:else}
+					<li>No posts to display</li>
+				{/if}
 			{/each}
 		</ul>
-		{#if filterPosts(posts).length > 9}
+		{#if filterPosts(posts).filter(post => searchList(post, query)).length > 9}
 			 <button on:click={() => more += 10}>show more</button>
 		{/if}
 	</section>

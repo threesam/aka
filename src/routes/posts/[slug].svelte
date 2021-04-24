@@ -9,7 +9,8 @@
       "alt": featuredMedia.alt,
       "palette": featuredMedia.asset->metadata.palette.darkMuted.background,
       body,
-			...
+      publishedAt,
+			"author": authors[0]->name
     }`
 
 const post = await client
@@ -22,18 +23,28 @@ return {post}
 
 <script>
 	export let post;
-	const {title, image, alt, body} = post
+	const {title, image, alt, body, publishedAt, author} = post
 	console.log('post', post);
+  import {format, parseISO} from 'date-fns'
 	import BlockContent from '@movingbrands/svelte-portable-text'
 	import serializers from '../../components/serializers'
+	import Hero from '../../components/Hero.svelte'
+	import Container from '../../components/Container.svelte'
 </script>
 
+<style>
+  p {
+    margin-bottom: 2rem;
+    font-size: var(--smallText);
+  }
+</style>
 
+<Hero data={{title, image, alt}} />
 
-<h1>{title}</h1>
-<img src={image} {alt}>
-
-<div class="content">
-	<BlockContent blocks={body} {serializers} />
-</div>
+<Container>
+  <section class="content">
+    <p>{format(parseISO(publishedAt), 'yyyy-MM-dd')}<br>by <a href="/about">{author}</a></p>
+    <BlockContent blocks={body} {serializers} />
+  </section>
+</Container>
 
