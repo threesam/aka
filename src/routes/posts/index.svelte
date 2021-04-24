@@ -116,7 +116,7 @@
 		box-shadow: none;
 		color: inherit;
 		/* display: block; */
-		position: absolute;
+		/* position: absolute; */
 
 		z-index: 20;
 	}
@@ -156,7 +156,7 @@
 
 	input {
 		border: 0.125rem solid var(--textColor);
-		font-size: 1.2rem;
+		font-size: 1rem;
 		border-radius: 0;
 		background: var(--background);
 		color: var(--textColor);
@@ -183,6 +183,18 @@
 	em {
 		color: var(--primary);
 	}
+
+	.flex-container {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: baseline;
+		margin: 3rem 0 0 0;
+	}
+
+	h1 {
+		margin: 0;
+	}
 </style>
 
 <SEO title="Posts" description="Content" {...settings} />
@@ -191,17 +203,18 @@
 
 	<section>
 		<!-- TITLE -->
-		{#if selected.slug}
-		<h1>Posts <span>in <em>{selected.title}</em></span></h1>
-		{:else}
-		<h1>Posts</h1>
-		{/if}
+		<div class="flex-container">
+			{#if selected.slug}
+			<h1>Posts <span>in <em>{selected.title}</em></span></h1>
+			{:else}
+			<h1>Posts</h1>
+			{/if}
+			<button in:fade={{delay: 400}} role="search" class="empty-button" on:click={() => showSearch = !showSearch}><Search size="30"/></button>
+		</div>
 		
 		<!-- SEARCH -->
 		<div class="search">
-			{#if !showSearch}
-				<button in:fade={{delay: 400}} role="search" class="empty-button" on:click={() => showSearch = !showSearch}><Search size="30"/></button>
-			{:else}
+			{#if showSearch}
 				<label use:parentWidth for="search">
 					<input use:focus style="width: ${width};" transition:slide={{duration: 400}} type="text" bind:value placeholder="search" />
 				</label>
