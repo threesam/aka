@@ -32,11 +32,17 @@
 	import serializers from '../../components/serializers'
 </script>
 
+<style>
+	.content {
+		border: 1px solid var(--grey);
+	}
+</style>
+
 <h1>About</h1>
 <p>{aka.description}</p>
+<a href="/press">Press Links</a>
 
 <div class="content">
-	<h2>About {author.name.split(' ')[0]}</h2>
 	<BlockContent blocks={author.bio} {serializers} />
 </div>
 

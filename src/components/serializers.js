@@ -28,6 +28,13 @@ export default {
         alt: node.alt,
       },
     }),
+    image: ({ node, children }) => ({
+      component: Image,
+      childNodes: children,
+      props: {
+        url: node
+      },
+    }),
     videoUrl: ({ node, children }) => ({
       component: Video,
       childNodes: children,

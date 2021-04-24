@@ -3,7 +3,7 @@
   import imageBuilder from '../utils/imageUrlBuilder'
 
   export let url
-  export let alt
+  export let alt = ""
 
   let width
 

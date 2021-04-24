@@ -1,5 +1,5 @@
 <script>
-  let darkMode = false
+  let darkMode = true
   function changeTheme() {
     // grab body
     const body = document.querySelector('body')
