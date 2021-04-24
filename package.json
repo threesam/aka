@@ -31,6 +31,7 @@
     "@sanity/block-content-to-hyperscript": "^2.0.10",
     "@sanity/image-url": "^0.140.22",
     "date-fns": "^2.21.1",
+    "hex-rgb": "^4.3.0",
     "rollup": "^2.3.4",
     "rollup-plugin-svelte": "^7.0.0",
     "rollup-plugin-terser": "^7.0.0",
