@@ -35,7 +35,7 @@
 	const {settings, posts, categories} = data
 
 	
-	import {slide, fade} from 'svelte/transition'
+	import {slide, fade, fly} from 'svelte/transition'
 	import SEO from '../../components/SEO.svelte'
 	import ListCard from '../../components/ListCard.svelte'
 	import Search from '../../components/icons/Search.svelte'
@@ -200,7 +200,7 @@
 		<!-- SEARCH -->
 		<div class="search">
 			{#if !showSearch}
-				<button in:fade={{delay: 400}} class="empty-button" on:click={() => showSearch = !showSearch}><Search size="30"/></button>
+				<button in:fade={{delay: 400}} role="search" class="empty-button" on:click={() => showSearch = !showSearch}><Search size="30"/></button>
 			{:else}
 				<label use:parentWidth for="search">
 					<input use:focus style="width: ${width};" transition:slide={{duration: 400}} type="text" bind:value placeholder="search" />
@@ -243,9 +243,9 @@
 				<ListCard data={post} {i} />
 			{:else}
 				{#if selected.slug && !value}
-					<li>No posts in <em>{selected.title}</em></li>
+					<li in:fly={{y: 50}}>No posts in <em>{selected.title}</em></li>
 				{:else}
-					<li>No posts to display</li>
+					<li in:fly={{y: 50}}>No posts to display</li>
 				{/if}
 			{/each}
 		</ul>
