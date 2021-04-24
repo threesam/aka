@@ -4,13 +4,16 @@
   export async function preload() {
 		const siteSettings = /* groq */`*[_type == "siteSettings"][0]{"image": featuredMedia.asset->url, "alt": featuredMedia.alt}`
     const postsQuery = /* groq */`*[_type == 'post']|order(publishedAt desc){
+			"id": _id,
 			"slug": slug.current,
 			title,
 			publishedAt,
 			"categories": categories[]->slug.current,
-			"excerpt": excerpt[0].children[0].text
+			"excerpt": excerpt[0].children[0].text,
+			"image": featuredMedia.asset->url,
+			"alt": featuredMedia.alt
 		}`
-		const categories = /* groq */`*[_type == "category"]{"slug": slug.current, title}`
+		const categories = /* groq */`*[_type == "category"]|order(order asc){"slug": slug.current, title}`
 
 
 		const query = `{
@@ -31,7 +34,7 @@
 	export let data
 	const {settings, posts, categories} = data
 
-	$: filteredPosts = posts.filter(post => {
+	$: filterPosts = (posts) => posts.filter(post => {
 		if(selected) {
 			return post.categories.includes(selected)
 		} else {
@@ -39,10 +42,10 @@
 		}
 	})
 
-	import {format, parseISO} from 'date-fns'
+	import {slide} from 'svelte/transition'
 	import SEO from '../../components/SEO.svelte'
+	import ListCard from '../../components/ListCard.svelte'
 	import Search from '../../components/icons/Search.svelte'
-	import Categories from '../../components/icons/Categories.svelte'
 
 	let selected = ""
 	let value = ""
@@ -53,24 +56,27 @@
 		return list.title.toLowerCase().match(query) || list.excerpt.toLowerCase().match(query)
 	}
 
-	let showSearch = false
-	let showCategories = false
+	// let showSearch = false
+	// let showCategories = false
 </script>
 
 <style>
+	main {
+		min-height: 100vh;
+		padding: 3rem var(--containerPadding);
+	}
 	section {
-		padding: 0 var(--containerPadding);
 		max-width: 40rem;
 		margin: 0 auto;
 	}
 
-	h2 {
+	span {
 		font-size: var(--h5);
-		font-weight: bold;
 	}
 
-	span {
-		font-size: var(--h3);
+	span em {
+		font-size: var(--h4);
+		margin-left: 0.25rem;
 	}
 
 	.flex {
@@ -80,14 +86,7 @@
 	.flex li {
 		margin: 0 0.5rem 0.5rem 0;
 	}
-	a:hover {
-		color: var(--primary);
-	}
-	em {
-		color: var(--primary);
-	}
-
-	.empty-button {
+	/* .empty-button {
 		background: none;
 		border: none;
 		outline: none;
@@ -100,49 +99,105 @@
 
 	.empty-button:focus {
 		color: var(--primary);
+	} */
+
+	ul.flex {
+		margin: 0.5rem 0;
+	}
+
+	button {
+		background: none;
+		border: 0.125rem solid transparent;
+		border-bottom: 0.125rem solid var(--textColor);
+		color: var(--textColor);
+		font-weight: bold;
+		padding: 0.5rem;
+		border-radius: 2px;
+		transition: all 0.3s ease-in-out;
+		box-shadow: none;
+	}
+	
+	.selected {
+		transition: all 0.3s ease-in-out;
+		border-bottom: 0.125rem solid var(--primary);
+	}
+
+	/* label {
+		width: 100%;
+		height: 100%;
+	} */
+
+	/* input {
+		border: 0.125rem solid transparent;
+		font-size: 1.2rem;
+		border-radius: 0;
+		background: var(--textColor);
+		padding: 0.28rem; 
+	} */
+	/* magic number to match svg search icon */
+
+	/* input:focus {
+		outline: 0.125rem solid var(--primary);
+		outline-style: groove;
+	} */
+
+	.flex {
+		justify-content: space-between;
+	}
+
+	@media(max-width: 500px) {
+		.flex {
+		justify-content: flex-start;
+		}
+	}
+
+	em {
+		color: var(--primary);
 	}
 </style>
 
 <SEO title="Posts" description="Content" {...settings} />
 
-<section>
-	{#if selected}
-	<h1>Posts <span>in <em>{selected}</em></span></h1>
-	{:else}
-	<h1>Posts</h1>
-	{/if}
-	<button class="empty-button" on:click={() => showSearch = !showSearch}><Search size="30"/></button>
+<main>
 
-	<ul class="flex">
-		<li><button on:click={() => selected = ""}>All</button></li>
-		{#each categories as {slug, title}}
-		<li><button on:click={() => selected = slug}>{title}</button></li>
-		{/each}
-	</ul>
-	
-	{#if showSearch}
-		<label for="search">
-			Search
-			<input type="text" bind:value />
-		</label>
-	{/if}
-</section>
-	
-<section>
-	<ul>
-		{#each filteredPosts.filter(post => searchList(post, query)).slice(0, more) as {slug, title, excerpt, publishedAt}}
-		<li>
-			<a href="posts/{slug}">
-				<hr>
-				<h2>{title}</h2>
-				<p>{excerpt}</p>
-				<p><em>{format(parseISO(publishedAt), 'yyyy-MM-dd')}</em></p>
-			</a>
-		</li>
+	<section>
+		{#if selected}
+		<h1>Posts <span>in <em>{selected}</em></span></h1>
 		{:else}
-		<li>No Posts to Display</li>
-		{/each}
-	</ul>
-	<button on:click={() => more += 10}>show more</button>
-</section>
+		<h1>Posts</h1>
+		{/if}
+		
+		<!-- <div class="search">
+			{#if !showSearch}
+				<button class="empty-button" on:click={() => showSearch = !showSearch}><Search size="30"/></button>
+			{:else}
+				<label for="search">
+					<input type="text" bind:value placeholder="search" />
+				</label>
+			{/if}
+		</div> -->
+
+		<ul class="flex">
+			<li><button class={!selected ? 'selected' : ''} on:click={() => selected = ""}>all</button></li>
+			{#each categories.filter(category => category.slug !== 'uncategorized') as {slug, title}}
+				<li><button class={selected === slug ? 'selected' : ''} on:click={() => selected = slug}>{title.toLowerCase()}</button></li>
+			{/each}
+		</ul>
+		
+	</section>
 	
+	<section>
+		<ul>
+			<!-- {#each filteredPosts.filter(post => searchList(post, query)).slice(0, more) as post, i} -->
+			{#each filterPosts(posts).slice(0, more) as post, i (post.id)}
+				<ListCard data={post} {i} />
+			{:else}
+				<li>No posts match</li>
+			{/each}
+		</ul>
+		{#if filterPosts(posts).length > 9}
+			 <button on:click={() => more += 10}>show more</button>
+		{/if}
+	</section>
+	
+</main>
