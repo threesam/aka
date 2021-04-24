@@ -14,8 +14,10 @@
 
   /* define colors' intentions */
   --primary: var(--red);
+  --secondary: var(--purple);
   --danger: var(--trueRed);
   --background: var(--lightGrey);
+  --secondaryBg: var(--grey);
   --textColor: var(--black);
   --buttonTextColor: var(--background);
   --lineColor: var(--grey);
@@ -65,7 +67,6 @@
 html {
   font-size: var(--baseFontSize);
   box-sizing: border-box;
-  scroll-behavior: smooth;
 } /*18px*/
 
 *,
@@ -164,6 +165,7 @@ blockquote a {
 
 .content {
   margin-top: 2rem;
+  scroll-behavior: smooth;
 }
 
 .content p,
@@ -359,8 +361,10 @@ button.small {
 /* themes */
 .dark {
   --primary: var(--pink);
+  --secondary: var(--red);
   --cardBg: var(--darkGrey);
   --background: var(--trueBlack);
+  --secondaryBg: var(--darkGrey);
   --textColor: var(--lightGrey);
   --buttonTextColor: var(--trueBlack);
   --headerBackground: var(--darkGrey);
