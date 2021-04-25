@@ -1,18 +1,20 @@
 <script>
 	import { stores } from '@sapper/app';
 	const { page } = stores();
-	const segment = page.path
+	$: segment = $page.path.substring(1)
+	$: console.log(segment)
 </script>
 
 <style>
 	a {
-		font-weight: 100;
+		font-weight: normal;
+		transition: all 0.3s ease-in-out;
 	}
 	span {
 		color: var(--primary);
 	}
 	.active {
-		font-weight: 900;
+		color: var(--primary);
 	}
 </style>
 
