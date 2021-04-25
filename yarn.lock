@@ -804,6 +804,14 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
+"@babel/runtime-corejs3@^7.12.1":
+  version "7.13.17"
+  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs3/-/runtime-corejs3-7.13.17.tgz#9baf45f03d4d013f021760b992d6349a9d27deaf"
+  integrity sha512-RGXINY1YvduBlGrP+vHjJqd/nK7JVpfM4rmZLGMx77WoL3sMrhheA0qxii9VNn1VHnxJLEyxmvCB+Wqc+x/FMw==
+  dependencies:
+    core-js-pure "^3.0.0"
+    regenerator-runtime "^0.13.4"
+
 "@babel/runtime@^7.0.0", "@babel/runtime@^7.8.4":
   version "7.13.10"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.13.10.tgz#47d42a57b6095f4468da440388fdbad8bebf0d7d"
@@ -1204,6 +1212,11 @@ core-js-compat@^3.9.0, core-js-compat@^3.9.1:
   dependencies:
     browserslist "^4.16.3"
     semver "7.0.0"
+
+core-js-pure@^3.0.0:
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.11.0.tgz#e07f25a8f616d178ec16b0354b008ad28b20b2f0"
+  integrity sha512-PxEiQGjzC+5qbvE7ZIs5Zn6BynNeZO9zHhrrWmkRff2SZLq0CE/H5LuZOJHhmOQ8L38+eMzEHAmPYWrUtDfuDQ==
 
 core-util-is@~1.0.0:
   version "1.0.2"
@@ -2015,6 +2028,13 @@ string-hash@^1.1.3:
   resolved "https://registry.yarnpkg.com/string-hash/-/string-hash-1.1.3.tgz#e8aafc0ac1855b4666929ed7dd1275df5d6c811b"
   integrity sha1-6Kr8CsGFW0Zmkp7X3RJ1311sgRs=
 
+string-punctuation-tokenizer@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/string-punctuation-tokenizer/-/string-punctuation-tokenizer-2.1.2.tgz#db2b5707bbab6d20540ebf0fd49c18280d94d898"
+  integrity sha512-jFVSLxWca5xIjaoi8vTSipXXK0Ng3+BdbfAtjCgqS4ZxHTGLYvKrGaARpATtBHIAOEMXhwMaBKLrypnyQ6cR6A==
+  dependencies:
+    xregexp "^4.1.1"
+
 string_decoder@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
@@ -2035,6 +2055,11 @@ supports-color@^7.0.0:
   integrity sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==
   dependencies:
     has-flag "^4.0.0"
+
+svelte-media-query@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/svelte-media-query/-/svelte-media-query-1.0.0.tgz#64fbb59cb52e11c11d6ed9eb1a847ae398bdab23"
+  integrity sha512-BSTTTkO3cQDX9U8iwOsW/4hh1HW66zs644aeBFw1+18GErMU5VjDkRmtgXpF3kcAgOY74QX+LMO3nr/48AcvGA==
 
 svelte-seo@^1.1.0:
   version "1.1.0"
@@ -2062,6 +2087,11 @@ through2@~2.0.3:
   dependencies:
     readable-stream "~2.3.6"
     xtend "~4.0.1"
+
+title-case-minors@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/title-case-minors/-/title-case-minors-1.0.0.tgz#51f17037c294747a1d1cda424b5004c86d8eb115"
+  integrity sha1-UfFwN8KUdHodHNpCS1AEyG2OsRU=
 
 to-fast-properties@^2.0.0:
   version "2.0.0"
@@ -2143,10 +2173,22 @@ vary@~1.1.2:
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
 
+wordcloud@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/wordcloud/-/wordcloud-1.2.1.tgz#1c35efd1dffdf678139ff86d27bc4e072b9dbc60"
+  integrity sha512-9oe/oG8HgoGzU5qVayvGoCjG8GOg+TCAQLvgOv3DYpcqSQED6sJKNDWlipvjLepK+tZPjm8nNJ0o3jifR/q4qw==
+
 wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
+
+xregexp@^4.1.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/xregexp/-/xregexp-4.4.1.tgz#c84a88fa79e9ab18ca543959712094492185fe65"
+  integrity sha512-2u9HwfadaJaY9zHtRRnH6BY6CQVNQKkYm3oLtC9gJXXzfsbACg5X5e4EZZGVAH+YIfa+QA9lsFQTTe3HURF3ag==
+  dependencies:
+    "@babel/runtime-corejs3" "^7.12.1"
 
 xtend@~4.0.1:
   version "4.0.2"

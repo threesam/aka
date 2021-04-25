@@ -41,6 +41,8 @@
   /* Type */
   --headingFont: 'Anton';
   --bodyFont: 'Roboto', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --biggestH: 6rem;
+  --bigH: 4rem;
   --h1: 3.052rem;
   --h2: 2.441rem;
   --h3: 1.953rem;

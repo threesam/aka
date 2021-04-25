@@ -4,7 +4,15 @@
 	import serializers from '../components/serializers'
 
   export async function preload() {
-    const siteSettings = /* groq */ `*[_type == "siteSettings"][0]{"image": featuredMedia.asset->url, "alt": featuredMedia.alt}`
+    const siteSettings = /* groq */ `*[_type == "siteSettings"][0]{
+			"image": image.asset->url, 
+			"alt": image.alt, 
+			wordCloud{
+				"shape": shape[0],
+				uselessWords
+			}
+		}`
+    const words = /* groq */ `*[_type == "post"]{title, "title": excerpt[0].children[0].text}`
     const projects = /* groq */ `*[_type == 'post' && "projects" in categories[]->slug.current]|order(publishedAt desc){
 			title,
 			excerpt,
@@ -14,6 +22,7 @@
 
     const query = `{
 			"settings": ${siteSettings},
+			"words": ${words},
 			"projects": ${projects}
 		}`
 
@@ -25,20 +34,27 @@
 
 <script>
 	export let data
+	const {words, settings} = data
+	
+	import {onMount} from 'svelte'
+
+	let WordCloud
+  onMount(async () => {
+      const mod = await import("../components/WordCloud.svelte")
+      WordCloud = mod.default
+  })
+	import {transform} from '../utils/transform'
+	const transformedWords = transform(words, settings.wordCloud.uselessWords)
 </script>
 
 <style>
 	section {
 		display: grid;
+		position: relative;
 		place-content: center;
 		min-height: calc(100vh);
 		width: 100%;
 	}
-
-	section:nth-child(odd) {
-		background: var(--secondaryBg);
-	}
-
 	h2 {
 		padding-top: 0;
 	}
@@ -64,11 +80,34 @@ img {
 	width: 100%;
 }
 
+span {
+	color: var(--primary);
+}
+
+@media (min-width: 1024px) {
+	h1 {
+		font-size: var(--biggestH);
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+	h1 {
+		font-size: var(--bigH);
+	}
+}
+
+@media (max-width: 767px) {
+	h1 {
+		font-size: var(--h1);
+	}
+}
+
 </style>
 
+<svelte:component this={WordCloud} words={transformedWords} shape={settings.wordCloud.shape}/>
 <main>
 	<section>
-		<h1>ArtKillingApathy</h1>
+		<h1>Art<span>Killing</span>Apathy</h1>
 	</section>
 	<section class="grid">
 		<img src={data.projects[0].image} alt={data.projects[0].alt}>
