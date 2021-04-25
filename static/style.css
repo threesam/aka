@@ -1,3 +1,8 @@
+@font-face{
+  font-family: 'Anton';
+  src: url('./fonts/Anton.woff') format('woff');
+}
+
 :root {
   /* define colors as colors */
   --red: #831b2d;
@@ -34,8 +39,8 @@
   --borderRadius: 10px;
 
   /* Type */
-  --headingFont: 'Impact';
-  --bodyFont: 'Garamond';
+  --headingFont: 'Anton';
+  --bodyFont: 'Roboto', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   --h1: 3.052rem;
   --h2: 2.441rem;
   --h3: 1.953rem;
@@ -60,6 +65,7 @@
     --baseFontSize: 112.5%;
   }
 }
+
 
 
 /* FROM type-scale.com */
