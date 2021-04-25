@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script context="module">
   import client from "../../sanityClient";
 
   export async function preload() {
