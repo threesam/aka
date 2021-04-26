@@ -89,9 +89,13 @@
 		font-size: var(--h5);
 	}
 
-	span em {
+	span span {
 		font-size: var(--h4);
 		margin-left: 0.25rem;
+	}
+	
+	.primary {
+		color: var(--primary);
 	}
 
 	.flex {
@@ -180,10 +184,6 @@
 		}
 	}
 
-	em {
-		color: var(--primary);
-	}
-
 	.flex-container {
 		display: flex;
 		flex-direction: row;
@@ -205,7 +205,7 @@
 		<!-- TITLE -->
 		<div class="flex-container">
 			{#if selected.slug}
-			<h1>Posts <span>in <em>{selected.title}</em></span></h1>
+			<h1>Posts <span>in <span class="primary">{selected.title}</span></span></h1>
 			{:else}
 			<h1>Posts</h1>
 			{/if}
@@ -242,9 +242,9 @@
 		<!-- SEARCH RESULTS -->
 		{#if value && filterPosts(posts).length}
 			{#if selected.slug}
-				<p transition:slide>{filterPosts(posts).length} posts match "{value}" in <em>{selected.title}</em></p>	
+				<p transition:slide>{filterPosts(posts).length} {filterPosts(posts).length !== 1 ? 'posts' : 'post'} match "{value}" in <em class="primary">{selected.title}</em></p>	
 			{:else}
-				<p transition:slide>{filterPosts(posts).length} posts match "{value}"</p>
+				<p transition:slide>{filterPosts(posts).length} {filterPosts(posts).length !== 1 ? 'posts' : 'post'} match "{value}"</p>
 			{/if}
 		{/if}
 	</section>
@@ -256,7 +256,7 @@
 				<ListCard data={post} {i} />
 			{:else}
 				{#if selected.slug && !value}
-					<li in:fly={{y: 50}}>No posts in <em>{selected.title}</em></li>
+					<li in:fly={{y: 50}}>No posts in <em class="primary">{selected.title}</em></li>
 				{:else}
 					<li in:fly={{y: 50}}>No posts to display</li>
 				{/if}
