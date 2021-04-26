@@ -51,7 +51,7 @@
 	section {
 		display: grid;
 		position: relative;
-		place-content: center;
+		place-items: center;
 		min-height: calc(100vh);
 		width: 100%;
 	}

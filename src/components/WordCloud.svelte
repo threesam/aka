@@ -6,6 +6,7 @@
 	import {fade} from 'svelte/transition'
 	import WordCloud from 'wordcloud'
 	import {darkMode} from '../utils/darkMode'
+	import {getCssCustomProperty} from '../utils/main'
 
 
 
@@ -13,11 +14,15 @@
 	let h
 	
 	onMount(() => {
-		const body = getComputedStyle(document.body)
-		const fontFamily = body.getPropertyValue('--headingFont') // 2 characters of whitespace preceeding
+		const white = getCssCustomProperty('--white')
+		const lightGrey = getCssCustomProperty('--lightGrey')
+		const darkGrey = getCssCustomProperty('--darkGrey')
+		const black = getCssCustomProperty('--black')
+		
 		document.getElementById('my_canvas').width = document.getElementById('canvas_ctn').clientWidth;
 		document.getElementById('my_canvas').height = document.getElementById('canvas_ctn').clientHeight;
-		const list = words
+
+
 		let gridSize
 		if(w > h) {
 			gridSize = w /50
@@ -28,18 +33,18 @@
 		let primary
 		let background
 			if($darkMode) {
-			primary = 'white'
-			background = 'black'
+			primary = lightGrey
+			background = black
 		} else {
-			primary = 'black'
-			background = 'white'
+			primary = darkGrey
+			background = white
 		}
 
 		WordCloud(document.getElementById('my_canvas'), { 
-			list,
+			list: words,
 			color: primary,
 			backgroundColor: background,
-			fontFamily,
+			fontFamily: 'mono',
 			gridSize,
 			minSize: 1,
 			weightFactor: 2,
