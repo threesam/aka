@@ -2,9 +2,9 @@
   import client from '../sanityClient'
 	import BlockContent from '@movingbrands/svelte-portable-text'
 	import serializers from '../components/serializers'
-
+	
   export async function preload() {
-    const siteSettings = /* groq */ `*[_type == "siteSettings"][0]{
+		const siteSettings = /* groq */ `*[_type == "siteSettings"][0]{
 			"image": image.asset->url, 
 			"alt": image.alt, 
 			wordCloud{
@@ -16,20 +16,21 @@
     const projects = /* groq */ `*[_type == 'post' && "projects" in categories[]->slug.current]|order(publishedAt desc){
 			title,
 			excerpt,
+			cta,
 			"image": featuredMedia.asset->url,
 			"alt": featuredMedia.alt
 		}`
 
-    const query = `{
-			"settings": ${siteSettings},
-			"words": ${words},
-			"projects": ${projects}
-		}`
+const query = `{
+	"settings": ${siteSettings},
+	"words": ${words},
+	"projects": ${projects}
+}`
 
-    const data = await client.fetch(query).catch((err) => this.error(500, err))
+const data = await client.fetch(query).catch((err) => this.error(500, err))
 
-    return { data }
-  }
+return { data }
+}
 </script>
 
 <script>
@@ -37,6 +38,7 @@
 	const {words, settings} = data
 	
 	import {onMount} from 'svelte'
+	import Cta from '../components/Cta.svelte'
 
 	let WordCloud
   onMount(async () => {
@@ -57,6 +59,7 @@
 	}
 	h2 {
 		padding-top: 0;
+		margin-top: 0;
 	}
 
 .flex {
@@ -70,14 +73,16 @@
 }
 
 .grid {
-	grid-template-columns: 1fr max-content;
+	grid-template-columns: 1fr 1fr;
 	max-width: 56rem;
 	margin: 0 auto;
+	border: var(--line);
 }
 
 img {
-	height: 100%;
-	width: 100%;
+	height: auto;
+	max-width: 100%;
+	padding: var(--containerPadding);
 }
 
 span {
@@ -109,14 +114,34 @@ span {
 	<section>
 		<h1>Art<span>Killing</span>Apathy</h1>
 	</section>
-	<section class="grid">
-		<img src={data.projects[0].image} alt={data.projects[0].alt}>
-		<div class="content">
-			<h2>{data.projects[0].title}</h2>
-			<BlockContent blocks={data.projects[0].excerpt} {serializers} />
-		</div>
-	</section>
 	<section>
-		<h3>More Projects</h3>
+		<h1 style="font-size: var(--h1);">Featured Project</h1>
+		<div class="grid">
+			<img src={data.projects[0].image} alt={data.projects[0].alt}>
+			<div class="content">
+				<h2>{data.projects[0].title}</h2>
+				<BlockContent blocks={data.projects[0].excerpt} {serializers} />
+				{#if data.projects[0].cta}
+				<Cta url={data.projects[0].cta.url} text={data.projects[0].cta.text} />
+				{/if}
+			</div>
+		</div>
+		<div>
+			<h3>More Projects</h3>
+			<ul>
+				{#each data.projects.slice(1) as project}
+				<div class="item">
+					<img src={project.image} alt={project.alt}>
+					<div class="content">
+						<h4>{project.title}</h4>
+						<!-- <BlockContent blocks={project.excerpt} {serializers} /> -->
+						{#if project.cta}
+							<Cta url={project.cta.url} text={project.cta.text} />
+						{/if}
+					</div>
+				</div>
+				{/each}
+			</ul>
+		</div>
 	</section>
 </main>

@@ -8,6 +8,7 @@ import Image from './Image.svelte';
 import Author from './Author.svelte';
 import Video from './Video.svelte';
 import Link from './Link.svelte';
+import Cta from './Cta.svelte';
 
 const urlFor = source => urlBuilder(client).image(source);
 
@@ -40,6 +41,14 @@ export default {
       childNodes: children,
       props: {
         url: node.url
+      },
+    }),
+    cta: ({ node, children }) => ({
+      component: Cta,
+      childNodes: children,
+      props: {
+        url: node,
+        text: node.text,
       },
     }),
     authorReference: ({ children, node: { author } }) => ({

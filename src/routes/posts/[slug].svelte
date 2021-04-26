@@ -43,7 +43,9 @@ return {post}
 
 <Container>
   <section class="content">
-    <p>{format(parseISO(publishedAt), 'yyyy-MM-dd')}<br>by <a href="/about">{author}</a></p>
+    {#if author}
+      <p>{format(parseISO(publishedAt), 'yyyy-MM-dd')}<br>by <a href="/about">{author}</a></p>
+    {/if}
     <BlockContent blocks={body} {serializers} />
   </section>
 </Container>
