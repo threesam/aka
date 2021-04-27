@@ -2,7 +2,6 @@
 	import { stores } from '@sapper/app';
 	const { page } = stores();
 	$: segment = $page.path.substring(1)
-	$: console.log(segment)
 </script>
 
 <style>
