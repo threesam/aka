@@ -21,16 +21,30 @@
 <script>
   export let data
   const { settings, press } = data
+
+  import Container from '../../components/Container.svelte'
 </script>
 
-<!-- 
-<ul>
-  {#each press as item}
-  <li><a href={item.link}>{item.title}</a></li>
-  {/each}
-</ul> -->
+<style>
+  section {
+    padding: var(--containerPadding);
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+</style>
 
-    <span>Press</span>
+<Container>
+  <section>
+    <h1>Press</h1>
+    <ul>
+      {#each press as item}
+      <li><a href={item.link}>{item.title}</a></li>
+      {/each}
+    </ul>
+  </section>
+</Container>
+
+    <!-- <span>Press</span>
         <iframe
           src="https://www.youtube.com/embed/L9TYGhHEK28"
           width="560"
@@ -460,4 +474,4 @@
                     src="http://www.artkillingapathy.com/wp-content/uploads/I_HAVE_A_DREAM_GIOIA-2-221x300.jpg"
                     alt="Eleanor Goldfield Featured in Martin Luther King
                     Anniversary" />
-                </a>
+                </a> -->
