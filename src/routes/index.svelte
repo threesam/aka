@@ -13,18 +13,17 @@
 			}
 		}`
     const words = /* groq */ `*[_type == "post"]{title, "title": excerpt[0].children[0].text}`
-    const projects = /* groq */ `*[_type == 'post' && "projects" in categories[]->slug.current]|order(publishedAt desc){
-			title,
-			excerpt,
-			cta,
-			"image": featuredMedia.asset->url,
-			"alt": featuredMedia.alt
-		}`
+    // const projects = /* groq */ `*[_type == 'post' && "projects" in categories[]->slug.current]|order(publishedAt desc){
+		// 	title,
+		// 	excerpt,
+		// 	cta,
+		// 	"image": featuredMedia.asset->url,
+		// 	"alt": featuredMedia.alt
+		// }`
 
 const query = `{
 	"settings": ${siteSettings},
 	"words": ${words},
-	"projects": ${projects}
 }`
 
 const data = await client.fetch(query).catch((err) => this.error(500, err))
@@ -114,7 +113,7 @@ span {
 	<section>
 		<h1>Art<span>Killing</span>Apathy</h1>
 	</section>
-	<section>
+	<!-- <section>
 		<h1 style="font-size: var(--h1);">Featured Project</h1>
 		<div class="grid">
 			<img src={data.projects[0].image} alt={data.projects[0].alt}>
@@ -134,7 +133,7 @@ span {
 					<img src={project.image} alt={project.alt}>
 					<div class="content">
 						<h4>{project.title}</h4>
-						<!-- <BlockContent blocks={project.excerpt} {serializers} /> -->
+						<BlockContent blocks={project.excerpt} {serializers} />
 						{#if project.cta}
 							<Cta url={project.cta.url} text={project.cta.text} />
 						{/if}
@@ -143,5 +142,5 @@ span {
 				{/each}
 			</ul>
 		</div>
-	</section>
+	</section> -->
 </main>
