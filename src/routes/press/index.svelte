@@ -27,7 +27,7 @@
 
 <style>
   section {
-    padding: var(--containerPadding);
+    padding: 0 var(--containerPadding);
     max-width: 40rem;
     margin: 0 auto;
   }
