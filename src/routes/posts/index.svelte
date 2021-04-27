@@ -229,7 +229,7 @@
 				value = ""
 				showSearch = false
 				}}>all</button></li>
-			{#each categories.filter(category => category.slug !== 'uncategorized') as {slug, title}}
+			{#each categories.filter(category => category.slug !== 'uncategorized') as {slug, title}, i}
 				<li><button class={selected.slug === slug ? 'selected' : ''} on:click={() => {
 					selected.slug = slug
 					selected.title = title
