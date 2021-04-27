@@ -47,7 +47,7 @@ export default {
       component: Cta,
       childNodes: children,
       props: {
-        url: node,
+        url: node.url,
         text: node.text,
       },
     }),
