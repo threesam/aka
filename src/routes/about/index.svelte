@@ -83,7 +83,7 @@
 		{#if selected === 'aka'}
 		<div in:blur class="content">
 			<p>{aka.description}</p>
-			<Cta url="/press" text="Press" />
+			<!-- <Cta url="/press" text="Press" /> -->
 		</div>
 			{:else if selected === 'eleanor'}
 			<div in:blur class="content">
