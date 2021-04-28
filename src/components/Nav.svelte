@@ -21,7 +21,7 @@
 	<a class="logo" aria-current="{segment === undefined ? 'page' : undefined}" href=".">Art<span>Killing</span>Apathy</a>
 
 	<nav>
-		<a rel="prefetch" class={segment === "posts" ? 'active' : ""} aria-current="{segment === 'posts' ? 'page' : undefined}" href="posts">posts</a>
+		<a rel="prefetch" class={segment === "content" ? 'active' : ""} aria-current="{segment === 'content' ? 'page' : undefined}" href="content">content</a>
 		<a rel="prefetch" class={segment === "about" ? 'active' : ""} aria-current="{segment === 'about' ? 'page' : undefined}" href="about">about</a>
 		<a rel="prefetch" class={segment === "contact" ? 'active' : ""} aria-current="{segment === 'contact' ? 'page' : undefined}" href="contact">contact</a>
 	</nav>

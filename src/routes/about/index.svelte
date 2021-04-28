@@ -71,6 +71,7 @@
 	.content {
 		padding-right: 0;
 		padding-left: 0;
+		padding-top: 0.5rem;
 	}
 </style>
 

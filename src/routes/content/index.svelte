@@ -13,7 +13,7 @@
 			// "image": featuredMedia.asset->url,
 			// "alt": featuredMedia.alt
 		}`
-		const categories = /* groq */`*[_type == "category"]|order(order asc){"slug": slug.current, title, order}`
+		const categories = /* groq */`*[_type == "category"]|order(order asc){"slug": slug.current, title, description, order}`
 
 
 		const query = `{
@@ -85,6 +85,10 @@
 		margin: 0 auto;
 	}
 
+	h1 {
+		margin: 3rem 0 1rem 0;
+	}
+/* 
 	span {
 		font-size: var(--h5);
 	}
@@ -92,7 +96,7 @@
 	span span {
 		font-size: var(--h4);
 		margin-left: 0.25rem;
-	}
+	} */
 	
 	.primary {
 		color: var(--primary);
@@ -101,6 +105,7 @@
 	.flex {
 		justify-content: flex-start;
 		flex-wrap: wrap;
+		margin-bottom: 0;
 	}
 	.flex li {
 		margin: 0 0.5rem 0.5rem 0;
@@ -174,26 +179,8 @@
 		outline-style: groove;
 	}
 
-	.flex {
-		justify-content: space-between;
-	}
-
-	@media(max-width: 500px) {
-		.flex {
-		justify-content: flex-start;
-		}
-	}
-
-	.flex-container {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: baseline;
-		margin: 3rem 0 0.5rem 0;
-	}
-
-	h1 {
-		margin: 0;
+	.content-section {
+		padding-top: var(--containerPadding);
 	}
 </style>
 
@@ -202,22 +189,16 @@
 <main>
 
 	<section>
-		<!-- TITLE -->
-		<div class="flex-container">
-			{#if selected.slug}
-			<h1>Posts <span>in <span class="primary">{selected.title}</span></span></h1>
-			{:else}
-			<h1>Posts</h1>
-			{/if}
-			<button in:fade={{delay: 400}} role="search" class="empty-button" on:click={() => showSearch = !showSearch}><Search size="30"/></button>
-		</div>
+		<h1>Content</h1>
 		
 		<!-- SEARCH -->
 		<div class="search">
 			{#if showSearch}
-				<label use:parentWidth for="search">
-					<input use:focus style="width: ${width};" transition:slide={{duration: 400}} type="text" bind:value placeholder="search" />
-				</label>
+			<label use:parentWidth for="search">
+				<input use:focus style="width: ${width};" transition:slide={{duration: 400}} type="text" bind:value placeholder="search" />
+			</label>
+			{:else}
+			<button in:fade={{delay: 400}} role="search" class="empty-button" on:click={() => showSearch = !showSearch}><Search size="30"/></button>
 			{/if}
 		</div>
 
@@ -226,37 +207,43 @@
 			<li><button class={!selected.slug ? 'selected' : ''} on:click={() => {
 				selected.slug = ""
 				selected.title = ""
+				selected.description = ""
 				value = ""
 				showSearch = false
 				}}>all</button></li>
-			{#each categories.filter(category => category.slug !== 'uncategorized') as {slug, title}, i}
+			{#each categories.filter(category => category.slug !== 'uncategorized') as {slug, title, description}, i}
 				<li><button class={selected.slug === slug ? 'selected' : ''} on:click={() => {
 					selected.slug = slug
 					selected.title = title
+					selected.description = description
 					value = ""
 					showSearch = false
 					}}>{title.toLowerCase()}</button></li>
 			{/each}
 		</ul>
+
+		{#if selected.description && filterPosts(posts).length}
+			 <p in:slide>{selected.description}</p>
+		{/if}
 		
 		<!-- SEARCH RESULTS -->
 		{#if value && filterPosts(posts).length}
 			{#if selected.slug}
-				<p transition:slide>{filterPosts(posts).length} {filterPosts(posts).length !== 1 ? 'posts' : 'post'} match "{value}" in <em class="primary">{selected.title}</em></p>	
+				<p transition:slide>{filterPosts(posts).length} {filterPosts(posts).length} matches "{value}" in <em class="primary">{selected.title.toLowerCase()}</em></p>	
 			{:else}
-				<p transition:slide>{filterPosts(posts).length} {filterPosts(posts).length !== 1 ? 'posts' : 'post'} match "{value}"</p>
+				<p transition:slide>{filterPosts(posts).length} {filterPosts(posts).length} matches "{value}"</p>
 			{/if}
 		{/if}
 	</section>
 	
 	<!-- POSTS -->
-	<section>
+	<section class="content-section">
 		<ul>
 			{#each filterPosts(posts).slice(0, more) as post, i (post.id)}
 				<ListCard data={post} {i} />
 			{:else}
 				{#if selected.slug && !value}
-					<li in:fly={{y: 50}}>No posts in <em class="primary">{selected.title}</em></li>
+					<li in:fly={{y: 50}}>No posts in <em class="primary">{selected.title.toLowerCase()}</em></li>
 				{:else}
 					<li in:fly={{y: 50}}>No posts to display</li>
 				{/if}
