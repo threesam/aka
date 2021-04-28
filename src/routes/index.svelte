@@ -50,13 +50,22 @@ return { data }
 
 <style>
 	section {
-		display: grid;
+		/* display: grid; */
 		position: relative;
-		place-items: center;
+		/* place-items: center; */
 		min-height: calc(100vh);
 		width: 100%;
 	}
-	h2 {
+
+	h1 {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		margin: 0;
+	}
+	
+	/* h2 {
 		padding-top: 0;
 		margin-top: 0;
 	}
@@ -69,9 +78,9 @@ return { data }
 .content {
 	margin-top: 0;
 	max-width: 100vw;
-}
+} */
 
-.grid {
+/* .grid {
 	grid-template-columns: 1fr 1fr;
 	max-width: 56rem;
 	margin: 0 auto;
@@ -82,7 +91,7 @@ img {
 	height: auto;
 	max-width: 100%;
 	padding: var(--containerPadding);
-}
+} */
 
 span {
 	color: var(--primary);
