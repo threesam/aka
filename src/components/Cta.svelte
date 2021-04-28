@@ -1,5 +1,6 @@
 <script>
   export let url, text
+  console.log(url, text)
 </script>
 
 <style>

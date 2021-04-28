@@ -1,7 +1,5 @@
 <script context="module">
   import client from '../sanityClient'
-	import BlockContent from '@movingbrands/svelte-portable-text'
-	import serializers from '../components/serializers'
 	
   export async function preload() {
 		const siteSettings = /* groq */ `*[_type == "siteSettings"][0]{
@@ -18,7 +16,7 @@
 				title, 
 				excerpt,
 				cta,
-				slug,
+				"slug": slug.current,
 				order,
 				publishedAt,
 				"image": featuredMedia.asset->url,
@@ -42,13 +40,15 @@ return { data }
 <script>
 	export let data
 	const {words, settings, page} = data
-
-	console.log(page.content)
+	const {content} = page
 	
 	import {onMount} from 'svelte'
+	import BlockContent from '@movingbrands/svelte-portable-text'
+	import serializers from '../components/serializers'
+	import Image from '../components/Image.svelte'
 	import Cta from '../components/Cta.svelte'
 	import ListCard from '../components/ListCard.svelte'
-
+	
 	let WordCloud
   onMount(async () => {
       const mod = await import("../components/WordCloud.svelte")
@@ -61,11 +61,9 @@ return { data }
 <style>
 	section {
 		/* display: grid; */
-		position: relative;
 		/* place-items: center; */
 		width: 100%;
-		min-height: 100%;
-		height: 100vh;
+		min-height: 100vh;
 	}
 
 	h1 {
@@ -75,13 +73,28 @@ return { data }
 		transform: translate(-50%, -50%);
 		margin: 0;
 	}
-	
-	/* h2 {
-		padding-top: 0;
-		margin-top: 0;
+
+	.projects {
+		max-width: 56rem;
+		padding: var(--containerPadding);
+		margin: 0 auto;
 	}
 
-.flex {
+	.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 10px;
+}
+
+	.grid:first-child {
+  grid-column: 1 / 4; /* span from grid column line 1 to 3 (i.e., span 2 columns) */
+}
+
+	figure {
+		margin: 0;
+	}
+
+/* .flex {
 	display: flex;
 	flex-direction: row;
 }
@@ -133,15 +146,18 @@ span {
 	<section>
 		<h1>Art<span>Killing</span>Apathy</h1>
 	</section>
-	<section>
-		<h2>Featured Project</h2>
-		<ListCard data={page.content[0]} />
-	</section>
-	<section>
-		<h3>More Projects</h3>
-		<ul>
-			{#each page.content.slice(1) as item}
-			<ListCard data={item} />
+	<section class="projects">
+		<h2>Featured Projects</h2>
+		<ul class="grid">
+			{#each content as {title, cta, excerpt, image, alt, categories}}
+				 <li>
+					<h3>{title}</h3>
+					<figure>
+						<Image url={image} {alt} />
+					</figure>
+					<BlockContent blocks={excerpt} {serializers} />
+					<Cta url={cta.url} text={cta.text} />
+				</li>
 			{/each}
 		</ul>
 	</section>
