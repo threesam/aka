@@ -88,6 +88,10 @@
 	h1 {
 		margin: 3rem 0 1rem 0;
 	}
+
+	h2 {
+		font-size: var(--h5);
+	}
 /* 
 	span {
 		font-size: var(--h5);
@@ -202,6 +206,15 @@
 			{/if}
 		</div>
 
+		<!-- SEARCH RESULTS -->
+		{#if value && filterPosts(posts).length}
+			{#if selected.slug}
+				<p transition:slide>{filterPosts(posts).length} matches for "{value}" in <em class="primary">{selected.title.toLowerCase()}</em></p>	
+			{:else}
+				<p transition:slide>{filterPosts(posts).length} matches for "{value}"</p>
+			{/if}
+		{/if}
+
 		<!-- CATEGORIES -->
 		<ul class="flex">
 			<li><button class={!selected.slug ? 'selected' : ''} on:click={() => {
@@ -223,17 +236,11 @@
 		</ul>
 
 		{#if selected.description && filterPosts(posts).length}
-			 <p in:slide>{selected.description}</p>
+			<h2>{selected.title}</h2>
+			<p in:slide><em>{selected.description}</em></p>
 		{/if}
 		
-		<!-- SEARCH RESULTS -->
-		{#if value && filterPosts(posts).length}
-			{#if selected.slug}
-				<p transition:slide>{filterPosts(posts).length} {filterPosts(posts).length} matches "{value}" in <em class="primary">{selected.title.toLowerCase()}</em></p>	
-			{:else}
-				<p transition:slide>{filterPosts(posts).length} {filterPosts(posts).length} matches "{value}"</p>
-			{/if}
-		{/if}
+
 	</section>
 	
 	<!-- POSTS -->

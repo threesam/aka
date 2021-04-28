@@ -5,24 +5,24 @@
   
 
   import {fly} from 'svelte/transition'
-  import imageBuilder from '../utils/imageUrlBuilder'
+  // import imageBuilder from '../utils/imageUrlBuilder'
+  import MediaQuery from "svelte-media-query"
   import SplashFilter from './SplashFilter.svelte'
   import { stores } from '@sapper/app';
   import {format, parseISO} from 'date-fns';
 	const { page } = stores();
 
-  let width
-  let height = 350
+  // let width
+  let height = 'auto'
 
-  function parentWidth(node) {
-    width = node.parentElement.clientWidth;
-  }
+  // function parentWidth(node) {
+  //   width = node.parentElement.clientWidth;
+  // }
 </script>
 
 <style>
   a {
-    display: grid;
-    place-content: center;
+    display: block;
     position: relative;
     width: 100%;
 		border-radius: 3px;
@@ -36,12 +36,12 @@
     box-shadow: var(--level-3);
   }
 	h2 {
-		font-size: var(--h3);
+		font-size: var(--h4);
     padding: 0;
     margin: 0;
 		font-weight: bold;
 	}
-  img {
+  /* img {
     position: absolute;
     top: -10%;
     left: -10%;
@@ -49,10 +49,12 @@
     height: 120%;
     z-index: -20;
     object-fit: cover;
-  }
+  } */
   div {
     padding: var(--containerPadding);
     width: 100%;
+    overflow-wrap: normal;
+    overflow-wrap: break-word;
   }
   em {
 		color: var(--primary);
@@ -61,25 +63,21 @@
     margin-bottom: 0;
   }
 
-  @media (max-width: 700px) {
-    .excerpt {
-      display: none;
-    }
-
+  @media (max-width: 767px) {
     a {
       border: 0.125rem solid var(--primary);
     }
   }
 </style>
 
+<!-- style={`height: ${height}px;`}  -->
     <li in:fly={{y: 25, delay: i * 100, duration: 600}}><a
-      style={`height: ${height}px;`}
       rel="prefetch" 
       href="{$page.path}/{slug}">
       <div>
         <h2>{title}</h2>
         {#if excerpt}
-        <p class="excerpt">{excerpt}</p>
+          <p class="excerpt">{excerpt}</p>
         {/if}
         {#if publishedAt}
           <p class="date"><em>{format(parseISO(publishedAt), 'yyyy-MM-dd')}</em></p>

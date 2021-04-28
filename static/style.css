@@ -137,26 +137,6 @@ header nav div {
   margin-left: 0.75rem;
 }
 
-/* footer */
-footer {
-  color: var(--footerTextColor);
-  background: linear-gradient(var(--footerBackground), var(--footerBackgroundFade));
-  display: grid;
-  place-content: center;
-  /* padding: 2rem var(--containerPadding); */
-  /* text-align: center; */
-}
-
-footer p {
-  margin-bottom: 0;
-  max-width: none;
-}
-
-/* css variables bubble up, even though not in root scope */
-footer a {
-  color: var(--footerTextColor);
-}
-
 p {
   margin-bottom: 1rem;
   max-width: 40em;

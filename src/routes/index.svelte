@@ -20,6 +20,7 @@
 				cta,
 				slug,
 				order,
+				publishedAt,
 				"image": featuredMedia.asset->url,
 				"alt": featuredMedia.alt,
 				"categories": categories[]->

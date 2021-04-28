@@ -20,8 +20,9 @@
 
 <slot/>
 
-<Footer />
 
 <div>
 	<Theme />
 </div>
+
+<Footer />

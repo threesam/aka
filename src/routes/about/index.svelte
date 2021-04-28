@@ -12,6 +12,7 @@
 			"aka": {
 				title,
 				description,
+				excerpt,
 				"image": image.asset->url,
 				"alt": image.alt
 			}
@@ -47,7 +48,7 @@
 	}
 
 	.content {
-		position: absolute;
+		position: relative;
 	}
 	button {
 		background: none;
@@ -83,7 +84,7 @@
 		
 		{#if selected === 'aka'}
 		<div in:blur class="content">
-			<p>{aka.description}</p>
+			<BlockContent blocks={aka.excerpt} {serializers} />
 			<!-- <Cta url="/press" text="Press" /> -->
 		</div>
 			{:else if selected === 'eleanor'}
