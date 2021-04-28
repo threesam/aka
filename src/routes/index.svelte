@@ -13,17 +13,23 @@
 			}
 		}`
     const words = /* groq */ `*[_type == "post"]{title, "title": excerpt[0].children[0].text}`
-    // const projects = /* groq */ `*[_type == 'post' && "projects" in categories[]->slug.current]|order(publishedAt desc){
-		// 	title,
-		// 	excerpt,
-		// 	cta,
-		// 	"image": featuredMedia.asset->url,
-		// 	"alt": featuredMedia.alt
-		// }`
+    const page = /* groq */ `*[_type == 'page'][0]{
+			"content": content[]->{
+				title, 
+				excerpt,
+				cta,
+				slug,
+				order,
+				"image": featuredMedia.asset->url,
+				"alt": featuredMedia.alt,
+				"categories": categories[]->
+			}
+		}`
 
 const query = `{
 	"settings": ${siteSettings},
 	"words": ${words},
+	"page": ${page},
 }`
 
 const data = await client.fetch(query).catch((err) => this.error(500, err))
@@ -34,10 +40,13 @@ return { data }
 
 <script>
 	export let data
-	const {words, settings} = data
+	const {words, settings, page} = data
+
+	console.log(page.content)
 	
 	import {onMount} from 'svelte'
 	import Cta from '../components/Cta.svelte'
+	import ListCard from '../components/ListCard.svelte'
 
 	let WordCloud
   onMount(async () => {
@@ -123,34 +132,16 @@ span {
 	<section>
 		<h1>Art<span>Killing</span>Apathy</h1>
 	</section>
-	<!-- <section>
-		<h1 style="font-size: var(--h1);">Featured Project</h1>
-		<div class="grid">
-			<img src={data.projects[0].image} alt={data.projects[0].alt}>
-			<div class="content">
-				<h2>{data.projects[0].title}</h2>
-				<BlockContent blocks={data.projects[0].excerpt} {serializers} />
-				{#if data.projects[0].cta}
-				<Cta url={data.projects[0].cta.url} text={data.projects[0].cta.text} />
-				{/if}
-			</div>
-		</div>
-		<div>
-			<h3>More Projects</h3>
-			<ul>
-				{#each data.projects.slice(1) as project}
-				<div class="item">
-					<img src={project.image} alt={project.alt}>
-					<div class="content">
-						<h4>{project.title}</h4>
-						<BlockContent blocks={project.excerpt} {serializers} />
-						{#if project.cta}
-							<Cta url={project.cta.url} text={project.cta.text} />
-						{/if}
-					</div>
-				</div>
-				{/each}
-			</ul>
-		</div>
-	</section> -->
+	<section>
+		<h2>Featured Project</h2>
+		<ListCard data={page.content[0]} />
+	</section>
+	<section>
+		<h3>More Projects</h3>
+		<ul>
+			{#each page.content.slice(1) as item}
+			<ListCard data={item} />
+			{/each}
+		</ul>
+	</section>
 </main>

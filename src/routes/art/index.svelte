@@ -189,7 +189,7 @@
 <main>
 
 	<section>
-		<h1>Content</h1>
+		<h1>My Art</h1>
 		
 		<!-- SEARCH -->
 		<div class="search">
