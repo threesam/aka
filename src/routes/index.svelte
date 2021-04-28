@@ -53,8 +53,9 @@ return { data }
 		/* display: grid; */
 		position: relative;
 		/* place-items: center; */
-		min-height: calc(100vh);
 		width: 100%;
+		min-height: 100%;
+		height: 100vh;
 	}
 
 	h1 {
