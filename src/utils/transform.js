@@ -1,4 +1,4 @@
-import stringTokenizer from 'string-punctuation-tokenizer'
+import { tokenize } from 'string-punctuation-tokenizer'
 import prepositions from 'title-case-minors'
 
 export const transform = (input, moreUselessWords = []) => {
@@ -10,7 +10,7 @@ export const transform = (input, moreUselessWords = []) => {
     .map(item => item.title)
 
   const words = titles
-    .map(title => stringTokenizer.tokenize({ text: `${title}` })) // turn title into array of words
+    .map(title => tokenize({ text: `${title}` })) // turn title into array of words
     .flat()
     .map(word => word.toLowerCase())
     .filter(item => Number.isNaN(+item) && item.length > 2) // filter out numbers and words shorter than two letters
