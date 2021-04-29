@@ -136,7 +136,6 @@ span {
 	place-items: center;
 	padding: 3rem;
 	width: 100%;
-	height: 20rem;
 }
 
 .more a {
