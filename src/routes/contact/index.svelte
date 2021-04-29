@@ -25,7 +25,9 @@
 
 <SEO title="Contact" description="Social links and contact form for Threesam" />
 
-<section>
-  <Contact/>
-  <svelte:component this={P5Sketch} {sketch} id=" contact-sketch"/>
-</section>
+<main>
+  <section>
+    <Contact/>
+    <svelte:component this={P5Sketch} {sketch} id=" contact-sketch"/>
+  </section>
+</main>

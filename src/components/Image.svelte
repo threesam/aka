@@ -34,7 +34,6 @@
   img {
     filter: brightness(90%);
     position: relative;
-    margin: 2rem 0;
     opacity: 0;
     transition: opacity 1200ms ease-out;
   }

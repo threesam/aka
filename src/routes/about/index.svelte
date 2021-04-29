@@ -76,11 +76,12 @@
 	}
 </style>
 
-<div class="container">
-	<section>
-		<h1>About</h1>
-		<button class={selected === 'aka' ? 'selected' : ''} on:click={() => selected = 'aka'}>this site</button>
-		<button class={selected ===  'eleanor' ? 'selected' : ''} on:click={() => selected = 'eleanor'}>eleanor</button>
+<section>
+		<div class="container">
+			<h1>About</h1>
+			<button class={selected === 'aka' ? 'selected' : ''} on:click={() => selected = 'aka'}>this site</button>
+			<button class={selected ===  'eleanor' ? 'selected' : ''} on:click={() => selected = 'eleanor'}>eleanor</button>
+		</div>
 		
 		{#if selected === 'aka'}
 		<div in:blur class="content">
@@ -93,5 +94,4 @@
 			</div>
 			{/if}
 	</section>
-</div>
 	

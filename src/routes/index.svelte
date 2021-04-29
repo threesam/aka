@@ -74,6 +74,11 @@ return { data }
 		margin: 0;
 	}
 
+	h2 {
+		text-align: center;
+		font-size: var(--bigH);
+	}
+
 	.projects {
 		max-width: 56rem;
 		padding: var(--containerPadding);
@@ -82,7 +87,7 @@ return { data }
 
 	.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 10px;
 }
 
@@ -93,6 +98,7 @@ return { data }
 	figure {
 		margin: 0;
 	}
+
 
 /* .flex {
 	display: flex;
@@ -121,6 +127,38 @@ span {
 	color: var(--primary);
 }
 
+.flex {
+	justify-content: flex-start;
+}
+
+.more {
+	display: grid;
+	place-items: center;
+	padding: 3rem;
+	width: 100%;
+	height: 20rem;
+}
+
+.more a {
+	text-decoration: none;
+	color: var(--textColor);
+	border: 0.125rem dashed var(--textColor);
+	border-radius: 0.25rem;
+	padding: 3rem;
+	font-size: var(--h4);
+	font-family: 'Anton';
+}
+
+.more a:hover {
+	transition: all 0.69s ease-in-out;
+	color: var(--primary);
+	border: 0.125rem solid var(--textColor);
+	/* box-shadow: 0 0 0.5rem var(--secondary); */
+	/* text-shadow: 0.5rem var(--h4) 0 var(--secondary), -0.5rem calc(-1 * var(--h4)) 0 var(--secondary); */
+	
+
+}
+
 @media (min-width: 1024px) {
 	h1 {
 		font-size: var(--biggestH);
@@ -147,18 +185,25 @@ span {
 		<h1>Art<span>Killing</span>Apathy</h1>
 	</section>
 	<section class="projects">
-		<h2>Featured Projects</h2>
+		<h2>Featured</h2>
 		<ul class="grid">
-			{#each content as {title, cta, excerpt, image, alt, categories}}
+			{#each content as {title, slug, cta, excerpt, image, alt}}
 				 <li>
 					<h3>{title}</h3>
 					<figure>
 						<Image url={image} {alt} />
 					</figure>
-					<BlockContent blocks={excerpt} {serializers} />
-					<Cta url={cta.url} text={cta.text} />
+					<div class="flex">
+						<Cta url={cta.url} text={cta.text} />
+						<Cta secondary="true" url={`art/${slug}`} text="Learn More" />
+					</div>
+					<!-- <BlockContent blocks={excerpt} {serializers} /> -->
 				</li>
 			{/each}
 		</ul>
+		<div class="more">
+			<a href="art">More Art</a>
+			
+		</div>
 	</section>
 </main>

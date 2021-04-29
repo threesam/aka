@@ -1,6 +1,5 @@
 <script>
-  export let url, text
-  console.log(url, text)
+  export let url, text, secondary = false
 </script>
 
 <style>
@@ -12,7 +11,26 @@
     border-radius: 3px;
     font-family: var(--headingFont);
     padding: 5px 13px;
+    margin-right: 0.5rem;
+    border: 0.125rem solid var(--primary);
+    transition: all 0.3s ease-in-out;
+  }
+
+  a:hover {
+    transform: scale(.98);
+  }
+
+  .secondary {
+    background: none;
+    color: var(--textColor);
+    border: 0.125rem solid transparent;
+  }
+
+  .secondary:hover {
+    color: var(--primary);
   }
 </style>
 
-<a class="cta" href={url}>{text}</a>
+<p>
+  <a class={secondary ? 'cta secondary' : 'cta'} role="button" href={url}>{text}</a>
+</p>
