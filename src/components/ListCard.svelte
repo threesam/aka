@@ -36,6 +36,8 @@
     box-shadow: var(--level-3);
   }
 	h2 {
+    font-family: var(--bodyFont);
+    font-weight: bold;
 		font-size: var(--h4);
     padding: 0;
     margin: 0;

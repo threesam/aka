@@ -12,7 +12,7 @@
 		}`
     const words = /* groq */ `*[_type == "post"]{title, "title": excerpt[0].children[0].text}`
     const page = /* groq */ `*[_type == 'page'][0]{
-			"content": content[]->{
+			"content": content[0..4]->{
 				title, 
 				excerpt,
 				cta,
@@ -88,7 +88,7 @@ return { data }
 	.grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 10px;
+  grid-gap: 1rem;
 }
 
 	.grid:first-child {
@@ -134,28 +134,22 @@ span {
 .more {
 	display: grid;
 	place-items: center;
-	padding: 3rem;
 	width: 100%;
+	height: 100%;
 }
 
 .more a {
 	text-decoration: none;
 	color: var(--textColor);
-	border: 0.125rem dashed var(--textColor);
-	border-radius: 0.25rem;
-	padding: 3rem;
 	font-size: var(--h4);
-	font-family: 'Anton';
+	font-family: var(--bodyFont);
+	margin: 50% 0;
+	border-bottom: 0.125rem solid var(--primary);
 }
 
 .more a:hover {
 	transition: all 0.69s ease-in-out;
-	color: var(--primary);
-	border: 0.125rem solid var(--textColor);
-	/* box-shadow: 0 0 0.5rem var(--secondary); */
-	/* text-shadow: 0.5rem var(--h4) 0 var(--secondary), -0.5rem calc(-1 * var(--h4)) 0 var(--secondary); */
-	
-
+	color: var(--secondary);
 }
 
 @media (min-width: 1024px) {
@@ -199,10 +193,9 @@ span {
 					<!-- <BlockContent blocks={excerpt} {serializers} /> -->
 				</li>
 			{/each}
+			<div class="more">
+				<a href="art">more art</a>
+			</div>
 		</ul>
-		<div class="more">
-			<a href="art">More Art</a>
-			
-		</div>
 	</section>
 </main>

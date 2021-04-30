@@ -1,5 +1,5 @@
 <script>
-  export let url, text, secondary = false
+  export let url, text, external = false, secondary = false
 </script>
 
 <style>
@@ -31,6 +31,12 @@
   }
 </style>
 
-<p>
-  <a class={secondary ? 'cta secondary' : 'cta'} role="button" href={url}>{text}</a>
+<p role="presentation">
+  <a 
+    class={secondary ? 'cta secondary' : 'cta'} 
+    role="button" 
+    target={external ? '_blank' : ''} 
+    rel={external ? 'noopener' : ''}  
+    href={url}
+  >{text}</a>
 </p>

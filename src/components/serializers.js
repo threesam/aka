@@ -49,6 +49,8 @@ export default {
       props: {
         url: node.url,
         text: node.text,
+        secondary: node.secondary,
+        external: node.external
       },
     }),
     authorReference: ({ children, node: { author } }) => ({
