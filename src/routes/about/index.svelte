@@ -3,6 +3,11 @@
 
   export async function preload() {
 		const query = /* groq */`*[_type == "siteSettings"][0]{
+			title,
+			description,
+			tags,
+			"image": featuredMedia.asset->url, 
+			"alt": featuredMedia.alt,
 			"author": author->{
 				name,
 				"image": image.asset->url,
@@ -32,7 +37,7 @@
 
 	import BlockContent from '@movingbrands/svelte-portable-text'
 	import serializers from '../../components/serializers'
-	import Cta from '../../components/Cta.svelte'
+	import SEO from '../../components/SEO.svelte'
 
 	let selected = 'aka'
 </script>
@@ -75,6 +80,8 @@
 		padding-top: 0.5rem;
 	}
 </style>
+
+<SEO title="About" description="Information about ArtKillingApathy and Eleanor Goldfield" />
 
 <section>
 		<div class="container">

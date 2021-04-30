@@ -3,6 +3,9 @@
 	
   export async function preload() {
 		const siteSettings = /* groq */ `*[_type == "siteSettings"][0]{
+			title,
+			description,
+			tags,
 			"image": image.asset->url, 
 			"alt": image.alt, 
 			wordCloud{
@@ -47,7 +50,7 @@ return { data }
 	import serializers from '../components/serializers'
 	import Image from '../components/Image.svelte'
 	import Cta from '../components/Cta.svelte'
-	import ListCard from '../components/ListCard.svelte'
+	import SEO from '../components/SEO.svelte'
 	
 	let WordCloud
   onMount(async () => {
@@ -60,8 +63,6 @@ return { data }
 
 <style>
 	section {
-		/* display: grid; */
-		/* place-items: center; */
 		width: 100%;
 		min-height: 100vh;
 	}
@@ -98,30 +99,6 @@ return { data }
 	figure {
 		margin: 0;
 	}
-
-
-/* .flex {
-	display: flex;
-	flex-direction: row;
-}
-
-.content {
-	margin-top: 0;
-	max-width: 100vw;
-} */
-
-/* .grid {
-	grid-template-columns: 1fr 1fr;
-	max-width: 56rem;
-	margin: 0 auto;
-	border: var(--line);
-}
-
-img {
-	height: auto;
-	max-width: 100%;
-	padding: var(--containerPadding);
-} */
 
 span {
 	color: var(--primary);
@@ -172,7 +149,10 @@ span {
 
 </style>
 
+<SEO {...settings} />
+
 <svelte:component this={WordCloud} words={transformedWords} shape={settings.wordCloud.shape}/>
+
 <main>
 	<section>
 		<h1>Art<span>Killing</span>Apathy</h1>
@@ -187,15 +167,15 @@ span {
 						<Image url={image} {alt} />
 					</figure>
 					<div class="flex">
-						<Cta url={cta.url} text={cta.text} />
-						<Cta secondary="true" url={`art/${slug}`} text="Learn More" />
+						<Cta {...cta} />
+						<Cta secondary="true" url={`art/${slug}`} text="Description" />
 					</div>
 					<!-- <BlockContent blocks={excerpt} {serializers} /> -->
 				</li>
 			{/each}
-			<div class="more">
+			<li class="more">
 				<a href="art">more art</a>
-			</div>
+			</li>
 		</ul>
 	</section>
 </main>

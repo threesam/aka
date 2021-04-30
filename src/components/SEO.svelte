@@ -8,7 +8,7 @@
   const SEO_IMAGE_HEIGHT = 1200
   const TWITTER_IMAGE_HEIGHT = 628
 
-  export let title
+  export let title = 'ArtKillingApathy'
   export let description
   export let publishedAt
   export let image

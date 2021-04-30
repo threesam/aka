@@ -1,5 +1,5 @@
 <script>
-  export let url
+  export let url, title = 'archived video from ArtKillingApathy'
 
   let width
   function parentWidth(node) {
@@ -25,5 +25,5 @@ iframe {
 </style>
 
 <div>
-  <iframe src={url} frameborder="0" allowfullscreen/>
+  <iframe src={url} frameborder="0" {title} allowfullscreen/>
 </div>

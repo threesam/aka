@@ -8,6 +8,7 @@
       "image": featuredMedia.asset->url,
       "alt": featuredMedia.alt,
       "palette": featuredMedia.asset->metadata.palette.darkMuted.background,
+      "description": excerpt[0].children[0].text,
       body,
       publishedAt,
 			"author": authors[0]->name
@@ -30,6 +31,7 @@ return {post}
 	import serializers from '../../components/serializers'
 	import Hero from '../../components/Hero.svelte'
 	import Container from '../../components/Container.svelte'
+	import SEO from '../../components/SEO.svelte'
 </script>
 
 <style>
@@ -38,6 +40,8 @@ return {post}
     font-size: var(--smallText);
   }
 </style>
+
+<SEO {...post} />
 
 <Hero data={{title, image, alt}} />
 

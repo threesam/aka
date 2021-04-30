@@ -183,7 +183,7 @@
 	}
 </style>
 
-<SEO title="Posts" description="Content" {...settings} />
+<SEO title="Art" description="The collected works of Eleanor Goldfield" {...settings} />
 
 <main>
 
