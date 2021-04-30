@@ -40,14 +40,11 @@
 	import ListCard from '../../components/ListCard.svelte'
 	import Search from '../../components/icons/Search.svelte'
 	
-	let selected = {
-		slug: '',
-		title: ''
-	}
+	import {selected} from '../../utils/store'
 
 	$: filterPosts = (posts) => posts.filter(post => {
-		if(selected.slug) {
-			return post.categories.includes(selected.slug)
+		if($selected.slug) {
+			return post.categories.includes($selected.slug)
 		} else {
 			return post
 		}
@@ -208,8 +205,8 @@
 
 		<!-- SEARCH RESULTS -->
 		{#if value && filterPosts(posts).length}
-			{#if selected.slug}
-				<p transition:slide>{filterPosts(posts).length} matches for "{value}" in <em class="primary">{selected.title.toLowerCase()}</em></p>	
+			{#if $selected.slug}
+				<p transition:slide>{filterPosts(posts).length} matches for "{value}" in <em class="primary">{$selected.title.toLowerCase()}</em></p>	
 			{:else}
 				<p transition:slide>{filterPosts(posts).length} matches for "{value}"</p>
 			{/if}
@@ -217,27 +214,27 @@
 
 		<!-- CATEGORIES -->
 		<ul class="flex">
-			<li><button class={!selected.slug ? 'selected' : ''} on:click={() => {
-				selected.slug = ""
-				selected.title = ""
-				selected.description = ""
+			<li><button class={!$selected.slug ? 'selected' : ''} on:click={() => {
+				$selected.slug = ""
+				$selected.title = ""
+				$selected.description = ""
 				value = ""
 				showSearch = false
 				}}>all</button></li>
 			{#each categories.filter(category => category.slug !== 'uncategorized') as {slug, title, description}, i}
-				<li><button class={selected.slug === slug ? 'selected' : ''} on:click={() => {
-					selected.slug = slug
-					selected.title = title
-					selected.description = description
+				<li><button class={$selected.slug === slug ? 'selected' : ''} on:click={() => {
+					$selected.slug = slug
+					$selected.title = title
+					$selected.description = description
 					value = ""
 					showSearch = false
 					}}>{title.toLowerCase()}</button></li>
 			{/each}
 		</ul>
 
-		{#if selected.description && filterPosts(posts).length}
-			<h2>{selected.title}</h2>
-			<p in:slide><em>{selected.description}</em></p>
+		{#if $selected.description && filterPosts(posts).length}
+			<h2>{$selected.title}</h2>
+			<p in:slide><em>{$selected.description}</em></p>
 		{/if}
 		
 
@@ -249,8 +246,8 @@
 			{#each filterPosts(posts).slice(0, more) as post, i (post.id)}
 				<ListCard data={post} {i} />
 			{:else}
-				{#if selected.slug && !value}
-					<li in:fly={{y: 50}}>No posts in <em class="primary">{selected.title.toLowerCase()}</em></li>
+				{#if $selected.slug && !value}
+					<li in:fly={{y: 50}}>No posts in <em class="primary">{$selected.title.toLowerCase()}</em></li>
 				{:else}
 					<li in:fly={{y: 50}}>No posts to display</li>
 				{/if}
