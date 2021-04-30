@@ -10,8 +10,8 @@
 			publishedAt,
 			"categories": categories[]->slug.current,
 			"excerpt": excerpt[0].children[0].text,
-			// "image": featuredMedia.asset->url,
-			// "alt": featuredMedia.alt
+			"image": featuredMedia.asset->url,
+			"alt": featuredMedia.alt
 		}`
 		const categories = /* groq */`*[_type == "category"]|order(order asc){"slug": slug.current, title, description, order}`
 
@@ -197,7 +197,7 @@
 				<input use:focus style="width: ${width};" transition:slide={{duration: 400}} type="text" bind:value placeholder="search" />
 			</label>
 			{:else}
-			<button in:fade={{delay: 400}} role="search" class="empty-button" on:click={() => showSearch = !showSearch}><Search size="30"/></button>
+			<button in:fade={{delay: 400}} role="search" class="umami--click--search empty-button" on:click={() => showSearch = !showSearch}><Search size="30"/></button>
 			{/if}
 		</div>
 
@@ -212,7 +212,7 @@
 
 		<!-- CATEGORIES -->
 		<ul class="flex">
-			<li><button class={!$selected.slug ? 'selected' : ''} on:click={() => {
+			<li><button class="umami--click--category-{$selected.slug} {!$selected.slug ? 'selected' : ''}" on:click={() => {
 				$selected.slug = ""
 				$selected.title = ""
 				$selected.description = ""
@@ -220,7 +220,7 @@
 				showSearch = false
 				}}>all</button></li>
 			{#each categories.filter(category => category.slug !== 'uncategorized') as {slug, title, description}, i}
-				<li><button class={$selected.slug === slug ? 'selected' : ''} on:click={() => {
+				<li><button class="umami--click--category-{$selected.slug} {$selected.slug === slug ? 'selected' : ''}" on:click={() => {
 					$selected.slug = slug
 					$selected.title = title
 					$selected.description = description
@@ -252,7 +252,7 @@
 			{/each}
 		</ul>
 		{#if filterPosts(posts).filter(post => searchList(post, query)).length > 9}
-			 <button on:click={() => $more += 10}>show more</button>
+			 <button class="umami--click--{$more}-more-{$selected.slug}" on:click={() => $more += 10}>show more</button>
 		{/if}
 	</section>
 	
