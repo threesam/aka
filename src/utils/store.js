@@ -5,3 +5,5 @@ export const selected = writable({
   slug: '',
   description: ''
 })
+
+export const more = writable(10)

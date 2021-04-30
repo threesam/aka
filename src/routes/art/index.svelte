@@ -40,7 +40,7 @@
 	import ListCard from '../../components/ListCard.svelte'
 	import Search from '../../components/icons/Search.svelte'
 	
-	import {selected} from '../../utils/store'
+	import {selected, more} from '../../utils/store'
 
 	$: filterPosts = (posts) => posts.filter(post => {
 		if($selected.slug) {
@@ -56,8 +56,6 @@
 
 	let value = ""
 	$: query = new RegExp(value, 'g')
-
-	$: more = 10
 
 	function searchList(list, query) {
 		return list.title.toLowerCase().match(query) || list.excerpt.toLowerCase().match(query)
@@ -243,7 +241,7 @@
 	<!-- POSTS -->
 	<section class="content-section">
 		<ul>
-			{#each filterPosts(posts).slice(0, more) as post, i (post.id)}
+			{#each filterPosts(posts).slice(0, $more) as post, i (post.id)}
 				<ListCard data={post} {i} />
 			{:else}
 				{#if $selected.slug && !value}
@@ -254,7 +252,7 @@
 			{/each}
 		</ul>
 		{#if filterPosts(posts).filter(post => searchList(post, query)).length > 9}
-			 <button on:click={() => more += 10}>show more</button>
+			 <button on:click={() => $more += 10}>show more</button>
 		{/if}
 	</section>
 	
