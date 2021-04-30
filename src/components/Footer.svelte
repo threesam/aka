@@ -13,6 +13,10 @@
     padding: var(--containerPadding);
   }
 
+  p {
+    font-weight: 100;
+  }
+
 p:first-child {
   max-width: calc(40rem - (2 * var(--containerPadding)));
   text-align: center;
@@ -29,6 +33,7 @@ p:last-child {
   text-align: center;
   font-size: var(--smallText);
   padding: 2rem 0;
+  font-family: var(--headingFont);
 }
 
 a {

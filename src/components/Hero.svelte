@@ -3,6 +3,15 @@
   import {scale} from 'svelte/transition'
 	import SplashFilter from './SplashFilter.svelte'
 
+	import imageBuilder from '../utils/imageUrlBuilder'
+
+	let w
+	let h
+	function parentWidth(node) {
+		w = node.parentElement.clientWidth;
+		h = node.parentElement.clientHeight;
+	}
+
 	export let data
 	const {image: src, alt, title} = data
 
@@ -34,8 +43,8 @@
 	}
 	
 	h1 {
-		font-size: clamp(var(--h4), 5vw, var(--h1));
-		max-width: 56rem;
+		font-size: clamp(var(--h3), 5vw, var(--bigH));
+		max-width: 70rem;
 		margin: 0;
 		line-height: 1.1;
 	}
@@ -47,7 +56,7 @@
 			<h1 id={title}>{title}</h1>
 			<slot/>
 		</div>
-		<img in:scale={{duration:2000, start: 1.2, opacity: 0.2}} {src} {alt}>
+		<img use:parentWidth in:scale={{duration:2000, start: 1.2, opacity: 0.2}} src={imageBuilder(src).width(w).height(h).fit('crop').crop('entropy').auto('format').url()} {alt}>
 		<SplashFilter opacity="0.8" />
 	{/if}
 </section>
