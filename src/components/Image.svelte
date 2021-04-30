@@ -6,9 +6,11 @@
   export let alt = ""
 
   let width
+  let height
 
   function parentWidth(node) {
     width = node.parentElement.clientWidth;
+    height = node.parentElement.clientHeight;
   }
 
   // function convertRemToPixels(rem) {    
@@ -45,10 +47,10 @@
 
 <img 
   {width}
-  height={width}
+  height={height}
   use:parentWidth 
   class:loaded
-  src={imageBuilder(url).width(width).height(width).auto('format').url()} 
+  src={imageBuilder(url).width(width).height(height).auto('format').url()} 
   bind:this={thisImage}
   {alt} 
   loading="lazy" 

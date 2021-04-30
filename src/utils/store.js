@@ -7,3 +7,5 @@ export const selected = writable({
 })
 
 export const more = writable(10)
+
+export const splashMulti = writable(0.5)

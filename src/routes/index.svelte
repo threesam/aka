@@ -78,6 +78,10 @@ return { data }
 		font-size: var(--bigH);
 	}
 
+	h3 {
+		margin-bottom: 0.5rem;
+	}
+
 	.projects {
 		max-width: 56rem;
 		padding: var(--containerPadding);
@@ -94,9 +98,13 @@ return { data }
   grid-column: 1 / 4; /* span from grid column line 1 to 3 (i.e., span 2 columns) */
 }
 
-	figure {
-		margin: 0;
-	}
+figure {
+	margin: 0;
+	border-radius: 3px;
+	overflow: hidden;
+	height: 300px;
+	width: 300px;
+}
 
 span {
 	color: var(--primary);

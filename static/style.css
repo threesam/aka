@@ -10,22 +10,24 @@
   /* define colors as colors */
   --red: #831b2d;
   --pink: #ff3456;
-  --trueRed: rgb(219, 25, 25);
+  --trueRed: #db1919;
   --purple: #8f62aa;
   --black: #161f2b;
   --trueBlack: #000;
   --darkBlue: #00214d;
-  --darkGrey: #111;
-  --grey: #bfbfbf;
-  --lightGrey: #f2f4f6;
+  --darkestGrey: #111;
+  --darkerGrey: #353535;
+  --grey: #818181;
+  --lighterGrey: #b0b1b3;
+  --lightestGrey: #f2f4f6;
   --white: #fff;
 
   /* define colors' intentions */
   --primary: var(--red);
   --secondary: var(--purple);
   --danger: var(--trueRed);
-  --background: var(--lightGrey);
-  --secondaryBg: var(--grey);
+  --background: var(--lightestGrey);
+  --secondaryBg: var(--lighterGrey);
   --textColor: var(--black);
   --buttonTextColor: var(--background);
   --lineColor: var(--grey);
@@ -63,6 +65,9 @@
   /* Positioning */
   --containerPadding: 1.5rem;
   --headerHeight: 3rem;
+
+  /* Effects */
+  --splashMulti: 0.5
 }
 
 @media only screen and (min-width: 500px) {
@@ -358,13 +363,13 @@ button.small {
 .dark {
   --primary: var(--pink);
   --secondary: var(--red);
-  --cardBg: var(--darkGrey);
+  --cardBg: var(--darkestGrey);
   --background: var(--trueBlack);
-  --secondaryBg: var(--darkGrey);
-  --textColor: var(--lightGrey);
+  --secondaryBg: var(--darkerGrey);
+  --textColor: var(--lightestGrey);
   --buttonTextColor: var(--trueBlack);
-  --headerBackground: var(--darkGrey);
+  --headerBackground: var(--darkestGrey);
   --headerTextColor: var(--white);
-  --footerBackground: var(--darkGrey);
+  --footerBackground: var(--darkestGrey);
   --footerBackgroundFade: var(--trueBlack);
 }
