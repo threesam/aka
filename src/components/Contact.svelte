@@ -14,13 +14,13 @@
     z-index: 10;
   }
 
-  form {
+  /* form {
     text-align: left;
-  }
+  } */
 
-  form div {
+  /* form div {
     margin-bottom: 0.5rem;
-  }
+  } */
 
   h1 {
     color: var(--textColor);
@@ -28,15 +28,15 @@
     width: max-content;
   }
 
-  button {
+  /* button {
     font-weight: 700;
-  }
+  } */
 
 </style>
 
 {#if show}
    <!-- content here -->
-   <div in:fly={{y: -100, duration: 1000}} class="border card">
+   <div in:fly={{y: -30, duration: 1000}} class="border card">
     <h1>Contact</h1>
     <SocialLinks />
     <!-- <form in:fade name="contact" method="POST" data-netlify="true" netlify-honeypot=“bot-field”>
