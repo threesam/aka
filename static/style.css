@@ -39,7 +39,7 @@
   /* Styles */
   --line: solid 0.125rem var(--lineColor);
   --baseFontSize: 100%;
-  --borderRadius: 10px;
+  --borderRadius: 4px;
 
   /* Type */
   --headingFont: 'Anton';

@@ -2,12 +2,20 @@
   import { stores } from '@sapper/app';
 	const { page } = stores();
   import {scale} from 'svelte/transition'
+  const d = 50
   export let links = [
+    {
+      title: 'Email',
+      href: 'mailto:eleanor@artkillingapathy.com?subject="From Contact"',
+      svg: {
+        code: `<svg viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="${d}" height="${d}"><path d="M.5 2.5A1.5 1.5 0 012 1h12a1.5 1.5 0 011.5 1.5v1.208L8 7.926.5 3.708V2.5z" fill="currentColor"></path><path d="M.5 4.855V12.5A1.5 1.5 0 002 14h12a1.5 1.5 0 001.5-1.5V4.855L8 9.074.5 4.854z" fill="currentColor"></path></svg>`
+      }
+    },
     {
       title: 'Twitter',
       href: 'https://twitter.com/radicaleleanor',
       svg: {
-        code: `<svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="30" height="30"><path d="M14.977 1.467a.5.5 0 00-.87-.301 2.559 2.559 0 01-1.226.763A3.441 3.441 0 0010.526 1a3.539 3.539 0 00-3.537 3.541v.44C3.998 4.75 2.4 2.477 1.967 1.325a.5.5 0 00-.916-.048C.004 3.373-.157 5.407.604 7.139 1.27 8.656 2.61 9.864 4.51 10.665 3.647 11.276 2.194 12 .5 12a.5.5 0 00-.278.916C1.847 14 3.55 14 5.132 14h.048c4.861 0 8.8-3.946 8.8-8.812v-.479c.363-.37.646-.747.82-1.236.193-.546.232-1.178.177-2.006z" fill="currentColor"></path></svg>`
+        code: `<svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="${d}" height="${d}"><path d="M14.977 1.467a.5.5 0 00-.87-.301 2.559 2.559 0 01-1.226.763A3.441 3.441 0 0010.526 1a3.539 3.539 0 00-3.537 3.541v.44C3.998 4.75 2.4 2.477 1.967 1.325a.5.5 0 00-.916-.048C.004 3.373-.157 5.407.604 7.139 1.27 8.656 2.61 9.864 4.51 10.665 3.647 11.276 2.194 12 .5 12a.5.5 0 00-.278.916C1.847 14 3.55 14 5.132 14h.048c4.861 0 8.8-3.946 8.8-8.812v-.479c.363-.37.646-.747.82-1.236.193-.546.232-1.178.177-2.006z" fill="currentColor"></path></svg>`
       }
     },
     {
@@ -18,8 +26,8 @@
       viewBox="0 0 15 15"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      width="30"
-      height="30">
+      width="${d}"
+      height="${d}">
       <path d="M7.5 5a2.5 2.5 0 100 5 2.5 2.5 0 000-5z" fill="currentColor" />
       <path
         fill-rule="evenodd"
@@ -39,8 +47,8 @@
       viewBox="0 0 15 15"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      width="30"
-      height="30">
+      width="${d}"
+      height="${d}">
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"
@@ -56,10 +64,19 @@
 
 <style>
   ul {
-    display: flex;
-    justify-content: space-between;
+  
+    /* display: flex;
+    justify-content: space-between; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
     align-items: center;
     margin-bottom: 0.5rem;
+  }
+
+  li {
+    display: grid;
+    place-items: center;
   }
 
   a {
@@ -69,7 +86,7 @@
   }
 
   a:hover {
-    /* color: var(--primary); */
+    color: var(--primary);
     transform: scale(1.2);
   }
 </style>
@@ -77,7 +94,8 @@
 <ul>
   {#each links as {href, title, svg}, i}
   <li class="umami--click--{$page.path !== '/' ? `${$page.path.substring(1).replace(/\//, '-')}` : 'home'}-{title.toLowerCase()}">
-    <a in:scale={{delay: ((i + 1) * 100) + 500, start: 0}} {href} aria-label={title}>{@html svg.code}</a>
+    <!-- <a in:scale={{delay: ((i + 1) * 100) + 500, start: 0}} {href} aria-label={title}>{@html svg.code}</a> -->
+    <a in:scale={{delay: (i === 0 ? 0 : i === 1 || i === 2 ? 150 : 300) + 500, duration: 500, start: 0}} {href} aria-label={title}>{@html svg.code}</a>
   </li>
   {/each}
 </ul>
