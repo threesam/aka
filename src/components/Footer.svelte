@@ -1,5 +1,6 @@
 <script>
-  import Cta from './Cta.svelte'
+  import { stores } from '@sapper/app';
+	const { page } = stores();
 </script>
 
 <style>
@@ -9,26 +10,45 @@
     width: 100%;
     background: linear-gradient(var(--background), var(--cardBg));
     color: inherit;
-    padding: 2rem;
+    padding: var(--containerPadding);
   }
 
 p:first-child {
-  max-width: 35rem;
+  max-width: calc(40rem - (2 * var(--containerPadding)));
   text-align: center;
-  padding: 2rem;
-  border: 0.125rem solid var(--cardBg);
+  margin: 0;
+  margin-top: calc(4 * var(--containerPadding));
+  padding: 3rem;
+  border: 0.125rem solid var(--secondaryBg);
+  box-shadow: var(--level-2);
 }
 
 p:last-child {
   width: 100%;
-  margin: 0 auto;
+  margin: var(--containerPadding) auto 0 auto;
   text-align: center;
   font-size: var(--smallText);
   padding: 2rem 0;
 }
+
+a {
+  transition: all 0.69s ease-in-out;
+}
+
+a:hover {
+  color: var(--primary);
+  border-bottom: 0.125rem solid transparent;
+}
+
+@media (max-width: 500px) {
+  p:first-child {
+    text-align: left;
+    padding: var(--containerPadding);
+  }
+}
 </style>
 
 <footer>
-  <p>For more content <a href="http://bit.ly/ActOutNewsletter">subscribe</a> to the Act Out! newsletter and for frequent updates, appearances and press <a href="https://twitter.com/radicaleleanor" target="_blank" rel="noopener">follow me</a> on Twitter.</p>
+  <p>For more content <span class="umami--click--footer{$page.path !== '/' ? `-${$page.path.substring(1).replace(/\//, '-')}` : '-home'}-newsletter"><a href="http://bit.ly/ActOutNewsletter">subscribe</a></span> to the Act Out! newsletter and for frequent updates, appearances and press <span class="umami--click--footer{$page.path !== '/' ? `-${$page.path.substring(1).replace(/\//, '-')}` : '-home'}-twitter"><a href="https://twitter.com/radicaleleanor" target="_blank" rel="noopener">follow me</a></span> on Twitter.</p>
   <p>© 2014-2020 Art Killing Apathy | <span>site by <a href="https://threesam.com">Sam</a></span></p>
 </footer>
