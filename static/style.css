@@ -1,6 +1,9 @@
 @font-face{
   font-family: 'Anton';
   src: url('./fonts/Anton.woff') format('woff');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
 }
 
 :root {
