@@ -88,7 +88,7 @@ return { data }
 	.grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 1rem;
+  grid-gap: var(--containerPadding);
 }
 
 	.grid:first-child {
