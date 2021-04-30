@@ -1,4 +1,6 @@
 <script>
+  import { stores } from '@sapper/app';
+	const { page } = stores();
   import {scale} from 'svelte/transition'
   export let links = [
     {
@@ -53,7 +55,7 @@
 </script>
 
 <style>
-  div {
+  ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -63,6 +65,7 @@
   a {
     color: var(--textColor);
     transition: all 0.3s;
+    border-bottom: none;
   }
 
   a:hover {
@@ -71,8 +74,10 @@
   }
 </style>
 
-<div>
+<ul>
   {#each links as {href, title, svg}, i}
+  <li class="umami--click--{$page.path !== '/' ? `${$page.path.substring(1).replace(/\//, '-')}` : 'home'}-{title.toLowerCase()}">
     <a in:scale={{delay: ((i + 1) * 100) + 500, start: 0}} {href} aria-label={title}>{@html svg.code}</a>
+  </li>
   {/each}
-</div>
+</ul>

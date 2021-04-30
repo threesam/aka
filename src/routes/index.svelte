@@ -46,8 +46,6 @@ return { data }
 	const {content} = page
 	
 	import {onMount} from 'svelte'
-	import BlockContent from '@movingbrands/svelte-portable-text'
-	import serializers from '../components/serializers'
 	import Image from '../components/Image.svelte'
 	import Cta from '../components/Cta.svelte'
 	import SEO from '../components/SEO.svelte'
@@ -160,7 +158,7 @@ span {
 	<section class="projects">
 		<h2>Featured</h2>
 		<ul class="grid">
-			{#each content as {title, slug, cta, excerpt, image, alt}}
+			{#each content as {title, slug, cta, image, alt}}
 				 <li>
 					<h3>{title}</h3>
 					<figure>
@@ -168,9 +166,8 @@ span {
 					</figure>
 					<div class="flex">
 						<Cta {...cta} />
-						<Cta secondary="true" url={`art/${slug}`} text="Description" />
+						<Cta secondary="true" url={`art/${slug}`} text="Description" {slug} />
 					</div>
-					<!-- <BlockContent blocks={excerpt} {serializers} /> -->
 				</li>
 			{/each}
 			<li class="more">

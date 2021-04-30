@@ -5,6 +5,7 @@
 		const {slug} = params
     const query = /* groq */`*[_type == "post" && slug.current == $slug][0]{
       title,
+      cta,
       "image": featuredMedia.asset->url,
       "alt": featuredMedia.alt,
       "palette": featuredMedia.asset->metadata.palette.darkMuted.background,
@@ -24,14 +25,15 @@ return {post}
 
 <script>
 	export let post;
-	const {title, image, alt, body, publishedAt, author} = post
-	console.log('post', post);
+	const {title, image, alt, body, publishedAt, author, cta} = post
+	console.log('cta', cta);
   import {format, parseISO} from 'date-fns'
 	import BlockContent from '@movingbrands/svelte-portable-text'
 	import serializers from '../../components/serializers'
 	import Hero from '../../components/Hero.svelte'
 	import Container from '../../components/Container.svelte'
 	import SEO from '../../components/SEO.svelte'
+	import Cta from '../../components/Cta.svelte'
 </script>
 
 <style>
@@ -51,6 +53,9 @@ return {post}
       <p>{format(parseISO(publishedAt), 'yyyy-MM-dd')}<br>by <a href="/about">{author}</a></p>
     {/if}
     <BlockContent blocks={body} {serializers} />
+    {#if cta}
+      <Cta {...cta} />
+    {/if}
   </section>
 </Container>
 

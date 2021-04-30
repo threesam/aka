@@ -1,5 +1,8 @@
 <script>
-  export let url, text, external, secondary
+  import { stores } from '@sapper/app';
+	const { page } = stores();
+  
+  export let url, text, external, secondary, slug
 </script>
 
 <style>
@@ -31,7 +34,7 @@
   }
 </style>
 
-<p role="presentation">
+<p class="umami--click--{secondary ? 'secondary-cta': 'cta'}{$page.path !== '/' ? `-${$page.path.substring(1).replace(/\//, '-')}` : '-home'}{slug ? `-${slug.current || slug}` : ''}">
   <a 
     class={secondary ? 'cta secondary' : 'cta'} 
     role="button" 
