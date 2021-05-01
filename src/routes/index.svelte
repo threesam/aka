@@ -169,7 +169,7 @@ span {
 		<h1>Art<span>Killing</span>Apathy</h1>
 	</section>
 	<section class="projects">
-		<h2>Featured</h2>
+		<h2>Featured Art</h2>
 		<ul class="grid">
 			{#each content as {title, slug, cta, image, alt}}
 				 <li>
