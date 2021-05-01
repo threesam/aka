@@ -41,6 +41,7 @@ return { data }
 </script>
 
 <script>
+
 	export let data
 	const {words, settings, page} = data
 	const {content} = page
@@ -49,11 +50,10 @@ return { data }
 	import Image from '../components/Image.svelte'
 	import Cta from '../components/Cta.svelte'
 	import SEO from '../components/SEO.svelte'
-	
 	let WordCloud
   onMount(async () => {
-      const mod = await import("../components/WordCloud.svelte")
-      WordCloud = mod.default
+		const mod = await import("../components/WordCloud.svelte")
+		WordCloud = mod.default
   })
 	import {transform} from '../utils/transform'
 	const transformedWords = transform(words, settings.wordCloud.uselessWords)

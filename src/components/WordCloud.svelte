@@ -15,8 +15,8 @@
 	
 	onMount(() => {
 		const white = getCssCustomProperty('--white')
-		const lightGrey = getCssCustomProperty('--lightGrey')
-		const darkGrey = getCssCustomProperty('--darkGrey')
+		const lightGrey = getCssCustomProperty('--lighterGrey')
+		const darkGrey = getCssCustomProperty('--darkerGrey')
 		const black = getCssCustomProperty('--black')
 		
 		document.getElementById('my_canvas').width = document.getElementById('canvas_ctn').clientWidth;
