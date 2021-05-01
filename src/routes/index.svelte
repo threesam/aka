@@ -98,6 +98,11 @@ return { data }
   grid-column: 1 / 4; /* span from grid column line 1 to 3 (i.e., span 2 columns) */
 }
 
+li {
+	display: grid;
+	justify-content: center;
+}
+
 figure {
 	margin: 0;
 	border-radius: 3px;
@@ -157,9 +162,9 @@ span {
 
 <SEO {...settings} />
 
-<svelte:component this={WordCloud} words={transformedWords} shape={settings.wordCloud.shape}/>
 
 <main>
+	<svelte:component this={WordCloud} words={transformedWords} shape={settings.wordCloud.shape}/>
 	<section>
 		<h1>Art<span>Killing</span>Apathy</h1>
 	</section>
