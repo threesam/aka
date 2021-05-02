@@ -103,13 +103,13 @@ li {
 	justify-content: center;
 }
 
-figure {
+/* div {
 	margin: 0;
 	border-radius: 3px;
 	overflow: hidden;
 	height: 300px;
 	width: 300px;
-}
+} */
 
 span {
 	color: var(--primary);
@@ -174,9 +174,7 @@ span {
 			{#each content as {title, slug, cta, image, alt}}
 				 <li>
 					<h3>{title}</h3>
-					<figure>
 						<Image url={image} {alt} />
-					</figure>
 					<div class="flex">
 						<Cta {...cta} />
 						<Cta secondary="true" url={`art/${slug}`} text="Description" {slug} />
