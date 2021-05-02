@@ -4,13 +4,12 @@
 
   export let url
   export let alt = ""
+  export let caption
 
   let width
-  let height
 
   function parentWidth(node) {
     width = node.parentElement.clientWidth;
-    height = node.parentElement.clientHeight;
   }
 
   // function convertRemToPixels(rem) {    
@@ -33,25 +32,42 @@
 </script>
 
 <style>
+  figure {
+    margin: 0;
+    position: relative;
+  }
   img {
     filter: brightness(90%);
     position: relative;
     opacity: 0;
     transition: opacity 1200ms ease-out;
+    width: 100%;
+    height: 100%;
   }
 
   img.loaded {
     opacity: 1;
   }
+
+  figcaption {
+    margin: 0 auto;
+    font-size: var(--smallText);
+    max-width: 40rem;
+    padding: 0 var(--containerPadding) var(--containerPadding) var(--containerPadding);
+  }
 </style>
 
-<img 
+<figure>
+  <img 
   {width}
-  height={height}
   use:parentWidth 
   class:loaded
-  src={imageBuilder(url).width(width).height(height).auto('format').url()} 
+  src={imageBuilder(url).width(width).auto('format').url()} 
   bind:this={thisImage}
   {alt} 
   loading="lazy" 
-/>
+  />
+  {#if caption}
+     <figcaption><em>{caption}</em></figcaption>
+  {/if}
+</figure>

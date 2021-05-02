@@ -26,7 +26,6 @@ return {post}
 <script>
 	export let post;
 	const {title, image, alt, body, publishedAt, author, cta} = post
-	console.log('cta', cta);
   import {format, parseISO} from 'date-fns'
 	import BlockContent from '@movingbrands/svelte-portable-text'
 	import serializers from '../../components/serializers'

@@ -216,11 +216,11 @@ li {
 }
 
 blockquote {
-  margin: 1em 0;
-  padding: 2em;
+  margin: 1em auto;
+  padding: var(--containerPadding);
   background: var(--cardBg);
   box-shadow: var(--level-3);
-
+  max-width: 40rem;
 }
 
 label {
@@ -244,13 +244,13 @@ textarea:focus {
 
 figure {
   max-width: 100%;
-  height: auto;
+  max-height: 100vh;
 }
 
 img {
   width: 100%;
   max-width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 textarea {
