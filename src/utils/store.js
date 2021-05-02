@@ -1,10 +1,12 @@
 import { writable } from 'svelte/store'
 
-export const selected = writable({
+export const initializedCategory = {
   title: '',
   slug: '',
   description: ''
-})
+}
+
+export const selected = writable(initializedCategory)
 
 export const more = writable(10)
 

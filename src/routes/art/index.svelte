@@ -212,7 +212,7 @@
 
 		<!-- CATEGORIES -->
 		<ul class="flex">
-			<li><button class="umami--click--category-{$selected.slug} {!$selected.slug ? 'selected' : ''}" on:click={() => {
+			<li><button class="umami--click--category-all {!$selected.slug ? 'selected' : ''}" on:click={() => {
 				$selected.slug = ""
 				$selected.title = ""
 				$selected.description = ""
@@ -220,7 +220,7 @@
 				showSearch = false
 				}}>all</button></li>
 			{#each categories.filter(category => category.slug !== 'uncategorized') as {slug, title, description}, i}
-				<li><button class="umami--click--category-{$selected.slug} {$selected.slug === slug ? 'selected' : ''}" on:click={() => {
+				<li><button class="umami--click--category-{slug} {$selected.slug === slug ? 'selected' : ''}" on:click={() => {
 					$selected.slug = slug
 					$selected.title = title
 					$selected.description = description

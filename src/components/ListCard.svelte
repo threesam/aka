@@ -74,7 +74,7 @@
   }
 </style>
 
-    <li in:fly={{y: 25, delay: i * 100, duration: 600}} on:mouseenter={() => $splashMulti = 1}><a
+    <li in:fly={{y: 25, delay: i * 100, duration: 600}}><a
       style={`height: ${height}px;`}
       rel="prefetch" 
       href="{$page.path}/{slug}">

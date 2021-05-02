@@ -1,5 +1,5 @@
 <script>
-  export let opacity = 0.9
+  export let opacity = 0.8
 </script>
 
 <style>

@@ -34,6 +34,13 @@ return {post}
 	import Container from '../../components/Container.svelte'
 	import SEO from '../../components/SEO.svelte'
 	import Cta from '../../components/Cta.svelte'
+
+  // reset category
+  import {onMount} from 'svelte'
+  import {selected, initializedCategory} from '../../utils/store'
+  onMount(()=> {
+    $selected = initializedCategory
+  })
 </script>
 
 <style>
