@@ -2,12 +2,47 @@
 	import { stores } from '@sapper/app';
 	const { page } = stores();
 	$: segment = $page.path.substring(1)
+
+	import Logo from './icons/Logo.svelte'
 </script>
 
 <style>
+	header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  color: var(--headerTextColor);
+  height: var(--headerHeight);
+  background: var(--headerBackground);
+  box-shadow: var(--level-2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--containerPadding);
+  z-index: 20;
+}
+
+nav {
+	display: flex;
+	align-items: center;
+}
+
+header nav a {
+
+  color: inherit;
+  text-decoration: none;
+}
+
+header nav a + a,
+header nav div {
+  margin-left: 0.75rem;
+}
 	a {
 		font-weight: normal;
 		transition: all 0.3s ease-in-out;
+		line-height: 0;
+		font-family: var(--headingFont);
 	}
 	span {
 		color: var(--primary);

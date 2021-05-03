@@ -9,7 +9,7 @@
 :root {
   /* define colors as colors */
   --red: #831b2d;
-  --pink: #ff3456;
+  --orange: #E33614;
   --trueRed: #db1919;
   --purple: #8f62aa;
   --black: #161f2b;
@@ -23,7 +23,7 @@
   --white: #fff;
 
   /* define colors' intentions */
-  --primary: var(--red);
+  --primary: var(--orange);
   --secondary: var(--purple);
   --danger: var(--trueRed);
   --background: var(--lightestGrey);
@@ -116,33 +116,6 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background-color: var(--primary);
   border: 0.25rem solid var(--background);
-}
-
-/* header */
-header {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  color: var(--headerTextColor);
-  height: var(--headerHeight);
-  background: var(--headerBackground);
-  box-shadow: var(--level-2);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 var(--containerPadding);
-  z-index: 20;
-}
-
-header nav a {
-  color: inherit;
-  text-decoration: none;
-}
-
-header nav a + a,
-header nav div {
-  margin-left: 0.75rem;
 }
 
 main {
@@ -362,7 +335,7 @@ button.small {
 
 /* themes */
 .dark {
-  --primary: var(--pink);
+  --primary: var(--orange);
   --secondary: var(--red);
   --cardBg: var(--darkestGrey);
   --background: var(--trueBlack);
