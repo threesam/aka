@@ -8,8 +8,7 @@
 
 :root {
   /* define colors as colors */
-  --red: #831b2d;
-  --orange: #E33614;
+  --red: #a7272d;
   --trueRed: #db1919;
   --purple: #8f62aa;
   --black: #161f2b;
@@ -23,7 +22,7 @@
   --white: #fff;
 
   /* define colors' intentions */
-  --primary: var(--orange);
+  --primary: var(--red);
   --secondary: var(--purple);
   --danger: var(--trueRed);
   --background: var(--lightestGrey);
@@ -335,8 +334,8 @@ button.small {
 
 /* themes */
 .dark {
-  --primary: var(--orange);
-  --secondary: var(--red);
+  --primary: var(--red);
+  --secondary: var(--pink);
   --cardBg: var(--darkestGrey);
   --background: var(--trueBlack);
   --secondaryBg: var(--darkerGrey);

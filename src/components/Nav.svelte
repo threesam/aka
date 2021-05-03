@@ -53,7 +53,7 @@ header nav div {
 </style>
 
 <header>
-	<a class="logo" aria-current="{segment === undefined ? 'page' : undefined}" href=".">Art<span>Killing</span>Apathy</a>
+	<a class="logo" aria-current="{segment === undefined ? 'page' : undefined}" href="."><Logo {segment} /></a>
 
 	<nav>
 		<a rel="prefetch" class={segment === "art" ? 'active' : ""} aria-current="{segment === 'art' ? 'page' : undefined}" href="art">art</a>

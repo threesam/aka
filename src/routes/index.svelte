@@ -50,6 +50,7 @@ return { data }
 	import Image from '../components/Image.svelte'
 	import Cta from '../components/Cta.svelte'
 	import SEO from '../components/SEO.svelte'
+	import Logo from '../components/icons/Logo.svelte'
 	let WordCloud
   onMount(async () => {
 		const mod = await import("../components/WordCloud.svelte")
@@ -65,8 +66,11 @@ return { data }
 		min-height: 100vh;
 	}
 
-	h1 {
+	.logo {
 		position: absolute;
+		width: 100%;
+		max-width: 56rem;
+		padding: var(--containerPadding);
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
@@ -140,21 +144,16 @@ span {
 	color: var(--secondary);
 }
 
-@media (min-width: 1024px) {
-	h1 {
-		font-size: var(--biggestH);
-	}
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-	h1 {
+@media (min-width: 768px) {
+	h2 {
 		font-size: var(--bigH);
 	}
 }
 
 @media (max-width: 767px) {
-	h1 {
+	h2 {
 		font-size: var(--h1);
+		text-align: left;
 	}
 }
 
@@ -166,7 +165,9 @@ span {
 <main>
 	<svelte:component this={WordCloud} words={transformedWords} shape={settings.wordCloud.shape}/>
 	<section>
-		<h1>Art<span>Killing</span>Apathy</h1>
+		<div class="logo">
+			<Logo home />
+		</div>
 	</section>
 	<section class="projects">
 		<h2>Featured Art</h2>
