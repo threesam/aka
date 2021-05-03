@@ -8,6 +8,8 @@
   const SEO_IMAGE_HEIGHT = 1200
   const TWITTER_IMAGE_HEIGHT = 628
 
+  const host = "https://artkillingapathy.com"
+
   export let title = 'ArtKillingApathy'
   export let description
   export let publishedAt
@@ -25,7 +27,7 @@
     openGraph={{
       title,
       description,
-      url: $page.host + $page.path,
+      url: host + $page.path,
       type: 'article',
       article: {
       publishedTime: publishedAt,
@@ -59,7 +61,7 @@
   openGraph={{
     title,
     description,
-    url: $page.host + $page.path,
+    url: host + $page.path,
     type: 'website',
     images: [
       {
