@@ -5,6 +5,7 @@
   export let url
   export let alt = ""
   export let caption
+  export let rounded = false
 
   let width
 
@@ -36,6 +37,11 @@
     margin: 0;
     position: relative;
   }
+
+  .rounded {
+    border-radius: 4px;
+    overflow: hidden;
+  }
   img {
     filter: brightness(90%);
     position: relative;
@@ -57,10 +63,9 @@
   }
 </style>
 
-<figure>
+<figure class:rounded use:parentWidth {width}>
   <img 
   {width}
-  use:parentWidth 
   class:loaded
   src={imageBuilder(url).width(width).auto('format').url()} 
   bind:this={thisImage}

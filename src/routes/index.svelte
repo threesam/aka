@@ -182,7 +182,7 @@ span {
 			{#each content as {title, slug, cta, image, alt}}
 				 <li>
 					<h3>{title}</h3>
-					<Image url={image} {alt} />
+					<Image rounded url={image} {alt} />
 					<div class="flex">
 						<Cta {...cta} />
 						<Cta secondary="true" url={`art/${slug}`} text="Description" {slug} />
