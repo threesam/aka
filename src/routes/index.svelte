@@ -50,7 +50,9 @@ return { data }
 	import Image from '../components/Image.svelte'
 	import Cta from '../components/Cta.svelte'
 	import SEO from '../components/SEO.svelte'
-	import Logo from '../components/icons/Logo.svelte'
+	import {darkMode} from '../utils/darkMode'
+
+	
 	let WordCloud
   onMount(async () => {
 		const mod = await import("../components/WordCloud.svelte")
@@ -105,6 +107,7 @@ return { data }
 li {
 	display: grid;
 	justify-content: center;
+	min-height: 300px;
 }
 
 /* div {
@@ -166,7 +169,11 @@ span {
 	<svelte:component this={WordCloud} words={transformedWords} shape={settings.wordCloud.shape}/>
 	<section>
 		<div class="logo">
-			<Logo home />
+			{#if $darkMode}
+      	<img src="ArtKill-light.svg" alt="full logo for art killing apathy">
+			{:else if !$darkMode}
+				<img src="ArtKilling.svg" alt="full logo for art killing apathy">
+			{/if}
 		</div>
 	</section>
 	<section class="projects">
@@ -175,7 +182,7 @@ span {
 			{#each content as {title, slug, cta, image, alt}}
 				 <li>
 					<h3>{title}</h3>
-						<Image url={image} {alt} />
+					<Image url={image} {alt} />
 					<div class="flex">
 						<Cta {...cta} />
 						<Cta secondary="true" url={`art/${slug}`} text="Description" {slug} />
