@@ -45,9 +45,9 @@
 			color: primary,
 			backgroundColor: background,
 			fontFamily: 'mono',
-			gridSize,
+			gridSize:3,
 			minSize: 1,
-			weightFactor: 2,
+			weightFactor: 5,
 			shape
 		})
 	})
