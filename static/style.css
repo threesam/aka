@@ -142,9 +142,14 @@ blockquote a {
 }
 
 .content p,
-.content h2 {
+.content h2,
+.content ul {
   max-width: 40rem;
   margin: 0 auto;
+}
+
+.content ul li {
+  margin-left: 1rem;
 }
 
 .content p {
