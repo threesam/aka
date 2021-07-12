@@ -57,5 +57,5 @@ a:hover {
 
 <footer>
   <p>For more content <span class="umami--click--footer{$page.path !== '/' ? `-${$page.path.substring(1).replace(/\//, '-')}` : '-home'}-newsletter"><a href="http://bit.ly/ActOutNewsletter">subscribe</a></span> to the Act Out! newsletter and for frequent updates, appearances and press <span class="umami--click--footer{$page.path !== '/' ? `-${$page.path.substring(1).replace(/\//, '-')}` : '-home'}-twitter"><a href="https://twitter.com/radicaleleanor" target="_blank" rel="noopener">follow me</a></span> on Twitter.</p>
-  <p>© 2014-{currentYear} Art Killing Apathy | <span>site by <a href="https://threesam.com">Sam</a></span></p>
+  <p>© 2014-{currentYear} Art Killing Apathy | <span class="umami--click--threesam{$page.path !== '/' ? `-${$page.path.substring(1).replace(/\//, '-')}` : '-home'}">site by <a href="https://threesam.com">Sam</a></span></p>
 </footer>
