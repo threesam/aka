@@ -110,13 +110,13 @@ li {
 	min-height: 300px;
 }
 
-/* div {
+.image-ctn {
 	margin: 0;
 	border-radius: 3px;
 	overflow: hidden;
 	height: 300px;
 	width: 300px;
-} */
+}
 
 span {
 	color: var(--primary);
@@ -182,9 +182,13 @@ span {
 			{#each content as {title, slug, cta, image, alt}}
 				 <li>
 					<h3>{title}</h3>
-					<Image rounded url={image} {alt} />
+					<div class="image-ctn">
+						<Image rounded url={image} {alt} />
+					</div>
 					<div class="flex">
-						<Cta {...cta} />
+						{#if cta}
+							<Cta {...cta} />
+						{/if}
 						<Cta secondary="true" url={`art/${slug}`} text="Description" {slug} />
 					</div>
 				</li>
