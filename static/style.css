@@ -152,12 +152,21 @@ blockquote a {
   margin-left: 1rem;
 }
 
-.content p {
+.content p, figure {
   padding: var(--containerPadding);
+  padding-bottom: 0;
 }
 
 .content h2 {
   padding: 2rem var(--containerPadding) 1.5rem var(--containerPadding);
+}
+
+.content blockquote {
+  margin: var(--containerPadding) auto 0 auto;
+  padding: var(--containerPadding);
+  background: var(--cardBg);
+  box-shadow: var(--level-3);
+  max-width: 40rem;
 }
 
 h1, h2, h3, h4, h5 {
@@ -190,14 +199,6 @@ ul {
 
 li {
   list-style: none;
-}
-
-blockquote {
-  margin: 1em auto;
-  padding: var(--containerPadding);
-  background: var(--cardBg);
-  box-shadow: var(--level-3);
-  max-width: 40rem;
 }
 
 label {
