@@ -11,7 +11,8 @@
 			"categories": categories[]->slug.current,
 			"excerpt": excerpt[0].children[0].text,
 			"image": featuredMedia.asset->url,
-			"alt": featuredMedia.alt
+			"alt": featuredMedia.alt,
+			"tags": tags[]->slug.current
 		}`
 		const categories = /* groq */`*[_type == "category"]|order(order asc){"slug": slug.current, title, description, order}`
 
@@ -33,7 +34,6 @@
 <script>
 	export let data
 	const {settings, posts, categories} = data
-
 	
 	import {slide, fade, fly} from 'svelte/transition'
 	import SEO from '../../components/SEO.svelte'

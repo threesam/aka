@@ -12,7 +12,8 @@
       "description": excerpt[0].children[0].text,
       body,
       publishedAt,
-			"author": authors[0]->name
+			"author": authors[0]->name,
+      "tags": tags[]->slug.current
     }`
 
 const post = await client
@@ -25,7 +26,8 @@ return {post}
 
 <script>
 	export let post;
-	const {title, image, alt, body, publishedAt, author, cta} = post
+	const {title, image, alt, body, publishedAt, author, cta, tags} = post
+  
   import {format, parseISO} from 'date-fns'
 	import BlockContent from '@movingbrands/svelte-portable-text'
 	import serializers from '../../components/serializers'
@@ -47,7 +49,7 @@ return {post}
 <Hero data={{title, image, alt}} />
 
 <Container>
-  <section class="content">
+  <section class="content {tags?.includes('poem') ? 'poem' : ''}">
     {#if author}
       <p>{format(parseISO(publishedAt), 'yyyy-MM-dd')}<br>by <a href="/about">{author}</a></p>
     {/if}

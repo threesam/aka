@@ -154,19 +154,28 @@ blockquote a {
 
 .content p, figure {
   padding: var(--containerPadding);
-  padding-bottom: 0;
 }
 
 .content h2 {
-  padding: 2rem var(--containerPadding) 1.5rem var(--containerPadding);
+  padding: var(--containerPadding) var(--containerPadding) 0 var(--containerPadding);
 }
 
 .content blockquote {
-  margin: var(--containerPadding) auto 0 auto;
+  margin: var(--containerPadding) auto var(--containerPadding) auto;
   padding: var(--containerPadding);
   background: var(--cardBg);
   box-shadow: var(--level-3);
   max-width: 40rem;
+}
+
+.poem p, .poem blockquote {
+  padding: 0 var(--containerPadding);
+  margin-top: 0;
+  min-height: 1rem;
+}
+
+.poem p:first-child {
+  padding-bottom: var(--containerPadding);
 }
 
 h1, h2, h3, h4, h5 {
