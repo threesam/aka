@@ -37,7 +37,10 @@ return {post}
 	import Cta from '../../components/Cta.svelte'
 
   function isPoem(tags) {
-    return tags?.includes('poem') ? 'content poem' : 'content'
+    if (tags && tags.includes('poem')) {
+      return 'content poem'
+    }
+    return 'content'
   }
 
   const containerClass = isPoem(tags)
