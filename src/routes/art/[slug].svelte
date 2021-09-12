@@ -49,7 +49,7 @@ return {post}
 <Hero data={{title, image, alt}} />
 
 <Container>
-  <section class="content {tags?.includes('poem') ? 'poem' : ''}">
+  <section class={tags?.includes('poem') ? 'content poem' : 'content'}>
     {#if author}
       <p>{format(parseISO(publishedAt), 'yyyy-MM-dd')}<br>by <a href="/about">{author}</a></p>
     {/if}
