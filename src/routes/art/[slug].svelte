@@ -35,6 +35,8 @@ return {post}
 	import Container from '../../components/Container.svelte'
 	import SEO from '../../components/SEO.svelte'
 	import Cta from '../../components/Cta.svelte'
+
+  const isPoem = (tags) => tags?.includes('poem') ? 'content poem' : 'content'
 </script>
 
 <style>
@@ -49,7 +51,7 @@ return {post}
 <Hero data={{title, image, alt}} />
 
 <Container>
-  <section class={tags?.includes('poem') ? 'content poem' : 'content'}>
+  <section class={isPoem}>
     {#if author}
       <p>{format(parseISO(publishedAt), 'yyyy-MM-dd')}<br>by <a href="/about">{author}</a></p>
     {/if}
