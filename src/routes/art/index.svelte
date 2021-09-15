@@ -26,7 +26,7 @@
     const data = await client
       .fetch(query)
 			.catch((err) => this.error(500, err))
-    
+			
     return {data}
   }
 </script>
@@ -48,17 +48,17 @@
 		} else {
 			return post
 		}
-	}).filter(post => searchList(post, query))
+	})//.filter(post => searchList(post, query))
 
 	function focus(node) {
 		return node.focus()
 	} 
 
-	let value = ""
+	$: value = ""
 	$: query = new RegExp(value, 'g')
 
 	function searchList(list, query) {
-		return list.title.toLowerCase().match(query) || list.excerpt.toLowerCase().match(query)
+		return list.slug.toLowerCase().match(query) || list.excerpt.toLowerCase().match(query)
 	}
 
 	let showSearch = false
@@ -87,16 +87,6 @@
 	h2 {
 		font-size: var(--h5);
 	}
-/* 
-	span {
-		font-size: var(--h5);
-	}
-
-	span span {
-		font-size: var(--h4);
-		margin-left: 0.25rem;
-	} */
-	
 	.primary {
 		color: var(--primary);
 	}
@@ -191,7 +181,7 @@
 		<h1>My Art</h1>
 		
 		<!-- SEARCH -->
-		<div class="search">
+		<!-- <div class="search">
 			{#if showSearch}
 			<label use:parentWidth for="search">
 				<input use:focus style="width: ${width};" transition:slide={{duration: 400}} type="text" bind:value placeholder="search" />
@@ -199,8 +189,7 @@
 			{:else}
 			<button in:fade={{delay: 400}} role="search" class="umami--click--search empty-button" on:click={() => showSearch = !showSearch}><Search size="30"/></button>
 			{/if}
-		</div>
-
+		</div> -->
 		<!-- SEARCH RESULTS -->
 		{#if value && filterPosts(posts).length}
 			{#if $selected.slug}
@@ -241,7 +230,8 @@
 	<!-- POSTS -->
 	<section class="content-section">
 		<ul>
-			{#each filterPosts(posts).slice(0, $more) as post, i (post.id)}
+			<!-- add .slice(0, $more) after filter posts -->
+			{#each filterPosts(posts) as post, i (post.id)} 
 				<ListCard data={post} {i} />
 			{:else}
 				{#if $selected.slug && !value}
@@ -251,9 +241,9 @@
 				{/if}
 			{/each}
 		</ul>
-		{#if filterPosts(posts).filter(post => searchList(post, query)).length > 9}
+		<!-- {#if filterPosts(posts).filter(post => searchList(post, query)).length > 9}
 			 <button class="umami--click--{$more}-more-{$selected.slug}" on:click={() => $more += 10}>show more</button>
-		{/if}
+		{/if} -->
 	</section>
 	
 </main>
