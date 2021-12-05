@@ -38,9 +38,18 @@
 	import {slide, fade, fly} from 'svelte/transition'
 	import SEO from '../../components/SEO.svelte'
 	import ListCard from '../../components/ListCard.svelte'
-	import Search from '../../components/icons/Search.svelte'
-	
-	import {selected, more} from '../../utils/store'
+
+	import { writable } from 'svelte/store'
+
+	const initializedCategory = {
+		title: '',
+		slug: '',
+		description: ''
+	}
+
+	const selected = writable(initializedCategory)
+
+	const more = writable(10)
 
 	$: filterPosts = (posts) => posts.filter(post => {
 		if($selected.slug) {
@@ -48,27 +57,65 @@
 		} else {
 			return post
 		}
-	})//.filter(post => searchList(post, query))
-
-	function focus(node) {
-		return node.focus()
-	} 
-
-	$: value = ""
-	$: query = new RegExp(value, 'g')
-
-	function searchList(list, query) {
-		return list.slug.toLowerCase().match(query) || list.excerpt.toLowerCase().match(query)
-	}
-
-	let showSearch = false
-	// let showCategories = false
-
-	let width
-  function parentWidth(node) {
-    width = node.parentElement.clientWidth;
-  }
+	})
 </script>
+
+<SEO title="Art" description="The collected works of Eleanor Goldfield" {...settings} />
+
+<main>
+
+	<section>
+		<h1>My Art</h1>
+
+		<!-- CATEGORIES -->
+		<ul class="flex">
+			<li><button class="umami--click--category-all {!$selected.slug ? 'selected' : ''}" on:click={() => {
+				$selected.slug = ""
+				$selected.title = ""
+				$selected.description = ""
+				}}>all</button></li>
+			{#each categories.filter(category => category.slug !== 'uncategorized') as {slug, title, description}, i}
+				<li><button class="umami--click--category-{slug} {$selected.slug === slug ? 'selected' : ''}" on:click={() => {
+					$selected.slug = slug
+					$selected.title = title
+					$selected.description = description
+					}}>{title.toLowerCase()}</button></li>
+			{/each}
+		</ul>
+
+		{#if $selected.description && filterPosts(posts).length}
+			<h2>{$selected.title}</h2>
+			<p in:slide><em>{$selected.description}</em></p>
+		{/if}
+		
+
+	</section>
+	
+	<!-- POSTS -->
+	<section class="content-section">
+		<ul>
+			{#each filterPosts(posts).slice(0, $more) as post, i (post.id)} 
+				<ListCard data={post} {i} />
+			{:else}
+				{#if $selected.slug}
+					<li in:fly={{y: 50}}>No posts in <em class="primary">{$selected.title.toLowerCase()}</em></li>
+				{:else}
+					<li in:fly={{y: 50}}>No posts to display</li>
+				{/if}
+			{/each}
+		</ul>
+		{#if filterPosts(posts).length > 9}
+			 <button class="umami--click--{$more}-more-{$selected.slug}" on:click={() => $more += 10}>show more</button>
+		{/if}
+	</section>
+	
+</main>
+
+
+
+
+
+
 
 <style>
 	main {
@@ -172,78 +219,3 @@
 		padding-top: var(--containerPadding);
 	}
 </style>
-
-<SEO title="Art" description="The collected works of Eleanor Goldfield" {...settings} />
-
-<main>
-
-	<section>
-		<h1>My Art</h1>
-		
-		<!-- SEARCH -->
-		<!-- <div class="search">
-			{#if showSearch}
-			<label use:parentWidth for="search">
-				<input use:focus style="width: ${width};" transition:slide={{duration: 400}} type="text" bind:value placeholder="search" />
-			</label>
-			{:else}
-			<button in:fade={{delay: 400}} role="search" class="umami--click--search empty-button" on:click={() => showSearch = !showSearch}><Search size="30"/></button>
-			{/if}
-		</div> -->
-		<!-- SEARCH RESULTS -->
-		{#if value && filterPosts(posts).length}
-			{#if $selected.slug}
-				<p transition:slide>{filterPosts(posts).length} matches for "{value}" in <em class="primary">{$selected.title.toLowerCase()}</em></p>	
-			{:else}
-				<p transition:slide>{filterPosts(posts).length} matches for "{value}"</p>
-			{/if}
-		{/if}
-
-		<!-- CATEGORIES -->
-		<ul class="flex">
-			<li><button class="umami--click--category-all {!$selected.slug ? 'selected' : ''}" on:click={() => {
-				$selected.slug = ""
-				$selected.title = ""
-				$selected.description = ""
-				value = ""
-				showSearch = false
-				}}>all</button></li>
-			{#each categories.filter(category => category.slug !== 'uncategorized') as {slug, title, description}, i}
-				<li><button class="umami--click--category-{slug} {$selected.slug === slug ? 'selected' : ''}" on:click={() => {
-					$selected.slug = slug
-					$selected.title = title
-					$selected.description = description
-					value = ""
-					showSearch = false
-					}}>{title.toLowerCase()}</button></li>
-			{/each}
-		</ul>
-
-		{#if $selected.description && filterPosts(posts).length}
-			<h2>{$selected.title}</h2>
-			<p in:slide><em>{$selected.description}</em></p>
-		{/if}
-		
-
-	</section>
-	
-	<!-- POSTS -->
-	<section class="content-section">
-		<ul>
-			<!-- add .slice(0, $more) after filter posts -->
-			{#each filterPosts(posts) as post, i (post.id)} 
-				<ListCard data={post} {i} />
-			{:else}
-				{#if $selected.slug && !value}
-					<li in:fly={{y: 50}}>No posts in <em class="primary">{$selected.title.toLowerCase()}</em></li>
-				{:else}
-					<li in:fly={{y: 50}}>No posts to display</li>
-				{/if}
-			{/each}
-		</ul>
-		<!-- {#if filterPosts(posts).filter(post => searchList(post, query)).length > 9}
-			 <button class="umami--click--{$more}-more-{$selected.slug}" on:click={() => $more += 10}>show more</button>
-		{/if} -->
-	</section>
-	
-</main>
