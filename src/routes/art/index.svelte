@@ -35,11 +35,12 @@
 	export let data
 	const {settings, posts, categories} = data
 	
-	import {slide, fade, fly} from 'svelte/transition'
+	import {slide, fly} from 'svelte/transition'
+	import { writable } from 'svelte/store'
+
+	// Components
 	import SEO from '../../components/SEO.svelte'
 	import ListCard from '../../components/ListCard.svelte'
-
-	import { writable } from 'svelte/store'
 
 	const initializedCategory = {
 		title: '',
@@ -49,7 +50,7 @@
 
 	const selected = writable(initializedCategory)
 
-	const more = writable(10)
+	const visiblePostsLength = writable(10)
 
 	$: filterPosts = (posts) => posts.filter(post => {
 		if($selected.slug) {
@@ -66,7 +67,6 @@
 
 	<section>
 		<h1>My Art</h1>
-
 		<!-- CATEGORIES -->
 		<ul class="flex">
 			<li><button class="umami--click--category-all {!$selected.slug ? 'selected' : ''}" on:click={() => {
@@ -87,14 +87,12 @@
 			<h2>{$selected.title}</h2>
 			<p in:slide><em>{$selected.description}</em></p>
 		{/if}
-		
-
 	</section>
 	
 	<!-- POSTS -->
 	<section class="content-section">
 		<ul>
-			{#each filterPosts(posts).slice(0, $more) as post, i (post.id)} 
+			{#each filterPosts(posts).slice(0, $visiblePostsLength) as post, i (post.id)} 
 				<ListCard data={post} {i} />
 			{:else}
 				{#if $selected.slug}
@@ -105,16 +103,11 @@
 			{/each}
 		</ul>
 		{#if filterPosts(posts).length > 9}
-			 <button class="umami--click--{$more}-more-{$selected.slug}" on:click={() => $more += 10}>show more</button>
+			 <button class="umami--click--{$visiblePostsLength}-more-{$selected.slug}" on:click={() => $visiblePostsLength += 10}>show more</button>
 		{/if}
 	</section>
 	
 </main>
-
-
-
-
-
 
 
 <style>
