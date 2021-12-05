@@ -14,7 +14,6 @@
     border-radius: 3px;
     font-family: var(--headingFont);
     padding: 5px 13px;
-    margin-right: 0.5rem;
     border: 0.125rem solid var(--primary);
     transition: all 0.3s ease-in-out;
   }
