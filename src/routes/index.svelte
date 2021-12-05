@@ -85,8 +85,10 @@ return { data }
 		width: 100%;
 		padding: 2rem;
 		margin-bottom: 2rem;
-		background: var(--primary);
-		color: var(--textColorInverted);
+		/* background: var(--primary); */
+		border-top: 2px solid var(--primary);
+		border-bottom: 2px solid var(--primary);
+		color: var(--primary);
 	}
 	.text {
 		padding: var(--containerPadding);
