@@ -111,12 +111,6 @@
 	
 </main>
 
-
-
-
-
-
-
 <style>
 	main {
 		min-height: 100vh;

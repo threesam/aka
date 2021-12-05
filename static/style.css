@@ -28,6 +28,7 @@
   --background: var(--lightestGrey);
   --secondaryBg: var(--lighterGrey);
   --textColor: var(--black);
+  --textColorInverted: white;
   --buttonTextColor: var(--background);
   --lineColor: var(--grey);
   --cardBg: var(--white);
@@ -355,6 +356,7 @@ button.small {
   --background: var(--trueBlack);
   --secondaryBg: var(--darkerGrey);
   --textColor: var(--lightestGrey);
+  --textColorInverted: black;
   --buttonTextColor: var(--trueBlack);
   --headerBackground: var(--darkestGrey);
   --headerTextColor: var(--white);

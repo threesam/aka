@@ -17,7 +17,7 @@
     const page = /* groq */ `*[_type == 'page'][0]{
 			"content": content[0..4]->{
 				title, 
-				excerpt,
+				"description": excerpt[0].children[0].text,
 				cta,
 				"slug": slug.current,
 				order,
@@ -82,83 +82,76 @@ return { data }
 	h2 {
 		text-align: center;
 		font-size: var(--bigH);
+		width: 100%;
+		padding: 2rem;
+		margin-bottom: 2rem;
+		background: var(--primary);
+		color: var(--textColorInverted);
+	}
+	.text {
+		padding: var(--containerPadding);
+	}
+
+	.text h3 {
+		margin-top: 0;
+	}
+
+	.ctas {
+		display: flex;
+		margin-bottom: 4rem;
 	}
 
 	h3 {
 		margin-bottom: 0.5rem;
 	}
 
-	.projects {
+	.projects ul {
 		max-width: 56rem;
-		padding: var(--containerPadding);
 		margin: 0 auto;
 	}
 
-	.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: var(--containerPadding);
-}
+	@media (max-width: 767px) {
+		h2 {
+			font-size: var(--h1);
+		}
 
-	.grid:first-child {
-  grid-column: 1 / 4; /* span from grid column line 1 to 3 (i.e., span 2 columns) */
-}
-
-li {
-	display: grid;
-	justify-content: center;
-	min-height: 300px;
-}
-
-.image-ctn {
-	margin: 0;
-	border-radius: 3px;
-	overflow: hidden;
-	height: 300px;
-	width: 300px;
-}
-
-span {
-	color: var(--primary);
-}
-
-.flex {
-	justify-content: flex-start;
-}
-
-.more {
-	display: grid;
-	place-items: center;
-	width: 100%;
-	height: 100%;
-}
-
-.more a {
-	text-decoration: none;
-	color: var(--textColor);
-	font-size: var(--h4);
-	font-family: var(--bodyFont);
-	margin: 50% 0;
-	border-bottom: 0.125rem solid var(--primary);
-}
-
-.more a:hover {
-	transition: all 0.69s ease-in-out;
-	color: var(--secondary);
-}
-
-@media (min-width: 768px) {
-	h2 {
-		font-size: var(--bigH);
+		.text {
+			padding-top: 0;
+		}
 	}
-}
 
-@media (max-width: 767px) {
-	h2 {
-		font-size: var(--h1);
-		text-align: left;
+	@media (min-width: 768px) {
+		h2 {
+			font-size: var(--bigH);
+		}
+		li {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+			margin-bottom: 3rem;
+		}
+		li:nth-child(even) {
+			flex-direction: row-reverse;
+			justify-content: flex-start;
+			text-align: right;
+		}
+
+		li:nth-child(even) .ctas {
+			flex-direction: row-reverse;
+			justify-content: flex-start;
+		}
+
+		li .image, li .text {
+			width: 50%;
+		}
+
+		li h3 {
+			margin-top: 0;
+		}
 	}
-}
+
+
 
 </style>
 
@@ -178,24 +171,24 @@ span {
 	</section>
 	<section class="projects">
 		<h2>Featured Art</h2>
-		<ul class="grid">
-			{#each content as {title, slug, cta, image, alt}}
+		<ul>
+			{#each content as {title, slug, cta, image, alt, description}}
 				 <li>
-					<h3>{title}</h3>
-					<div class="image-ctn">
+					<div class="image">
 						<Image rounded url={image} {alt} />
 					</div>
-					<div class="flex">
-						{#if cta}
+					<div class="text">
+						<h3>{title}</h3>
+						<p>{description}</p>
+						<div class="ctas">
+							{#if cta}
 							<Cta {...cta} />
-						{/if}
-						<Cta secondary="true" url={`art/${slug}`} text="Description" {slug} />
+							{/if}
+							<Cta secondary="true" url={`art/${slug}`} text="Learn More" {slug} />
+						</div>
 					</div>
 				</li>
 			{/each}
-			<li class="more">
-				<a href="art">more art</a>
-			</li>
 		</ul>
 	</section>
 </main>
