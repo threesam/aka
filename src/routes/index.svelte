@@ -84,6 +84,7 @@ return { data }
 		font-size: var(--bigH);
 		width: 100%;
 		padding: 2rem;
+		margin-top: 0;
 		margin-bottom: 2rem;
 		/* background: var(--primary); */
 		border-top: 2px solid var(--primary);
