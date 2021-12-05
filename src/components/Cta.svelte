@@ -11,7 +11,6 @@
     text-decoration: none;
     background: var(--primary);
     color: var(--background);
-    border-radius: 3px;
     font-family: var(--headingFont);
     padding: 5px 13px;
     border: 0.125rem solid var(--primary);
