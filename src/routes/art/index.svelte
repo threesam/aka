@@ -52,6 +52,8 @@
 
 	const visiblePostsLength = writable(10)
 
+	const slugs = posts.map(word => word.slug)
+
 	$: filterPosts = (posts) => posts.filter(post => {
 		if($selected.slug) {
 			return post.categories.includes($selected.slug)
@@ -106,6 +108,9 @@
 			 <button class="umami--click--{$visiblePostsLength}-more-{$selected.slug}" on:click={() => $visiblePostsLength += 10}>show more</button>
 		{/if}
 	</section>
+	{#each slugs as slug}
+	<a aria-hidden="true" style="position: absolute; visibility: hidden;" href="art/{slug}">{slug}</a>
+{/each}
 	
 </main>
 
