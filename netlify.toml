@@ -1,14 +1,16 @@
 [build]
-  base = "/"
-  publish = "__sapper__/export"
-  command = "yarn export"
+base = "/"
+command = "yarn export"
+publish = "__sapper__/export"
 
 [[redirects]]
-  from = "/*"
-  to = "/art/:splat"
+from = "/api/*"
+status = 200
+to = "/.netlify/functions/:splat"
+
+[[redirects]]
+from = "/*"
+to = "/art/:splat"
 
 [functions]
-  # Directory with serverless functions, including background functions,
-  # to deploy. This is relative to the base directory if one has been set, 
-  # or the root directory if a base hasn’t been set.
-  directory = "functions/"
+directory = "functions/"
