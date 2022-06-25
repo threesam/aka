@@ -28,6 +28,7 @@
   --background: var(--lightestGrey);
   --secondaryBg: var(--lighterGrey);
   --textColor: var(--black);
+  --textColorInverted: white;
   --buttonTextColor: var(--background);
   --lineColor: var(--grey);
   --cardBg: var(--white);
@@ -40,7 +41,7 @@
   /* Styles */
   --line: solid 0.125rem var(--lineColor);
   --baseFontSize: 100%;
-  --borderRadius: 4px;
+  --borderRadius: 0;
 
   /* Type */
   --headingFont: 'Anton';
@@ -152,12 +153,30 @@ blockquote a {
   margin-left: 1rem;
 }
 
-.content p {
+.content p, figure {
   padding: var(--containerPadding);
 }
 
 .content h2 {
-  padding: 2rem var(--containerPadding) 1.5rem var(--containerPadding);
+  padding: var(--containerPadding) var(--containerPadding) 0 var(--containerPadding);
+}
+
+.content blockquote {
+  margin: var(--containerPadding) auto var(--containerPadding) auto;
+  padding: var(--containerPadding);
+  background: var(--cardBg);
+  box-shadow: var(--level-3);
+  max-width: 40rem;
+}
+
+.poem p, .poem blockquote {
+  padding: 0 var(--containerPadding);
+  margin-top: 0;
+  min-height: 1rem;
+}
+
+.poem p:first-child {
+  padding-bottom: var(--containerPadding);
 }
 
 h1, h2, h3, h4, h5 {
@@ -192,14 +211,6 @@ li {
   list-style: none;
 }
 
-blockquote {
-  margin: 1em auto;
-  padding: var(--containerPadding);
-  background: var(--cardBg);
-  box-shadow: var(--level-3);
-  max-width: 40rem;
-}
-
 label {
   display: block;
   font-size: var(--smallText);
@@ -209,7 +220,7 @@ label {
 input, textarea {
   padding: 4px 5px;
   border: var(--line);
-  border-radius: 4px;
+  border-radius: 0;
   width: 100%;
 }
 
@@ -252,7 +263,7 @@ button {
   color: var(--buttonTextColor);
   background: var(--buttonColor);
   border: none;
-  border-radius: 10px;
+  border-radius: 0;
   padding: 10px 25px 5px 25px;
   box-shadow: var(--level-1);
   transition: 0.3s ease-in-out box-shadow;
@@ -345,6 +356,7 @@ button.small {
   --background: var(--trueBlack);
   --secondaryBg: var(--darkerGrey);
   --textColor: var(--lightestGrey);
+  --textColorInverted: black;
   --buttonTextColor: var(--trueBlack);
   --headerBackground: var(--darkestGrey);
   --headerTextColor: var(--white);

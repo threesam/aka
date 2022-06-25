@@ -62,7 +62,6 @@
 		color: var(--textColor);
 		font-weight: bold;
 		padding: 0.5rem;
-		border-radius: 2px;
 		transition: all 0.3s ease-in-out;
 		box-shadow: none;
 	}

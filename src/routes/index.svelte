@@ -1,7 +1,7 @@
 <script context="module">
-  import client from '../sanityClient'
-	
-  export async function preload() {
+	import client from '../sanityClient'
+
+	export async function preload() {
 		const siteSettings = /* groq */ `*[_type == "siteSettings"][0]{
 			title,
 			description,
@@ -13,11 +13,11 @@
 				uselessWords
 			}
 		}`
-    const words = /* groq */ `*[_type == "post"]{title, "title": excerpt[0].children[0].text}`
-    const page = /* groq */ `*[_type == 'page'][0]{
-			"content": content[0..4]->{
+		const words = /* groq */ `*[_type == "post"]{title, "title": excerpt[0].children[0].text}`
+		const page = /* groq */ `*[_type == 'page'][0]{
+			"content": content[]->{
 				title, 
-				excerpt,
+				"description": excerpt[0].children[0].text,
 				cta,
 				"slug": slug.current,
 				order,
@@ -28,170 +28,179 @@
 			}
 		}`
 
-const query = `{
+		const query = `{
 	"settings": ${siteSettings},
 	"words": ${words},
 	"page": ${page},
 }`
 
-const data = await client.fetch(query).catch((err) => this.error(500, err))
+		const data = await client.fetch(query).catch(err => this.error(500, err))
 
-return { data }
-}
+		return { data }
+	}
 </script>
 
 <script>
-
 	export let data
-	const {words, settings, page} = data
-	const {content} = page
-	
-	import {onMount} from 'svelte'
+	const { words, settings, page } = data
+	const { content } = page
+
+	import { onMount } from 'svelte'
 	import Image from '../components/Image.svelte'
 	import Cta from '../components/Cta.svelte'
 	import SEO from '../components/SEO.svelte'
-	import {darkMode} from '../utils/darkMode'
+	import SubscribeForm from '../components/SubscribeForm.svelte'
+	import { darkMode } from '../utils/darkMode'
 
-	
 	let WordCloud
-  onMount(async () => {
-		const mod = await import("../components/WordCloud.svelte")
+	onMount(async () => {
+		const mod = await import('../components/WordCloud.svelte')
 		WordCloud = mod.default
-  })
-	import {transform} from '../utils/transform'
+	})
+	import { transform } from '../utils/transform'
 	const transformedWords = transform(words, settings.wordCloud.uselessWords)
 </script>
+
+<SEO {...settings} />
+
+<main>
+	<svelte:component
+		this={WordCloud}
+		words={transformedWords}
+		shape={settings.wordCloud.shape}
+	/>
+	<section class="logo-container">
+		<div class="logo">
+			{#if $darkMode}
+				<img src="ArtKill-light.svg" alt="full logo for art killing apathy" />
+			{:else if !$darkMode}
+				<img src="ArtKilling.svg" alt="full logo for art killing apathy" />
+			{/if}
+		</div>
+		<SubscribeForm />
+	</section>
+	<section class="projects">
+		<h2>Featured Art</h2>
+		<ul>
+			{#each content as { title, slug, cta, image, alt, description }}
+				<li>
+					<div class="image">
+						<Image rounded url={image} {alt} />
+					</div>
+					<div class="text">
+						<h3>{title}</h3>
+						<p>{description}</p>
+						<div class="ctas">
+							{#if cta}
+								<Cta {...cta} />
+							{/if}
+							<Cta
+								secondary="true"
+								url={`art/${slug}`}
+								text="Learn More"
+								{slug}
+							/>
+						</div>
+					</div>
+				</li>
+			{/each}
+		</ul>
+	</section>
+</main>
 
 <style>
 	section {
 		width: 100%;
-		min-height: 100vh;
+		min-height: 80vh;
 	}
 
+	.logo-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
 	.logo {
-		position: absolute;
 		width: 100%;
+		height: 100%;
 		max-width: 56rem;
 		padding: var(--containerPadding);
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
 		margin: 0;
 	}
 
 	h2 {
 		text-align: center;
 		font-size: var(--bigH);
+		width: 100%;
+		padding: 2rem;
+		margin-top: 0;
+		margin-bottom: 2rem;
+		/* background: var(--primary); */
+		border-top: 2px solid var(--primary);
+		border-bottom: 2px solid var(--primary);
+		color: var(--primary);
+	}
+	.text {
+		padding: var(--containerPadding);
+	}
+
+	.text h3 {
+		margin-top: 0;
+	}
+
+	.ctas {
+		display: flex;
+		margin-bottom: 4rem;
 	}
 
 	h3 {
 		margin-bottom: 0.5rem;
 	}
 
-	.projects {
+	.projects ul {
 		max-width: 56rem;
-		padding: var(--containerPadding);
 		margin: 0 auto;
 	}
 
-	.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: var(--containerPadding);
-}
+	@media (max-width: 767px) {
+		h2 {
+			font-size: var(--h1);
+		}
 
-	.grid:first-child {
-  grid-column: 1 / 4; /* span from grid column line 1 to 3 (i.e., span 2 columns) */
-}
-
-li {
-	display: grid;
-	justify-content: center;
-	min-height: 300px;
-}
-
-/* div {
-	margin: 0;
-	border-radius: 3px;
-	overflow: hidden;
-	height: 300px;
-	width: 300px;
-} */
-
-span {
-	color: var(--primary);
-}
-
-.flex {
-	justify-content: flex-start;
-}
-
-.more {
-	display: grid;
-	place-items: center;
-	width: 100%;
-	height: 100%;
-}
-
-.more a {
-	text-decoration: none;
-	color: var(--textColor);
-	font-size: var(--h4);
-	font-family: var(--bodyFont);
-	margin: 50% 0;
-	border-bottom: 0.125rem solid var(--primary);
-}
-
-.more a:hover {
-	transition: all 0.69s ease-in-out;
-	color: var(--secondary);
-}
-
-@media (min-width: 768px) {
-	h2 {
-		font-size: var(--bigH);
+		.text {
+			padding-top: 0;
+		}
 	}
-}
 
-@media (max-width: 767px) {
-	h2 {
-		font-size: var(--h1);
-		text-align: left;
+	@media (min-width: 768px) {
+		h2 {
+			font-size: var(--bigH);
+		}
+		li {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+			margin-bottom: 3rem;
+		}
+		li:nth-child(even) {
+			flex-direction: row-reverse;
+			justify-content: flex-start;
+			text-align: right;
+		}
+
+		li:nth-child(even) .ctas {
+			flex-direction: row-reverse;
+			justify-content: flex-start;
+		}
+
+		li .image,
+		li .text {
+			width: 50%;
+		}
+
+		li h3 {
+			margin-top: 0;
+		}
 	}
-}
-
 </style>
-
-<SEO {...settings} />
-
-
-<main>
-	<svelte:component this={WordCloud} words={transformedWords} shape={settings.wordCloud.shape}/>
-	<section>
-		<div class="logo">
-			{#if $darkMode}
-      	<img src="ArtKill-light.svg" alt="full logo for art killing apathy">
-			{:else if !$darkMode}
-				<img src="ArtKilling.svg" alt="full logo for art killing apathy">
-			{/if}
-		</div>
-	</section>
-	<section class="projects">
-		<h2>Featured Art</h2>
-		<ul class="grid">
-			{#each content as {title, slug, cta, image, alt}}
-				 <li>
-					<h3>{title}</h3>
-					<Image rounded url={image} {alt} />
-					<div class="flex">
-						<Cta {...cta} />
-						<Cta secondary="true" url={`art/${slug}`} text="Description" {slug} />
-					</div>
-				</li>
-			{/each}
-			<li class="more">
-				<a href="art">more art</a>
-			</li>
-		</ul>
-	</section>
-</main>

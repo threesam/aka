@@ -9,7 +9,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: var(--borderRadius);
     background-color: var(--background);
     z-index: -10;
   }

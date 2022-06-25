@@ -39,7 +39,6 @@
   }
 
   .rounded {
-    border-radius: 4px;
     overflow: hidden;
   }
   img {

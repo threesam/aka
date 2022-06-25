@@ -33,7 +33,6 @@
     transition: all 0.3s ease-in-out;
     border-bottom: none;
     border: 0.125rem solid var(--secondaryBg);
-    border-radius: 10px;
     overflow: hidden;
   }
   a:hover {
