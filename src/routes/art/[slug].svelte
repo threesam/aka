@@ -1,9 +1,9 @@
 <script context="module">
-  import client from "../../sanityClient";
-	
-  export async function preload({params}) {
-		const {slug} = params
-    const query = /* groq */`*[_type == "post" && slug.current == $slug][0]{
+	import client from '../../sanityClient'
+
+	export async function preload({ params }) {
+		const { slug } = params
+		const query = /* groq */ `*[_type == "post" && slug.current == ${slug}][0]{
       title,
       cta,
       "image": featuredMedia.asset->url,
@@ -16,19 +16,19 @@
       "tags": tags[]->slug.current
     }`
 
-const post = await client
-.fetch(query, {slug})
-.catch((err) => this.error(500, err))
+		const post = await client
+			.fetch(query, { slug })
+			.catch(err => this.error(500, err))
 
-return {post}
-}
+		return { post }
+	}
 </script>
 
 <script>
-	export let post;
-	const {title, image, alt, body, publishedAt, author, cta, tags} = post
-  
-  import {format, parseISO} from 'date-fns'
+	export let post
+	const { title, image, alt, body, publishedAt, author, cta, tags } = post
+
+	import { format, parseISO } from 'date-fns'
 	import BlockContent from '@movingbrands/svelte-portable-text'
 	import serializers from '../../components/serializers'
 	import Hero from '../../components/Hero.svelte'
@@ -36,36 +36,38 @@ return {post}
 	import SEO from '../../components/SEO.svelte'
 	import Cta from '../../components/Cta.svelte'
 
-  function isPoem(tags) {
-    if (tags && tags.includes('poem')) {
-      return 'content poem'
-    }
-    return 'content'
-  }
+	function isPoem(tags) {
+		if (tags && tags.includes('poem')) {
+			return 'content poem'
+		}
+		return 'content'
+	}
 
-  const containerClass = isPoem(tags)
+	const containerClass = isPoem(tags)
 </script>
-
-<style>
-  p {
-    margin-bottom: 2rem;
-    font-size: var(--smallText);
-  }
-</style>
 
 <SEO {...post} />
 
-<Hero data={{title, image, alt}} />
+<Hero data={{ title, image, alt }} />
 
 <Container>
-  <section class={containerClass}>
-    {#if author}
-      <p>{format(parseISO(publishedAt), 'yyyy-MM-dd')}<br>by <a href="/about">{author}</a></p>
-    {/if}
-    <BlockContent blocks={body} {serializers} />
-    {#if cta}
-      <Cta {...cta} />
-    {/if}
-  </section>
+	<section class={containerClass}>
+		{#if author}
+			<p>
+				{format(parseISO(publishedAt), 'yyyy-MM-dd')}<br />by
+				<a href="/about">{author}</a>
+			</p>
+		{/if}
+		<BlockContent blocks={body} {serializers} />
+		{#if cta}
+			<Cta {...cta} />
+		{/if}
+	</section>
 </Container>
 
+<style>
+	p {
+		margin-bottom: 2rem;
+		font-size: var(--smallText);
+	}
+</style>
