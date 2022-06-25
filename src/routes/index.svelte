@@ -1,7 +1,7 @@
 <script context="module">
-  import client from '../sanityClient'
-	
-  export async function preload() {
+	import client from '../sanityClient'
+
+	export async function preload() {
 		const siteSettings = /* groq */ `*[_type == "siteSettings"][0]{
 			title,
 			description,
@@ -13,8 +13,8 @@
 				uselessWords
 			}
 		}`
-    const words = /* groq */ `*[_type == "post"]{title, "title": excerpt[0].children[0].text}`
-    const page = /* groq */ `*[_type == 'page'][0]{
+		const words = /* groq */ `*[_type == "post"]{title, "title": excerpt[0].children[0].text}`
+		const page = /* groq */ `*[_type == 'page'][0]{
 			"content": content[]->{
 				title, 
 				"description": excerpt[0].children[0].text,
@@ -28,39 +28,83 @@
 			}
 		}`
 
-const query = `{
+		const query = `{
 	"settings": ${siteSettings},
 	"words": ${words},
 	"page": ${page},
 }`
 
-const data = await client.fetch(query).catch((err) => this.error(500, err))
+		const data = await client.fetch(query).catch(err => this.error(500, err))
 
-return { data }
-}
+		return { data }
+	}
 </script>
 
 <script>
-
 	export let data
-	const {words, settings, page} = data
-	const {content} = page
-	
-	import {onMount} from 'svelte'
+	const { words, settings, page } = data
+	const { content } = page
+
+	import { onMount } from 'svelte'
 	import Image from '../components/Image.svelte'
 	import Cta from '../components/Cta.svelte'
 	import SEO from '../components/SEO.svelte'
-	import {darkMode} from '../utils/darkMode'
+	import { darkMode } from '../utils/darkMode'
 
-	
 	let WordCloud
-  onMount(async () => {
-		const mod = await import("../components/WordCloud.svelte")
+	onMount(async () => {
+		const mod = await import('../components/WordCloud.svelte')
 		WordCloud = mod.default
-  })
-	import {transform} from '../utils/transform'
+	})
+	import { transform } from '../utils/transform'
 	const transformedWords = transform(words, settings.wordCloud.uselessWords)
 </script>
+
+<SEO {...settings} />
+
+<main>
+	<svelte:component
+		this={WordCloud}
+		words={transformedWords}
+		shape={settings.wordCloud.shape}
+	/>
+	<section>
+		<div class="logo">
+			{#if $darkMode}
+				<img src="ArtKill-light.svg" alt="full logo for art killing apathy" />
+			{:else if !$darkMode}
+				<img src="ArtKilling.svg" alt="full logo for art killing apathy" />
+			{/if}
+		</div>
+	</section>
+	<section class="projects">
+		<h2>Featured Art</h2>
+		<ul>
+			{#each content as { title, slug, cta, image, alt, description }}
+				<li>
+					<div class="image">
+						<Image rounded url={image} {alt} />
+					</div>
+					<div class="text">
+						<h3>{title}</h3>
+						<p>{description}</p>
+						<div class="ctas">
+							{#if cta}
+								<Cta {...cta} />
+							{/if}
+							<Cta
+								secondary="true"
+								url={`art/${slug}`}
+								text="Learn More"
+								{slug}
+							/>
+						</div>
+					</div>
+				</li>
+			{/each}
+		</ul>
+	</section>
+</main>
 
 <style>
 	section {
@@ -145,7 +189,8 @@ return { data }
 			justify-content: flex-start;
 		}
 
-		li .image, li .text {
+		li .image,
+		li .text {
 			width: 50%;
 		}
 
@@ -153,45 +198,4 @@ return { data }
 			margin-top: 0;
 		}
 	}
-
-
-
 </style>
-
-<SEO {...settings} />
-
-
-<main>
-	<svelte:component this={WordCloud} words={transformedWords} shape={settings.wordCloud.shape}/>
-	<section>
-		<div class="logo">
-			{#if $darkMode}
-      	<img src="ArtKill-light.svg" alt="full logo for art killing apathy">
-			{:else if !$darkMode}
-				<img src="ArtKilling.svg" alt="full logo for art killing apathy">
-			{/if}
-		</div>
-	</section>
-	<section class="projects">
-		<h2>Featured Art</h2>
-		<ul>
-			{#each content as {title, slug, cta, image, alt, description}}
-				 <li>
-					<div class="image">
-						<Image rounded url={image} {alt} />
-					</div>
-					<div class="text">
-						<h3>{title}</h3>
-						<p>{description}</p>
-						<div class="ctas">
-							{#if cta}
-							<Cta {...cta} />
-							{/if}
-							<Cta secondary="true" url={`art/${slug}`} text="Learn More" {slug} />
-						</div>
-					</div>
-				</li>
-			{/each}
-		</ul>
-	</section>
-</main>
