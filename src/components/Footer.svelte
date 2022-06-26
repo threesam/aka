@@ -1,13 +1,15 @@
 <script>
 	import { stores } from '@sapper/app'
 	import SubscribeForm from '../components/SubscribeForm.svelte'
+	import SocialLinks from '../components/SocialLinks.svelte'
 
 	const { page } = stores()
 </script>
 
 <footer>
 	<SubscribeForm />
-	<p>
+	<SocialLinks footer />
+	<!-- <p>
 		For more content <span
 			class="umami--click--footer{$page.path !== '/'
 				? `-${$page.path.substring(1).replace(/\//, '-')}`
@@ -29,17 +31,18 @@
 	<p>
 		© 2014-{new Date().getFullYear()} Art Killing Apathy |
 		<span>site by <a href="https://threesam.com">Sam</a></span>
-	</p>
+	</p> -->
 </footer>
 
 <style>
 	footer {
 		display: grid;
 		place-content: center;
+		gap: 0.5rem;
 		width: 100%;
-		background: linear-gradient(var(--background), var(--cardBg));
+		background: linear-gradient(var(--secondaryBg), var(--cardBg));
 		color: inherit;
-		padding: var(--containerPadding);
+		padding: 5rem var(--containerPadding);
 	}
 
 	p {
