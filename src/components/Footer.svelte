@@ -27,11 +27,11 @@
 				rel="noopener">follow me</a
 			></span
 		> on Twitter.
-	</p>
+	</p> -->
 	<p>
 		© 2014-{new Date().getFullYear()} Art Killing Apathy |
 		<span>site by <a href="https://threesam.com">Sam</a></span>
-	</p> -->
+	</p>
 </footer>
 
 <style>
@@ -49,7 +49,7 @@
 		font-weight: 100;
 	}
 
-	p:first-child {
+	/* p:first-child {
 		max-width: calc(40rem - (2 * var(--containerPadding)));
 		text-align: center;
 		margin: 0;
@@ -57,14 +57,15 @@
 		padding: 3rem;
 		border: 0.125rem solid var(--secondaryBg);
 		box-shadow: var(--level-2);
-	}
+	} */
 
 	p:last-child {
 		width: 100%;
-		margin: var(--containerPadding) auto 0 auto;
+		/* margin: var(--containerPadding) auto 0 auto; */
+		margin: 0;
 		text-align: center;
 		font-size: var(--smallText);
-		padding: 2rem 0;
+		/* padding: 2rem 0; */
 		font-family: var(--headingFont);
 	}
 
