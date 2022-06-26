@@ -10,16 +10,16 @@ client.setConfig({
 })
 
 exports.handler = async function (event, context) {
-  const { email } = await event.body
+  const { email } = event.body
 
-  const response = await client.lists.addListMember(MAILCHIMP_LIST_ID, {
-    email_address: email,
-    status: "pending",
-  })
+  // const response = await client.lists.addListMember(MAILCHIMP_LIST_ID, {
+  //   email_address: email,
+  //   status: "pending",
+  // })
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ event, context, email, response }, null, 2)
+    body: JSON.stringify({ event, context, email }, null, 2)
   }
 }
 
