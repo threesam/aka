@@ -1,15 +1,18 @@
 const client = require('@mailchimp/mailchimp_marketing')
 
+// get env vars
+const { MAILCHIMP_API_KEY, MAILCHIMP_SERVER_PREFIX, MAILCHIMP_LIST_ID } = process.env
+
 // configure mailchimp client
 client.setConfig({
-  apiKey: process.env.MAILCHIMP_API_KEY,
-  server: process.env.MAILCHIMP_SERVER_PREFIX
+  apiKey: MAILCHIMP_API_KEY,
+  server: MAILCHIMP_SERVER_PREFIX
 })
 
 exports.handler = async function (event, context) {
   const { email } = await event.body
 
-  const response = await client.lists.addListMember("list_id", {
+  const response = await client.lists.addListMember(MAILCHIMP_LIST_ID, {
     email_address: email,
     status: "pending",
   })
@@ -19,3 +22,4 @@ exports.handler = async function (event, context) {
     body: JSON.stringify({ event, context, email, response }, null, 2)
   }
 }
+
