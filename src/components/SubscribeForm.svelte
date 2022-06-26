@@ -8,7 +8,7 @@
 		onSubmit: async values => {
 			const response = await fetch('/api/subscribe', {
 				method: 'POST',
-				body: JSON.stringify({ email: values }),
+				body: JSON.stringify({ email: values.email }),
 			})
 
 			console.log(response)
