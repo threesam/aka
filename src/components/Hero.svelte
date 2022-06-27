@@ -1,6 +1,6 @@
 <script>
-  import {onMount} from 'svelte'
-  import {scale} from 'svelte/transition'
+	import { onMount } from 'svelte'
+	import { scale } from 'svelte/transition'
 	import SplashFilter from './SplashFilter.svelte'
 
 	import imageBuilder from '../utils/imageUrlBuilder'
@@ -8,21 +8,43 @@
 	let w
 	let h
 	function parentWidth(node) {
-		w = node.parentElement.clientWidth;
-		h = node.parentElement.clientHeight;
+		w = node.parentElement.clientWidth
+		h = node.parentElement.clientHeight
 	}
 
 	export let data
-	const {image: src, alt, title} = data
+	const { image: src, alt, title } = data
 
-  let show = false
-  onMount(() => show = true)
+	let show = false
+	onMount(() => (show = true))
 </script>
+
+<section>
+	{#if show}
+		<div>
+			<h1 id={title}>{title}</h1>
+			<slot />
+		</div>
+		<img
+			use:parentWidth
+			in:scale={{ duration: 2000, start: 1.2, opacity: 0.2 }}
+			src={imageBuilder(src)
+				.width(w)
+				.height(h)
+				.fit('crop')
+				.crop('entropy')
+				.auto('format')
+				.url()}
+			{alt}
+		/>
+		<SplashFilter opacity="0.8" />
+	{/if}
+</section>
 
 <style>
 	section {
 		position: relative;
-		height: 100vh;
+		height: 50vh;
 		width: 100%;
 		display: grid;
 		place-content: center;
@@ -31,7 +53,7 @@
 		padding: var(--containerPadding);
 		box-shadow: var(--level-1);
 	}
-	
+
 	img {
 		position: absolute;
 		top: 0;
@@ -41,7 +63,7 @@
 		height: 100%;
 		z-index: -10;
 	}
-	
+
 	h1 {
 		font-size: clamp(var(--h3), 5vw, var(--bigH));
 		max-width: 70rem;
@@ -49,14 +71,3 @@
 		line-height: 1.1;
 	}
 </style>
-
-<section>
-	{#if show}
-		<div>
-			<h1 id={title}>{title}</h1>
-			<slot/>
-		</div>
-		<img use:parentWidth in:scale={{duration:2000, start: 1.2, opacity: 0.2}} src={imageBuilder(src).width(w).height(h).fit('crop').crop('entropy').auto('format').url()} {alt}>
-		<SplashFilter opacity="0.8" />
-	{/if}
-</section>
