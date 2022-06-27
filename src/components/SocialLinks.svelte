@@ -95,18 +95,17 @@
 		grid-template-columns: 1fr 1fr;
 		gap: 1rem;
 		align-items: center;
-		margin: unset;
-		margin-bottom: 0.5rem;
+		margin: 0;
 	}
 
 	ul li {
-		display: grid;
-		place-items: center;
 		margin-left: 0;
 	}
 
 	a {
 		color: var(--textColor);
+		display: grid;
+		place-content: center;
 		transition: all 0.3s;
 		border-bottom: none;
 	}
