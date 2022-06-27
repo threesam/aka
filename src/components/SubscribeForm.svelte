@@ -30,7 +30,7 @@
 				setTimeout(() => {
 					$form.email = ''
 					isSubmitted = false
-				}, 5000)
+				}, 3000)
 			} catch (error) {
 				console.error(error)
 			}
