@@ -1,33 +1,22 @@
 <script>
-	import { stores } from '@sapper/app'
 	import SubscribeForm from '../components/SubscribeForm.svelte'
 	import SocialLinks from '../components/SocialLinks.svelte'
 
-	const { page } = stores()
+	let flatten = false
+	function setSize(node) {
+		if (node.clientWidth < 767) {
+			flatten = true
+		}
+	}
 </script>
 
-<footer>
-	<SubscribeForm />
-	<SocialLinks footer />
-	<!-- <p>
-		For more content <span
-			class="umami--click--footer{$page.path !== '/'
-				? `-${$page.path.substring(1).replace(/\//, '-')}`
-				: '-home'}-newsletter"
-			><a href="http://bit.ly/ActOutNewsletter">subscribe</a></span
-		>
-		to the Act Out! newsletter and for frequent updates, appearances and press
-		<span
-			class="umami--click--footer{$page.path !== '/'
-				? `-${$page.path.substring(1).replace(/\//, '-')}`
-				: '-home'}-twitter"
-			><a
-				href="https://twitter.com/radicaleleanor"
-				target="_blank"
-				rel="noopener">follow me</a
-			></span
-		> on Twitter.
-	</p> -->
+<footer use:setSize>
+	<!-- CONTENT -->
+	<div class="content">
+		<SubscribeForm />
+		<SocialLinks {flatten} />
+	</div>
+	<!-- TRADEMARK -->
 	<p>
 		© 2014-{new Date().getFullYear()} Art Killing Apathy |
 		<span>site by <a href="https://threesam.com">Sam</a></span>
@@ -37,36 +26,34 @@
 <style>
 	footer {
 		display: grid;
-		place-content: center;
+		align-items: center;
+		justify-content: center;
 		gap: 0.5rem;
+		position: relative;
 		width: 100%;
 		background: linear-gradient(var(--secondaryBg), var(--cardBg));
 		color: inherit;
 		padding: 5rem var(--containerPadding);
 	}
 
-	p {
-		font-weight: 100;
+	.content {
+		min-width: 100%;
+		display: flex;
+		gap: 3rem;
 	}
 
-	/* p:first-child {
-		max-width: calc(40rem - (2 * var(--containerPadding)));
-		text-align: center;
-		margin: 0;
-		margin-top: calc(4 * var(--containerPadding));
-		padding: 3rem;
-		border: 0.125rem solid var(--secondaryBg);
-		box-shadow: var(--level-2);
-	} */
-
-	p:last-child {
+	p {
 		width: 100%;
-		/* margin: var(--containerPadding) auto 0 auto; */
+		max-width: 100%;
 		margin: 0;
 		text-align: center;
 		font-size: var(--smallText);
-		/* padding: 2rem 0; */
 		font-family: var(--headingFont);
+		font-weight: 100;
+		position: absolute;
+		bottom: 1rem;
+		width: 100%;
+		text-align: center;
 	}
 
 	a {
@@ -78,7 +65,10 @@
 		border-bottom: 0.125rem solid transparent;
 	}
 
-	@media (max-width: 500px) {
+	@media (max-width: 767px) {
+		.content {
+			flex-direction: column;
+		}
 		p:first-child {
 			text-align: left;
 			padding: var(--containerPadding);

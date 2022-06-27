@@ -1,4 +1,5 @@
 <script>
+	import { slide } from 'svelte/transition'
 	import { createForm } from 'svelte-forms-lib'
 
 	$: isSubmitted = false
@@ -25,6 +26,11 @@
 				}
 				// const json = await response.json()
 				isSubmitted = true
+
+				setTimeout(() => {
+					$form.email = ''
+					isSubmitted = false
+				}, 5000)
 			} catch (error) {
 				console.error(error)
 			}
@@ -33,26 +39,25 @@
 </script>
 
 <div class="subscribe-form">
-	{#if !isSubmitted}
-		<h3>Subscribe to email updates</h3>
-		<form
-			action="/api/subscribe"
-			method="post"
-			on:submit|preventDefault={handleSubmit}
-		>
-			<label for="email">
-				<input
-					type="email"
-					name="email"
-					id="email"
-					on:change={handleChange}
-					bind:value={$form.email}
-				/>
-			</label>
-			<button type="submit">Subscribe</button>
-		</form>
-	{:else}
-		<h5>{message}</h5>
+	<h3>Subscribe to email updates</h3>
+	<form
+		action="/api/subscribe"
+		method="post"
+		on:submit|preventDefault={handleSubmit}
+	>
+		<label for="email">
+			<input
+				type="email"
+				name="email"
+				id="email"
+				on:change={handleChange}
+				bind:value={$form.email}
+			/>
+		</label>
+		<button type="submit">Subscribe</button>
+	</form>
+	{#if isSubmitted}
+		<h5 transition:slide>{message}</h5>
 	{/if}
 </div>
 

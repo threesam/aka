@@ -2,8 +2,8 @@
 	import { stores } from '@sapper/app'
 	const { page } = stores()
 	import { scale } from 'svelte/transition'
-	export let footer
-	const d = footer ? 40 : 50
+	export let flatten
+	const d = 50
 
 	export let links = [
 		{
@@ -64,7 +64,7 @@
 	]
 </script>
 
-<ul class={footer ? 'footer' : ''}>
+<ul class={flatten ? 'flatten' : ''}>
 	{#each links as { href, title, svg }, i}
 		<li
 			class="umami--click--{$page.path !== '/'
@@ -86,7 +86,7 @@
 </ul>
 
 <style>
-	.footer {
+	.flatten {
 		display: flex;
 		justify-content: space-between;
 	}
@@ -98,9 +98,10 @@
 		margin-bottom: 0.5rem;
 	}
 
-	li {
+	ul li {
 		display: grid;
 		place-items: center;
+		margin-left: 0;
 	}
 
 	a {
