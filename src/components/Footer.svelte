@@ -33,7 +33,7 @@
 		width: 100%;
 		background: linear-gradient(var(--secondaryBg), var(--cardBg));
 		color: inherit;
-		padding: 5rem var(--containerPadding);
+		padding: 4rem var(--containerPadding);
 	}
 
 	.content {
@@ -68,6 +68,7 @@
 	@media (max-width: 767px) {
 		.content {
 			flex-direction: column;
+			gap: 1.5rem;
 		}
 		p:first-child {
 			text-align: left;

@@ -95,6 +95,7 @@
 		grid-template-columns: 1fr 1fr;
 		gap: 1rem;
 		align-items: center;
+		margin: unset;
 		margin-bottom: 0.5rem;
 	}
 

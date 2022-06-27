@@ -39,7 +39,7 @@
 </script>
 
 <div class="subscribe-form">
-	<h3>Subscribe to email updates</h3>
+	<h3>Follow for Updates</h3>
 	<form
 		action="/api/subscribe"
 		method="post"
@@ -50,6 +50,7 @@
 				type="email"
 				name="email"
 				id="email"
+				placeholder="enter email"
 				on:change={handleChange}
 				bind:value={$form.email}
 			/>
