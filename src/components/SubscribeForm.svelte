@@ -97,4 +97,10 @@
 	h5 {
 		margin-top: 0;
 	}
+
+	@media screen and (max-width: 600px) {
+		h3 {
+			font-size: var(--h4);
+		}
+	}
 </style>
