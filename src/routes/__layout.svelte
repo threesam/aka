@@ -1,8 +1,18 @@
 <script>
-	import Nav from '../components/Nav.svelte';
+	import Nav from '../components/Nav.svelte'
 	import Theme from '../components/Theme.svelte'
 	import Footer from '../components/Footer.svelte'
 </script>
+
+<Nav />
+
+<slot />
+
+<div>
+	<Theme />
+</div>
+
+<Footer />
 
 <style>
 	div {
@@ -15,14 +25,3 @@
 		opacity: 0.8;
 	}
 </style>
-
-<Nav />
-
-<slot/>
-
-
-<div>
-	<Theme />
-</div>
-
-<Footer />
