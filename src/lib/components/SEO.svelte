@@ -1,83 +1,84 @@
 <script>
-  import SvelteSeo from 'svelte-seo'
-  import imageBuilder from '../utils/imageUrlBuilder'
-  import { stores } from '@sapper/app';
-	const { page } = stores();
+	import SvelteSeo from 'svelte-seo'
+	import imageBuilder from '../utils/imageUrlBuilder'
+	import { page } from '$app/stores'
 
-  const SEO_IMAGE_WIDTH = 1200
-  const SEO_IMAGE_HEIGHT = 1200
-  const TWITTER_IMAGE_HEIGHT = 628
+	const SEO_IMAGE_WIDTH = 1200
+	const SEO_IMAGE_HEIGHT = 1200
+	const TWITTER_IMAGE_HEIGHT = 628
 
-  const host = "https://artkillingapathy.com"
+	const host = 'https://artkillingapathy.com'
 
-  export let title = 'ArtKillingApathy'
-  export let description
-  export let publishedAt
-  export let image
-  export let alt
-  export let tags
-  export let type = 'website'
+	export let title = 'ArtKillingApathy'
+	export let description
+	export let publishedAt
+	export let image
+	export let alt
+	export let tags
+	export let type = 'website'
 </script>
 
 {#if type !== 'website'}
-
-  <SvelteSeo 
-    {title}
-    {description}
-    openGraph={{
-      title,
-      description,
-      url: host + $page.path,
-      type: 'article',
-      article: {
-      publishedTime: publishedAt,
-      authors: [
-        "https://www.artkillingapathy.com/about"
-      ],
-      tags,
-    },
-      images: [
-        {
-          url: imageBuilder(image).width(SEO_IMAGE_WIDTH).height(SEO_IMAGE_HEIGHT),
-          width: SEO_IMAGE_WIDTH,
-          height: SEO_IMAGE_HEIGHT,
-          alt
-        }
-      ]
-    }} 
-    twitter={{
-      title,
-      description,
-      image: imageBuilder(image).width(SEO_IMAGE_WIDTH).height(TWITTER_IMAGE_HEIGHT),
-      imageAlt: alt,
-    }}
-  />
-
+	<SvelteSeo
+		{title}
+		{description}
+		openGraph={{
+			title,
+			description,
+			url: host + $page.params.pathname,
+			type: 'article',
+			article: {
+				publishedTime: publishedAt,
+				authors: ['https://www.artkillingapathy.com/about'],
+				tags,
+			},
+			images: [
+				{
+					url: imageBuilder(image)
+						.width(SEO_IMAGE_WIDTH)
+						.height(SEO_IMAGE_HEIGHT),
+					width: SEO_IMAGE_WIDTH,
+					height: SEO_IMAGE_HEIGHT,
+					alt,
+				},
+			],
+		}}
+		twitter={{
+			title,
+			description,
+			image: imageBuilder(image)
+				.width(SEO_IMAGE_WIDTH)
+				.height(TWITTER_IMAGE_HEIGHT),
+			imageAlt: alt,
+		}}
+	/>
 {:else}
-
-  <SvelteSeo 
-  {title}
-  {description}
-  openGraph={{
-    title,
-    description,
-    url: host + $page.path,
-    type: 'website',
-    images: [
-      {
-        url: imageBuilder(image).width(SEO_IMAGE_WIDTH).height(SEO_IMAGE_HEIGHT),
-        width: SEO_IMAGE_WIDTH,
-        height: SEO_IMAGE_HEIGHT,
-        alt
-      }
-    ]
-  }} 
-    twitter={{
-      title,
-      description,
-      image: imageBuilder(image).width(SEO_IMAGE_WIDTH).height(TWITTER_IMAGE_HEIGHT),
-      imageAlt: alt,
-    }}
-  />
-
+	<SvelteSeo
+		{title}
+		{description}
+		openGraph={{
+			title,
+			description,
+			url: host + $page.params.pathname,
+			type: 'website',
+			images: [
+				{
+					url: imageBuilder(image)
+						.width(SEO_IMAGE_WIDTH)
+						.height(SEO_IMAGE_HEIGHT),
+					width: SEO_IMAGE_WIDTH,
+					height: SEO_IMAGE_HEIGHT,
+					alt,
+				},
+			],
+		}}
+		twitter={{
+			title,
+			description,
+			image: imageBuilder(image)
+				.width(SEO_IMAGE_WIDTH)
+				.height(TWITTER_IMAGE_HEIGHT),
+			imageAlt: alt,
+		}}
+	/>
 {/if}
