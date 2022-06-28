@@ -1,7 +1,7 @@
 <script>
 	import { page } from '$app/stores'
 
-	$: segment = $page.params.pathname.substring(1)
+	$: segment = $page.url.pathname.substring(1)
 
 	import Logo from './icons/Logo.svelte'
 </script>

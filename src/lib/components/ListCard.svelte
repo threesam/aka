@@ -23,7 +23,7 @@
 	<a
 		style={`height: ${height}px;`}
 		rel="prefetch"
-		href="{$page.params.pathname}/{slug}"
+		href="{$page.url.pathname}/{slug}"
 	>
 		<div>
 			<h2>{title}</h2>

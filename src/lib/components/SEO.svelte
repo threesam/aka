@@ -25,7 +25,7 @@
 		openGraph={{
 			title,
 			description,
-			url: host + $page.params.pathname,
+			url: host + $page.url.pathname,
 			type: 'article',
 			article: {
 				publishedTime: publishedAt,
@@ -59,7 +59,7 @@
 		openGraph={{
 			title,
 			description,
-			url: host + $page.params.pathname,
+			url: host + $page.url.pathname,
 			type: 'website',
 			images: [
 				{

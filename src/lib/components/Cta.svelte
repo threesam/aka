@@ -5,9 +5,9 @@
 </script>
 
 <p
-	class="umami--click--{secondary ? 'secondary-cta' : 'cta'}{$page.params
+	class="umami--click--{secondary ? 'secondary-cta' : 'cta'}{$page.url
 		.pathname !== '/'
-		? `-${$page.params.pathname.substring(1).replace(/\//, '-')}`
+		? `-${$page.url.pathname.substring(1).replace(/\//, '-')}`
 		: '-home'}{slug ? `-${slug.current || slug}` : ''}"
 >
 	<a

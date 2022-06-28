@@ -67,8 +67,8 @@
 <ul class={flatten ? 'flatten' : ''}>
 	{#each links as { href, title, svg }, i}
 		<li
-			class="umami--click--{$page.params.pathname !== '/'
-				? `${$page.params.pathname.substring(1).replace(/\//, '-')}`
+			class="umami--click--{$page.url.pathname !== '/'
+				? `${$page.url.pathname.substring(1).replace(/\//, '-')}`
 				: 'home'}-{title.toLowerCase()}"
 		>
 			<!-- <a in:scale={{delay: ((i + 1) * 100) + 500, start: 0}} {href} aria-label={title}>{@html svg.code}</a> -->
