@@ -53,14 +53,14 @@
 	import Image from '$lib/components/Image.svelte'
 	import Cta from '$lib/components/Cta.svelte'
 	import SEO from '$lib/components/SEO.svelte'
-	import { darkMode } from '../utils/darkMode'
+	import { darkMode } from '$lib/utils/darkMode'
 
 	let WordCloud
 	onMount(async () => {
 		const mod = await import('$lib/components/WordCloud.svelte')
 		WordCloud = mod.default
 	})
-	import { transform } from '../utils/transform'
+	import { transform } from '$lib/utils/transform'
 	const transformedWords = transform(words, settings.wordCloud.uselessWords)
 </script>
 

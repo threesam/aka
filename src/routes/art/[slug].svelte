@@ -1,5 +1,5 @@
 <script context="module">
-	import client from '../../sanityClient'
+	import client from '$lib/sanityClient'
 
 	export async function load({ params: { slug } }) {
 		const query = /* groq */ `*[_type == "post" && slug.current == $slug][0]{

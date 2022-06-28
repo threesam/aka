@@ -1,5 +1,5 @@
 <script>
-  import {darkMode} from '../utils/darkMode'
+  import {darkMode} from '$lib/utils/darkMode'
   
   function changeTheme() {
     // grab body

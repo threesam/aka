@@ -2,7 +2,7 @@
   export let home = false
   
   import MediaQuery from "svelte-media-query";
-  import {darkMode} from '../../utils/darkMode'
+  import {darkMode} from '$lib/utils/darkMode'
 </script>
 
 <style>
