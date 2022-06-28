@@ -1,7 +1,7 @@
 [build]
 base = "/"
-command = "yarn export"
-publish = "__sapper__/export"
+command = "yarn build"
+publish = "build"
 
 [[redirects]]
 from = "/api/*"
