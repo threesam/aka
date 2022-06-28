@@ -1,7 +1,7 @@
 <script context="module">
 	import client from '$lib/sanityClient'
 
-	export async function preload() {
+	export async function load() {
 		const query = /* groq */ `*[_type == "siteSettings"][0]{
 			title,
 			description,
@@ -23,9 +23,13 @@
 			}
 		}`
 
-		const data = await client.fetch(query).catch(err => this.error(500, err))
+		const data = await client.fetch(query)
 
-		return { ...data }
+		return {
+			props: {
+				...data,
+			},
+		}
 	}
 </script>
 

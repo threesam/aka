@@ -1,7 +1,7 @@
 <script context="module">
-	import client from '../../sanityClient'
+	import client from '$lib/sanityClient'
 
-	export async function preload() {
+	export async function load() {
 		const siteSettings = /* groq */ `*[_type == "siteSettings"][0]{"image": featuredMedia.asset->url, "alt": featuredMedia.alt}`
 		const press = /* groq */ `*[_type == 'press']|order(publishedAt desc){
 			...
@@ -12,9 +12,13 @@
 			"press": ${press}
 		}`
 
-		const data = await client.fetch(query).catch(err => this.error(500, err))
+		const data = await client.fetch(query)
 
-		return { data }
+		return {
+			props: {
+				data,
+			},
+		}
 	}
 </script>
 
@@ -467,7 +471,6 @@
                     alt="Eleanor Goldfield Featured in Martin Luther King
                     Anniversary" />
                 </a> -->
-
 <style>
 	section {
 		padding: 0 var(--containerPadding);

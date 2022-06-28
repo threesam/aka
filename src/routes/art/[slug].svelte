@@ -1,8 +1,7 @@
 <script context="module">
 	import client from '../../sanityClient'
 
-	export async function preload({ params }) {
-		const { slug } = params
+	export async function load({ params: { slug } }) {
 		const query = /* groq */ `*[_type == "post" && slug.current == $slug][0]{
       title,
       cta,
@@ -16,11 +15,13 @@
       "tags": tags[]->slug.current
     }`
 
-		const post = await client
-			.fetch(query, { slug })
-			.catch(err => this.error(500, err))
+		const post = await client.fetch(query, { slug })
 
-		return { post }
+		return {
+			props: {
+				post,
+			},
+		}
 	}
 </script>
 
