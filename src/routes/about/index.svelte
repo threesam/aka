@@ -1,8 +1,8 @@
 <script context="module">
-  import client from "../../sanityClient"
+	import client from '$lib/sanityClient'
 
-  export async function preload() {
-		const query = /* groq */`*[_type == "siteSettings"][0]{
+	export async function preload() {
+		const query = /* groq */ `*[_type == "siteSettings"][0]{
 			title,
 			description,
 			tags,
@@ -22,25 +22,53 @@
 				"alt": image.alt
 			}
 		}`
-		
-    const data = await client
-      .fetch(query)
-			.catch((err) => this.error(500, err))
-    
-    return {...data}
-  }
+
+		const data = await client.fetch(query).catch(err => this.error(500, err))
+
+		return { ...data }
+	}
 </script>
 
 <script>
 	export let aka, author
-	import {blur} from 'svelte/transition'
+	import { blur } from 'svelte/transition'
 
 	import BlockContent from '@movingbrands/svelte-portable-text'
-	import serializers from '../../components/serializers'
-	import SEO from '../../components/SEO.svelte'
+	import serializers from '$lib/components/serializers'
+	import SEO from '$lib/components/SEO.svelte'
 
 	let selected = 'aka'
 </script>
+
+<SEO
+	title="About"
+	description="Information about ArtKillingApathy and Eleanor Goldfield"
+/>
+
+<section>
+	<div class="container">
+		<h1>About</h1>
+		<button
+			class={selected === 'aka' ? 'selected' : ''}
+			on:click={() => (selected = 'aka')}>this site</button
+		>
+		<button
+			class={selected === 'eleanor' ? 'selected' : ''}
+			on:click={() => (selected = 'eleanor')}>eleanor</button
+		>
+	</div>
+
+	{#if selected === 'aka'}
+		<div in:blur class="content">
+			<BlockContent blocks={aka.excerpt} {serializers} />
+			<!-- <Cta url="/press" text="Press" /> -->
+		</div>
+	{:else if selected === 'eleanor'}
+		<div in:blur class="content">
+			<BlockContent blocks={author.bio} {serializers} />
+		</div>
+	{/if}
+</section>
 
 <style>
 	.container {
@@ -65,7 +93,7 @@
 		transition: all 0.3s ease-in-out;
 		box-shadow: none;
 	}
-	
+
 	.selected {
 		transition: all 0.3s ease-in-out;
 		border-bottom: 0.125rem solid var(--primary);
@@ -79,25 +107,3 @@
 		padding-top: 0.5rem;
 	}
 </style>
-
-<SEO title="About" description="Information about ArtKillingApathy and Eleanor Goldfield" />
-
-<section>
-		<div class="container">
-			<h1>About</h1>
-			<button class={selected === 'aka' ? 'selected' : ''} on:click={() => selected = 'aka'}>this site</button>
-			<button class={selected ===  'eleanor' ? 'selected' : ''} on:click={() => selected = 'eleanor'}>eleanor</button>
-		</div>
-		
-		{#if selected === 'aka'}
-		<div in:blur class="content">
-			<BlockContent blocks={aka.excerpt} {serializers} />
-			<!-- <Cta url="/press" text="Press" /> -->
-		</div>
-			{:else if selected === 'eleanor'}
-			<div in:blur class="content">
-				<BlockContent blocks={author.bio} {serializers} />
-			</div>
-			{/if}
-	</section>
-	

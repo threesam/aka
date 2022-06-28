@@ -30,11 +30,11 @@
 
 	import { format, parseISO } from 'date-fns'
 	import BlockContent from '@movingbrands/svelte-portable-text'
-	import serializers from '../../components/serializers'
-	import Hero from '../../components/Hero.svelte'
-	import Container from '../../components/Container.svelte'
-	import SEO from '../../components/SEO.svelte'
-	import Cta from '../../components/Cta.svelte'
+	import serializers from '$lib/components/serializers'
+	import Hero from '$lib/components/Hero.svelte'
+	import Container from '$lib/components/Container.svelte'
+	import SEO from '$lib/components/SEO.svelte'
+	import Cta from '$lib/components/Cta.svelte'
 
 	function isPoem(tags) {
 		if (tags && tags.includes('poem')) {

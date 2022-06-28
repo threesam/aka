@@ -1,50 +1,42 @@
 <script context="module">
-  import client from '../../sanityClient'
+	import client from '../../sanityClient'
 
-  export async function preload() {
-    const siteSettings = /* groq */ `*[_type == "siteSettings"][0]{"image": featuredMedia.asset->url, "alt": featuredMedia.alt}`
-    const press = /* groq */ `*[_type == 'press']|order(publishedAt desc){
+	export async function preload() {
+		const siteSettings = /* groq */ `*[_type == "siteSettings"][0]{"image": featuredMedia.asset->url, "alt": featuredMedia.alt}`
+		const press = /* groq */ `*[_type == 'press']|order(publishedAt desc){
 			...
 		}`
 
-    const query = `{
+		const query = `{
 			"settings": ${siteSettings},
 			"press": ${press}
 		}`
 
-    const data = await client.fetch(query).catch((err) => this.error(500, err))
+		const data = await client.fetch(query).catch(err => this.error(500, err))
 
-    return { data }
-  }
+		return { data }
+	}
 </script>
 
 <script>
-  export let data
-  const { settings, press } = data
+	export let data
+	const { settings, press } = data
 
-  import Container from '../../components/Container.svelte'
+	import Container from '$lib/components/Container.svelte'
 </script>
 
-<style>
-  section {
-    padding: 0 var(--containerPadding);
-    max-width: 40rem;
-    margin: 0 auto;
-  }
-</style>
-
 <Container>
-  <section>
-    <h1>Press</h1>
-    <ul>
-      {#each press as item}
-      <li><a href={item.link}>{item.title}</a></li>
-      {/each}
-    </ul>
-  </section>
+	<section>
+		<h1>Press</h1>
+		<ul>
+			{#each press as item}
+				<li><a href={item.link}>{item.title}</a></li>
+			{/each}
+		</ul>
+	</section>
 </Container>
 
-    <!-- <span>Press</span>
+<!-- <span>Press</span>
         <iframe
           src="https://www.youtube.com/embed/L9TYGhHEK28"
           width="560"
@@ -475,3 +467,11 @@
                     alt="Eleanor Goldfield Featured in Martin Luther King
                     Anniversary" />
                 </a> -->
+
+<style>
+	section {
+		padding: 0 var(--containerPadding);
+		max-width: 40rem;
+		margin: 0 auto;
+	}
+</style>

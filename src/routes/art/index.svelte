@@ -1,9 +1,9 @@
 <script context="module">
-  import client from "../../sanityClient";
+	import client from '../../sanityClient'
 
-  export async function preload() {
-		const siteSettings = /* groq */`*[_type == "siteSettings"][0]{"image": featuredMedia.asset->url, "alt": featuredMedia.alt}`
-    const postsQuery = /* groq */`*[_type == 'post']|order(publishedAt desc){
+	export async function preload() {
+		const siteSettings = /* groq */ `*[_type == "siteSettings"][0]{"image": featuredMedia.asset->url, "alt": featuredMedia.alt}`
+		const postsQuery = /* groq */ `*[_type == 'post']|order(publishedAt desc){
 			"id": _id,
 			"slug": slug.current,
 			title,
@@ -14,38 +14,35 @@
 			"alt": featuredMedia.alt,
 			"tags": tags[]->slug.current
 		}`
-		const categories = /* groq */`*[_type == "category"]|order(order asc){"slug": slug.current, title, description, order}`
-
+		const categories = /* groq */ `*[_type == "category"]|order(order asc){"slug": slug.current, title, description, order}`
 
 		const query = `{
 			"settings": ${siteSettings},
 			"posts": ${postsQuery},
 			"categories": ${categories}
 		}`
-		
-    const data = await client
-      .fetch(query)
-			.catch((err) => this.error(500, err))
-			
-    return {data}
-  }
+
+		const data = await client.fetch(query).catch(err => this.error(500, err))
+
+		return { data }
+	}
 </script>
 
 <script>
 	export let data
-	const {settings, posts, categories} = data
-	
-	import {slide, fly} from 'svelte/transition'
+	const { settings, posts, categories } = data
+
+	import { slide, fly } from 'svelte/transition'
 	import { writable } from 'svelte/store'
 
 	// Components
-	import SEO from '../../components/SEO.svelte'
-	import ListCard from '../../components/ListCard.svelte'
+	import SEO from '$lib/components/SEO.svelte'
+	import ListCard from '$lib/components/ListCard.svelte'
 
 	const initializedCategory = {
 		title: '',
 		slug: '',
-		description: ''
+		description: '',
 	}
 
 	const selected = writable(initializedCategory)
@@ -54,34 +51,50 @@
 
 	const slugs = posts.map(word => word.slug)
 
-	$: filterPosts = (posts) => posts.filter(post => {
-		if($selected.slug) {
-			return post.categories.includes($selected.slug)
-		} else {
-			return post
-		}
-	})
+	$: filterPosts = posts =>
+		posts.filter(post => {
+			if ($selected.slug) {
+				return post.categories.includes($selected.slug)
+			} else {
+				return post
+			}
+		})
 </script>
 
-<SEO title="Art" description="The collected works of Eleanor Goldfield" {...settings} />
+<SEO
+	title="Art"
+	description="The collected works of Eleanor Goldfield"
+	{...settings}
+/>
 
 <main>
-
 	<section>
 		<h1>My Art</h1>
 		<!-- CATEGORIES -->
 		<ul class="flex">
-			<li><button class="umami--click--category-all {!$selected.slug ? 'selected' : ''}" on:click={() => {
-				$selected.slug = ""
-				$selected.title = ""
-				$selected.description = ""
-				}}>all</button></li>
-			{#each categories.filter(category => category.slug !== 'uncategorized') as {slug, title, description}, i}
-				<li><button class="umami--click--category-{slug} {$selected.slug === slug ? 'selected' : ''}" on:click={() => {
-					$selected.slug = slug
-					$selected.title = title
-					$selected.description = description
-					}}>{title.toLowerCase()}</button></li>
+			<li>
+				<button
+					class="umami--click--category-all {!$selected.slug ? 'selected' : ''}"
+					on:click={() => {
+						$selected.slug = ''
+						$selected.title = ''
+						$selected.description = ''
+					}}>all</button
+				>
+			</li>
+			{#each categories.filter(category => category.slug !== 'uncategorized') as { slug, title, description }, i}
+				<li>
+					<button
+						class="umami--click--category-{slug} {$selected.slug === slug
+							? 'selected'
+							: ''}"
+						on:click={() => {
+							$selected.slug = slug
+							$selected.title = title
+							$selected.description = description
+						}}>{title.toLowerCase()}</button
+					>
+				</li>
 			{/each}
 		</ul>
 
@@ -90,28 +103,36 @@
 			<p in:slide><em>{$selected.description}</em></p>
 		{/if}
 	</section>
-	
+
 	<!-- POSTS -->
 	<section class="content-section">
 		<ul>
-			{#each filterPosts(posts).slice(0, $visiblePostsLength) as post, i (post.id)} 
+			{#each filterPosts(posts).slice(0, $visiblePostsLength) as post, i (post.id)}
 				<ListCard data={post} {i} />
 			{:else}
 				{#if $selected.slug}
-					<li in:fly={{y: 50}}>No posts in <em class="primary">{$selected.title.toLowerCase()}</em></li>
+					<li in:fly={{ y: 50 }}>
+						No posts in <em class="primary">{$selected.title.toLowerCase()}</em>
+					</li>
 				{:else}
-					<li in:fly={{y: 50}}>No posts to display</li>
+					<li in:fly={{ y: 50 }}>No posts to display</li>
 				{/if}
 			{/each}
 		</ul>
 		{#if filterPosts(posts).length > 9}
-			 <button class="umami--click--{$visiblePostsLength}-more-{$selected.slug}" on:click={() => $visiblePostsLength += 10}>show more</button>
+			<button
+				class="umami--click--{$visiblePostsLength}-more-{$selected.slug}"
+				on:click={() => ($visiblePostsLength += 10)}>show more</button
+			>
 		{/if}
 	</section>
 	{#each slugs as slug}
-	<a aria-hidden="true" style="position: absolute; visibility: hidden;" href="art/{slug}">{slug}</a>
-{/each}
-	
+		<a
+			aria-hidden="true"
+			style="position: absolute; visibility: hidden;"
+			href="art/{slug}">{slug}</a
+		>
+	{/each}
 </main>
 
 <style>
@@ -182,7 +203,7 @@
 		transition: all 0.3s ease-in-out;
 		box-shadow: none;
 	}
-	
+
 	.selected {
 		transition: all 0.3s ease-in-out;
 		border-bottom: 0.125rem solid var(--primary);
@@ -202,7 +223,7 @@
 		border-radius: 0;
 		background: var(--background);
 		color: var(--textColor);
-		padding: 0.28rem; 
+		padding: 0.28rem;
 	}
 	/* magic number to match svg search icon */
 
