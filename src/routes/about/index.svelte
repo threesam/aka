@@ -62,16 +62,13 @@
 		>
 	</div>
 
-	{#if selected === 'aka'}
-		<div in:blur class="content">
-			<TextBlock text={aka.excerpt} />
-			<!-- <Cta url="/press" text="Press" /> -->
-		</div>
-	{:else if selected === 'eleanor'}
-		<div in:blur class="content">
-			<TextBlock text={author.bio} />
-		</div>
-	{/if}
+	<div in:blur class="content">
+		<TextBlock text={aka.excerpt} />
+		<!-- <Cta url="/press" text="Press" /> -->
+	</div>
+	<!-- <div in:blur class="content">
+		<TextBlock text={author.bio} />
+	</div> -->
 </section>
 
 <style>
