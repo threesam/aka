@@ -1,16 +1,8 @@
-// https://www.sanity.io/docs/what-you-need-to-know-about-block-text/presenting-block-text
-// https://github.com/movingbrands/svelte-portable-text
-import BlockContent from '@movingbrands/svelte-portable-text';
-// https://www.npmjs.com/package/@sanity/image-url
-import urlBuilder from '@sanity/image-url';
-import client from '../sanityClient';
-import Image from './Image.svelte';
-import Author from './Author.svelte';
-import Video from './Video.svelte';
-import Link from './Link.svelte';
-import Cta from './Cta.svelte';
-
-const urlFor = source => urlBuilder(client).image(source);
+import Image from './Image.svelte'
+import Author from './Author.svelte'
+import Video from './Video.svelte'
+import Link from './Link.svelte'
+import Cta from './Cta.svelte'
 
 export default {
   marks: {
@@ -61,4 +53,4 @@ export default {
       },
     }),
   },
-};
+}

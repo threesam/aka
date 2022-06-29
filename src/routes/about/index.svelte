@@ -6,8 +6,8 @@
 			title,
 			description,
 			tags,
-			"image": featuredMedia.asset->url, 
-			"alt": featuredMedia.alt,
+			"image": image.asset->url, 
+			"alt": image.alt,
 			"author": author->{
 				name,
 				"image": image.asset->url,
@@ -34,10 +34,10 @@
 </script>
 
 <script>
-	export let aka, author
+	export let aka, author, image
 	import { blur } from 'svelte/transition'
 
-	import BlockContent from '@movingbrands/svelte-portable-text'
+	import TextBlock from '$lib/components/TextBlock.svelte'
 	import serializers from '$lib/components/serializers'
 	import SEO from '$lib/components/SEO.svelte'
 
@@ -47,6 +47,7 @@
 <SEO
 	title="About"
 	description="Information about ArtKillingApathy and Eleanor Goldfield"
+	{image}
 />
 
 <section>
@@ -64,12 +65,12 @@
 
 	{#if selected === 'aka'}
 		<div in:blur class="content">
-			<BlockContent blocks={aka.excerpt} {serializers} />
+			<TextBlock text={aka.excerpt} {serializers} />
 			<!-- <Cta url="/press" text="Press" /> -->
 		</div>
 	{:else if selected === 'eleanor'}
 		<div in:blur class="content">
-			<BlockContent blocks={author.bio} {serializers} />
+			<TextBlock text={author.bio} {serializers} />
 		</div>
 	{/if}
 </section>
