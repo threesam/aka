@@ -3,14 +3,5 @@ base = "/"
 command = "npx pnpm build"
 publish = "build"
 
-[[redirects]]
-from = "/api/*"
-status = 200
-to = "/.netlify/functions/:splat"
-
-[[redirects]]
-from = "/*"
-to = "/art/:splat"
-
 [functions]
 directory = "functions/"
