@@ -4,7 +4,7 @@
 	import SEO from '$lib/components/SEO.svelte'
 
 	// ssr p5 sketch
-	import sketch from './sketch.js'
+	import sketch from '$lib/components/sketch.js'
 	let P5Sketch
 	onMount(async () => {
 		const mod = await import('$lib/components/CanvasP5.svelte')
@@ -12,12 +12,12 @@
 	})
 </script>
 
-<SEO title="Contact" description="Social links and contact form for Threesam" />
+<!-- <SEO title="Contact" description="Social links and contact form for Threesam" /> -->
 
 <main>
 	<section>
 		<Contact />
-		<svelte:component this={P5Sketch} {sketch} id=" contact-sketch" />
+		<!-- <svelte:component this={P5Sketch} {sketch} id=" contact-sketch" /> -->
 	</section>
 </main>
 
