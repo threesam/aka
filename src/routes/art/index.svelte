@@ -2,7 +2,7 @@
 	import client from '$lib/sanityClient'
 
 	export async function load() {
-		const siteSettings = /* groq */ `*[_type == "siteSettings"][0]{"image": featuredMedia.asset->url, "alt": featuredMedia.alt}`
+		const siteSettings = /* groq */ `*[_type == "siteSettings"][0]{"image": image.asset->url, "alt": image.alt}`
 		const postsQuery = /* groq */ `*[_type == 'post']|order(publishedAt desc){
 			"id": _id,
 			"slug": slug.current,
