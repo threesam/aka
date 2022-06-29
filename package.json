@@ -16,15 +16,12 @@
     "svelte-forms-lib": "^2.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-    "@babel/plugin-transform-runtime": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/runtime": "^7.0.0",
     "@movingbrands/svelte-portable-text": "^0.0.11",
+    "@portabletext/svelte": "^1.0.1",
     "@sanity/block-content-to-hyperscript": "^2.0.10",
-    "@sanity/image-url": "^0.140.22",
+    "@sanity/image-url": "^1.0.1",
     "@sveltejs/adapter-netlify": "1.0.0-next.65",
+    "@sveltejs/adapter-static": "1.0.0-next.34",
     "@sveltejs/kit": "next",
     "date-fns": "^2.21.1",
     "hex-rgb": "^4.3.0",
