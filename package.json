@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@movingbrands/svelte-portable-text": "^0.0.11",
-    "@portabletext/svelte": "^1.0.1",
+    "@portabletext/svelte": "^0.2.0",
     "@sanity/block-content-to-hyperscript": "^2.0.10",
     "@sanity/image-url": "^1.0.1",
     "@sveltejs/adapter-netlify": "1.0.0-next.65",

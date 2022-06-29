@@ -38,7 +38,6 @@
 	import { blur } from 'svelte/transition'
 
 	import TextBlock from '$lib/components/TextBlock.svelte'
-	import serializers from '$lib/components/serializers'
 	import SEO from '$lib/components/SEO.svelte'
 
 	let selected = 'aka'
@@ -65,12 +64,12 @@
 
 	{#if selected === 'aka'}
 		<div in:blur class="content">
-			<TextBlock text={aka.excerpt} {serializers} />
+			<TextBlock text={aka.excerpt} />
 			<!-- <Cta url="/press" text="Press" /> -->
 		</div>
 	{:else if selected === 'eleanor'}
 		<div in:blur class="content">
-			<TextBlock text={author.bio} {serializers} />
+			<TextBlock text={author.bio} />
 		</div>
 	{/if}
 </section>
