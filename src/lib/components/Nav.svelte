@@ -16,18 +16,21 @@
 	<nav>
 		<a
 			rel="prefetch"
+			sveltekit:prefetch
 			class={segment === 'art' ? 'active' : ''}
 			aria-current={segment === 'art' ? 'page' : undefined}
 			href="art">art</a
 		>
 		<a
 			rel="prefetch"
+			sveltekit:prefetch
 			class={segment === 'about' ? 'active' : ''}
 			aria-current={segment === 'about' ? 'page' : undefined}
 			href="about">about</a
 		>
 		<a
 			rel="prefetch"
+			sveltekit:prefetch
 			class={segment === 'contact' ? 'active' : ''}
 			aria-current={segment === 'contact' ? 'page' : undefined}
 			href="contact">contact</a
