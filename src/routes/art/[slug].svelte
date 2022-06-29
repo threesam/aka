@@ -26,6 +26,7 @@
 </script>
 
 <script>
+	export const prerender = true
 	export let post
 	const { title, image, alt, body, publishedAt, author, cta, tags } = post
 
