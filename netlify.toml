@@ -1,6 +1,6 @@
 [build]
 base = "/"
-command = "yarn build"
+command = "npx pnpm build"
 publish = "build"
 
 [[redirects]]
