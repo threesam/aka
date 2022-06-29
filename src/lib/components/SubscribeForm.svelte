@@ -16,8 +16,6 @@
 					body: JSON.stringify({ email: values.email }),
 				})
 
-				console.log('response', response)
-
 				if (response.status == 400) {
 					message = 'Already Subscribed!'
 				}

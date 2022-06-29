@@ -3,7 +3,7 @@
 	import { scale } from 'svelte/transition'
 	import SplashFilter from './SplashFilter.svelte'
 
-	import imageBuilder from '../utils/imageUrlBuilder'
+	import imageBuilder from '$lib/utils/imageUrlBuilder'
 
 	let w
 	let h

@@ -1,4 +1,4 @@
-import myConfiguredSanityClient from '../sanityClient'
+import myConfiguredSanityClient from '$lib/sanityClient'
 import imageUrlBuilder from '@sanity/image-url'
 
 const builder = imageUrlBuilder(myConfiguredSanityClient)

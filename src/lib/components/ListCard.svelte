@@ -4,7 +4,7 @@
 	const { slug, title, image: src, alt, excerpt, publishedAt } = data
 
 	import { fly } from 'svelte/transition'
-	import imageBuilder from '../utils/imageUrlBuilder'
+	import imageBuilder from '$lib/utils/imageUrlBuilder'
 	import SplashFilter from './SplashFilter.svelte'
 	import { splashMulti } from '../utils/store'
 	import { page } from '$app/stores'
