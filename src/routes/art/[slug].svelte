@@ -16,7 +16,6 @@
     }`
 
 		const post = await client.fetch(query, { slug })
-		console.log('post', post)
 
 		return {
 			props: {
