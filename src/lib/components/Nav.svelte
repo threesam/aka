@@ -2,6 +2,7 @@
 	import { page } from '$app/stores'
 
 	$: segment = $page.url.pathname.substring(1)
+	const origin = $page.url.origin
 
 	import Logo from './icons/Logo.svelte'
 </script>
@@ -19,21 +20,21 @@
 			sveltekit:prefetch
 			class={segment === 'art' ? 'active' : ''}
 			aria-current={segment === 'art' ? 'page' : undefined}
-			href="art">art</a
+			href={`${origin}/art/`}>art</a
 		>
 		<a
 			rel="prefetch"
 			sveltekit:prefetch
 			class={segment === 'about' ? 'active' : ''}
 			aria-current={segment === 'about' ? 'page' : undefined}
-			href="about">about</a
+			href={`${origin}/about/`}>about</a
 		>
 		<a
 			rel="prefetch"
 			sveltekit:prefetch
 			class={segment === 'contact' ? 'active' : ''}
 			aria-current={segment === 'contact' ? 'page' : undefined}
-			href="contact">contact</a
+			href={`${origin}/contact/`}>contact</a
 		>
 	</nav>
 </header>
