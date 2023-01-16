@@ -12,7 +12,7 @@
 
 <footer use:setSize>
 	<!-- CONTENT -->
-	<div class="content">
+	<div class="footer-content">
 		<SubscribeForm />
 		<SocialLinks {flatten} />
 	</div>
@@ -36,7 +36,7 @@
 		padding: 4rem var(--containerPadding);
 	}
 
-	.content {
+	.footer-content {
 		min-width: 100%;
 		display: flex;
 		gap: 3rem;

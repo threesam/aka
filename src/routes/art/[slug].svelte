@@ -16,6 +16,7 @@
     }`
 
 		const post = await client.fetch(query, { slug })
+		console.log('post', post)
 
 		return {
 			props: {
@@ -70,5 +71,9 @@
 <style>
 	p {
 		font-size: var(--smallText);
+	}
+
+	section ul {
+		padding: 3rem;
 	}
 </style>
