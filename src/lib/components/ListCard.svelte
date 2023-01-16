@@ -36,14 +36,17 @@
 				</p>
 			{/if}
 		</div>
-		<img
-			{width}
-			{height}
-			use:parentWidth
-			src={imageBuilder(src).width(width).height(height).auto('format').url()}
-			{alt}
-			loading="lazy"
-		/>
+		{#if src}
+			<img
+				{width}
+				{height}
+				use:parentWidth
+				src={imageBuilder(src).width(width).height(height).auto('format').url()}
+				{alt}
+				loading="lazy"
+			/>
+		{/if}
+
 		<SplashFilter />
 	</a>
 </li>
