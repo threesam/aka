@@ -52,23 +52,27 @@
 <section>
 	<div class="container">
 		<h1>About</h1>
-		<button
+		<!-- <button
 			class={selected === 'aka' ? 'selected' : ''}
 			on:click={() => (selected = 'aka')}>this site</button
 		>
 		<button
 			class={selected === 'eleanor' ? 'selected' : ''}
 			on:click={() => (selected = 'eleanor')}>eleanor</button
-		>
+		> -->
 	</div>
 
+	<!-- {#if selected === 'aka'} -->
+	<!-- content here -->
 	<div in:blur class="content">
 		<TextBlock text={aka.excerpt} />
 		<!-- <Cta url="/press" text="Press" /> -->
 	</div>
-	<!-- <div in:blur class="content">
-		<TextBlock text={author.bio} />
-	</div> -->
+	<!-- {:else if selected === 'eleanor'}
+		<div in:blur class="content">
+			<TextBlock text={author.bio} />
+		</div>
+	{/if} -->
 </section>
 
 <style>
