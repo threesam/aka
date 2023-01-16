@@ -36,7 +36,8 @@
 				{
 					url: imageBuilder(image)
 						.width(SEO_IMAGE_WIDTH)
-						.height(SEO_IMAGE_HEIGHT),
+						.height(SEO_IMAGE_HEIGHT)
+						.url(),
 					width: SEO_IMAGE_WIDTH,
 					height: SEO_IMAGE_HEIGHT,
 					alt,
@@ -48,7 +49,8 @@
 			description,
 			image: imageBuilder(image)
 				.width(SEO_IMAGE_WIDTH)
-				.height(TWITTER_IMAGE_HEIGHT),
+				.height(TWITTER_IMAGE_HEIGHT)
+				.url(),
 			imageAlt: alt,
 		}}
 	/>
@@ -65,7 +67,8 @@
 				{
 					url: imageBuilder(image)
 						.width(SEO_IMAGE_WIDTH)
-						.height(SEO_IMAGE_HEIGHT),
+						.height(SEO_IMAGE_HEIGHT)
+						.url(),
 					width: SEO_IMAGE_WIDTH,
 					height: SEO_IMAGE_HEIGHT,
 					alt,
@@ -77,7 +80,8 @@
 			description,
 			image: imageBuilder(image)
 				.width(SEO_IMAGE_WIDTH)
-				.height(TWITTER_IMAGE_HEIGHT),
+				.height(TWITTER_IMAGE_HEIGHT)
+				.url(),
 			imageAlt: alt,
 		}}
 	/>
