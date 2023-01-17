@@ -33,11 +33,11 @@
 		width: 100vw;
 		background: linear-gradient(var(--secondaryBg), var(--cardBg));
 		color: inherit;
-		padding: var(--containerPadding);
+		padding: 4rem var(--containerPadding);
 	}
 
 	.footer-content {
-		min-width: 100%;
+		width: 100%;
 		display: flex;
 		gap: 3rem;
 	}
