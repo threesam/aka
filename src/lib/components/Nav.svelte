@@ -11,7 +11,7 @@
 	<a
 		class="logo"
 		aria-current={segment === undefined ? 'page' : undefined}
-		href="."><Logo {segment} /></a
+		href={`${origin}/`}><Logo {segment} /></a
 	>
 
 	<nav>
