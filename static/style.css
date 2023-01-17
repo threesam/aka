@@ -150,11 +150,12 @@ blockquote a {
 }
 
 .content ul {
-  padding: var(--containerPadding);
+  padding: 0 var(--containerPadding);
 }
 
 .content ul li {
-  margin-left: 1rem;
+  margin-left: var(--containerPadding);
+  margin-bottom: var(--containerPadding);
   list-style-type: square;
 }
 

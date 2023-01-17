@@ -31,9 +31,11 @@
 		gap: 0.5rem;
 		position: relative;
 		width: 100vw;
+		max-width: 100%;
 		background: linear-gradient(var(--secondaryBg), var(--cardBg));
 		color: inherit;
 		padding: 4rem var(--containerPadding);
+		overflow: hidden;
 	}
 
 	.footer-content {
