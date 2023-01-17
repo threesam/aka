@@ -30,10 +30,10 @@
 		justify-content: center;
 		gap: 0.5rem;
 		position: relative;
-		width: 100%;
+		width: 100vw;
 		background: linear-gradient(var(--secondaryBg), var(--cardBg));
 		color: inherit;
-		padding: 4rem var(--containerPadding);
+		padding: var(--containerPadding);
 	}
 
 	.footer-content {
