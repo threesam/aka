@@ -155,7 +155,7 @@ blockquote a {
 
 .content ul li {
   font-size: var(--smallText);
-  margin-left: calc(var(--containerPadding) / 2);
+  margin-left: 1rem;
   margin-bottom: var(--containerPadding);
   list-style-type: square;
 }
