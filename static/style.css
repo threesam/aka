@@ -154,9 +154,14 @@ blockquote a {
 }
 
 .content ul li {
-  margin-left: var(--containerPadding);
+  font-size: var(--smallText);
+  margin-left: calc(var(--containerPadding) / 2);
   margin-bottom: var(--containerPadding);
   list-style-type: square;
+}
+
+.content ul li ul li {
+  margin-top: calc(var(--containerPadding) / 2);
 }
 
 .content p, figure {
