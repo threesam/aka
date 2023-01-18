@@ -72,15 +72,7 @@
 				: 'home'}-{title.toLowerCase()}"
 		>
 			<!-- <a in:scale={{delay: ((i + 1) * 100) + 500, start: 0}} {href} aria-label={title}>{@html svg.code}</a> -->
-			<a
-				in:scale={{
-					delay: (i === 0 ? 0 : i === 1 || i === 2 ? 150 : 300) + 500,
-					duration: 500,
-					start: 0,
-				}}
-				{href}
-				aria-label={title}>{@html svg.code}</a
-			>
+			<a {href} aria-label={title}>{@html svg.code}</a>
 		</li>
 	{/each}
 </ul>
