@@ -12,7 +12,8 @@
 	export let title = 'ArtKillingApathy'
 	export let description = ''
 	export let publishedAt = ''
-	export let image = ''
+	export let image =
+		'https://cdn.sanity.io/images/qcht0vh1/production/ced38505e9a21f744a3e36afb02ec89b8b28c4af-1888x945.png'
 	export let alt = ''
 	export let tags = []
 	export let type = 'website'
