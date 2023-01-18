@@ -1,4 +1,4 @@
-<!-- <script>
+<script>
 	import SvelteSeo from 'svelte-seo'
 	import imageBuilder from '$lib/utils/imageUrlBuilder'
 	import { page } from '$app/stores'
@@ -33,19 +33,19 @@
 				authors: ['https://www.artkillingapathy.com/about'],
 				tags,
 			},
-			images: [
-				{
-					url: image
-						? imageBuilder(image)
+			images: image
+				? [
+						{
+							url: imageBuilder(image)
 								.width(SEO_IMAGE_WIDTH)
 								.height(SEO_IMAGE_HEIGHT)
-								.url()
-						: '',
-					width: SEO_IMAGE_WIDTH,
-					height: SEO_IMAGE_HEIGHT,
-					alt,
-				},
-			],
+								.url(),
+							width: SEO_IMAGE_WIDTH,
+							height: SEO_IMAGE_HEIGHT,
+							alt,
+						},
+				  ]
+				: [],
 		}}
 		twitter={{
 			title,
@@ -68,19 +68,19 @@
 			description,
 			url: host + $page.url.pathname,
 			type: 'website',
-			images: [
-				{
-					url: image
-						? imageBuilder(image)
+			images: image
+				? [
+						{
+							url: imageBuilder(image)
 								.width(SEO_IMAGE_WIDTH)
 								.height(SEO_IMAGE_HEIGHT)
-								.url()
-						: '',
-					width: SEO_IMAGE_WIDTH,
-					height: SEO_IMAGE_HEIGHT,
-					alt,
-				},
-			],
+								.url(),
+							width: SEO_IMAGE_WIDTH,
+							height: SEO_IMAGE_HEIGHT,
+							alt,
+						},
+				  ]
+				: '',
 		}}
 		twitter={{
 			title,
@@ -94,4 +94,4 @@
 			imageAlt: alt,
 		}}
 	/>
-{/if} -->
+{/if}
