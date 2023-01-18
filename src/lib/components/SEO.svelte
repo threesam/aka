@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 	import SvelteSeo from 'svelte-seo'
 	import imageBuilder from '$lib/utils/imageUrlBuilder'
 	import { page } from '$app/stores'
@@ -94,4 +94,4 @@
 			imageAlt: alt,
 		}}
 	/>
-{/if}
+{/if} -->
