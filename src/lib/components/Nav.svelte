@@ -11,7 +11,7 @@
 	<a
 		class="logo"
 		aria-current={segment === undefined ? 'page' : undefined}
-		href={`${origin}/`}><Logo {segment} /></a
+		href={`${origin}`}><Logo {segment} /></a
 	>
 
 	<nav>
@@ -20,21 +20,21 @@
 			sveltekit:prefetch
 			class={segment === 'art' ? 'active' : ''}
 			aria-current={segment === 'art' ? 'page' : undefined}
-			href={`${origin}/art/`}>art</a
+			href={`${origin}/art`}>art</a
 		>
 		<a
 			rel="prefetch"
 			sveltekit:prefetch
 			class={segment === 'about' ? 'active' : ''}
 			aria-current={segment === 'about' ? 'page' : undefined}
-			href={`${origin}/about/`}>about</a
+			href={`${origin}/about`}>about</a
 		>
 		<a
 			rel="prefetch"
 			sveltekit:prefetch
 			class={segment === 'contact' ? 'active' : ''}
 			aria-current={segment === 'contact' ? 'page' : undefined}
-			href={`${origin}/contact/`}>contact</a
+			href={`${origin}/contact`}>contact</a
 		>
 	</nav>
 </header>
