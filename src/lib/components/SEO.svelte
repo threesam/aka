@@ -1,6 +1,6 @@
 <script>
 	import SvelteSeo from 'svelte-seo'
-	import image ? imageBuilder from '$lib/utils/imageUrlBuilder'
+	import imageBuilder from '$lib/utils/imageUrlBuilder'
 	import { page } from '$app/stores'
 
 	const SEO_IMAGE_WIDTH = 1200
