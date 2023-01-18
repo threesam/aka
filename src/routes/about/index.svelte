@@ -34,6 +34,7 @@
 </script>
 
 <script>
+	export const prerender = true
 	export let aka, author, image
 	import { blur } from 'svelte/transition'
 
