@@ -14,7 +14,10 @@
 	})
 </script>
 
-<!-- <SEO title="Contact" description="Social links and contact form for Threesam" /> -->
+<!-- <SEO title="Contact" description="Social links for Art Killing Apathy" /> -->
+<svelte:head>
+	<title>Contact</title>
+</svelte:head>
 
 <main>
 	<section>
