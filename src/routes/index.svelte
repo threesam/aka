@@ -45,6 +45,7 @@
 </script>
 
 <script>
+	export const prerender = true
 	export let data
 	const { words, settings, page } = data
 	const { content } = page

@@ -1,4 +1,6 @@
 <script>
+	export const prerender = true
+
 	import { onMount } from 'svelte'
 	import Contact from '$lib/components/Contact.svelte'
 	import SEO from '$lib/components/SEO.svelte'
