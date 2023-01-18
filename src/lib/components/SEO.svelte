@@ -10,11 +10,11 @@
 	const host = 'https://artkillingapathy.com'
 
 	export let title = 'ArtKillingApathy'
-	export let description
-	export let publishedAt
-	export let image
-	export let alt
-	export let tags
+	export let description = ''
+	export let publishedAt = ''
+	export let image = ''
+	export let alt = ''
+	export let tags = []
 	export let type = 'website'
 </script>
 
