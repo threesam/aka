@@ -117,11 +117,11 @@
 				<ListCard data={post} {i} />
 			{:else}
 				{#if $selected.slug}
-					<li in:fly={{ y: 50 }}>
+					<li>
 						No posts in <em class="primary">{$selected.title.toLowerCase()}</em>
 					</li>
 				{:else}
-					<li in:fly={{ y: 50 }}>No posts to display</li>
+					<li>No posts to display</li>
 				{/if}
 			{/each}
 		</ul>
