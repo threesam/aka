@@ -20,7 +20,7 @@
     "@portabletext/svelte": "^0.2.0",
     "@sanity/block-content-to-hyperscript": "^2.0.10",
     "@sanity/image-url": "^1.0.1",
-    "@sveltejs/adapter-netlify": "next",
+    "@sveltejs/adapter-netlify": "2.0.7",
     "@sveltejs/adapter-static": "next",
     "@sveltejs/kit": "next",
     "date-fns": "^2.21.1",
