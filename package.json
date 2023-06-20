@@ -13,7 +13,8 @@
     "@mailchimp/mailchimp_marketing": "^3.0.75",
     "@sanity/client": "^2.8.0",
     "dotenv": "^8.2.0",
-    "svelte-forms-lib": "^2.0.1"
+    "svelte-forms-lib": "^2.0.1",
+    "vite": "^4.3.9"
   },
   "devDependencies": {
     "@movingbrands/svelte-portable-text": "^0.0.11",
