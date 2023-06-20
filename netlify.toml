@@ -1,6 +1,6 @@
 [build]
 base = "/"
-command = "npx pnpm build"
+command = "pnpm run build"
 publish = "build"
 
 [functions]
