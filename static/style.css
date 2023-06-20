@@ -1,6 +1,6 @@
-@font-face{
-  font-family: 'Anton';
-  src: url('./fonts/Anton.woff') format('woff');
+@font-face {
+  font-family: "Anton";
+  src: url("./fonts/Anton.woff") format("woff");
   font-display: swap;
   font-style: normal;
   font-weight: 400;
@@ -44,7 +44,7 @@
   --borderRadius: 0;
 
   /* Type */
-  --headingFont: 'Anton';
+  --headingFont: "Anton";
   --bodyFont: sans-serif;
   --biggestH: 4.4rem;
   --bigH: 3.7rem;
@@ -57,17 +57,20 @@
   --smallText: 0.8rem;
 
   /* Elevation */
-  --level-1: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);
-  --level-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --level-3: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --level-4: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --level-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --level-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --level-3: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --level-4: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
   /* Positioning */
   --containerPadding: 1.5rem;
   --headerHeight: 3rem;
 
   /* Effects */
-  --splashMulti: 0.5
+  --splashMulti: 0.5;
 }
 
 @media only screen and (min-width: 500px) {
@@ -75,8 +78,6 @@
     --baseFontSize: 112.5%;
   }
 }
-
-
 
 /* FROM type-scale.com */
 
@@ -128,7 +129,7 @@ p {
 }
 
 .link,
-p a, 
+p a,
 li a,
 blockquote a {
   color: var(--textColor);
@@ -163,12 +164,14 @@ blockquote a {
   margin-top: calc(var(--containerPadding) / 2);
 }
 
-.content p, figure {
+.content p,
+figure {
   padding: var(--containerPadding);
 }
 
 .content h2 {
-  padding: var(--containerPadding) var(--containerPadding) 0 var(--containerPadding);
+  padding: var(--containerPadding) var(--containerPadding) 0
+    var(--containerPadding);
 }
 
 .content blockquote {
@@ -179,7 +182,8 @@ blockquote a {
   max-width: 40rem;
 }
 
-.poem p, .poem blockquote {
+.poem p,
+.poem blockquote {
   padding: 0 var(--containerPadding);
   margin-top: 0;
   min-height: 1rem;
@@ -189,7 +193,11 @@ blockquote a {
   padding-bottom: var(--containerPadding);
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   margin: 3rem 0 1.38rem;
   font-family: var(--headingFont);
   font-weight: 400;
@@ -200,17 +208,30 @@ h1 {
   font-size: var(--h1);
 }
 
-h2 {font-size: var(--h2);}
+h2 {
+  font-size: var(--h2);
+}
 
-h3 {font-size: var(--h3);}
+h3 {
+  font-size: var(--h3);
+}
 
-h4 {font-size: var(--h4);}
+h4 {
+  font-size: var(--h4);
+}
 
-h5 {font-size: var(--h5);}
+h5 {
+  font-size: var(--h5);
+}
 
-h6 {font-size: var(--h6);}
+h6 {
+  font-size: var(--h6);
+}
 
-small, .text_small {font-size: var(--smallText);}
+small,
+.text_small {
+  font-size: var(--smallText);
+}
 
 /* End type-scale */
 ul {
@@ -224,10 +245,11 @@ li {
 label {
   display: block;
   font-size: var(--smallText);
-  color: var(--textColor)
+  color: var(--textColor);
 }
 
-input, textarea {
+input,
+textarea {
   padding: 4px 5px;
   border: var(--line);
   border-radius: 0;
@@ -242,7 +264,6 @@ textarea:focus {
 
 figure {
   max-width: 100%;
-  max-height: 100vh;
 }
 
 img {
@@ -279,7 +300,7 @@ button {
   transition: 0.3s ease-in-out box-shadow;
 }
 
-button:hover {  
+button:hover {
   box-shadow: var(--level-4);
 }
 
@@ -302,7 +323,7 @@ button.small {
   grid-template-columns: repeat(var(--gridCols), 1fr);
 }
 
-.grid--split  {
+.grid--split {
   grid-template-columns: 1fr 2fr;
   grid-gap: 20px;
 }
@@ -356,7 +377,6 @@ button.small {
 .card > *:last-child {
   margin-bottom: 0;
 }
-
 
 /* themes */
 .dark {
