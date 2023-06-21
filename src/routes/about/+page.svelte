@@ -1,41 +1,7 @@
-<script context="module">
-  import client from "$lib/sanityClient";
-
-  export async function load() {
-    const query = /* groq */ `*[_type == "siteSettings"][0]{
-			title,
-			description,
-			tags,
-			"image": image.asset->url, 
-			"alt": image.alt,
-			"author": author->{
-				name,
-				"image": image.asset->url,
-				bio,
-				"slug": slug.current
-			},
-			"aka": {
-				title,
-				description,
-				excerpt,
-				"image": image.asset->url,
-				"alt": image.alt
-			}
-		}`;
-
-    const data = await client.fetch(query);
-
-    return {
-      props: {
-        ...data,
-      },
-    };
-  }
-</script>
-
 <script>
   export const prerender = true;
-  export let aka, author, image;
+  export let data;
+  const { aka, author, image } = data.data;
   import { blur } from "svelte/transition";
 
   import TextBlock from "$lib/components/TextBlock.svelte";

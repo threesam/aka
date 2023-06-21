@@ -1,45 +1,21 @@
-<script context="module">
-	import client from '$lib/sanityClient'
-
-	export async function load() {
-		const siteSettings = /* groq */ `*[_type == "siteSettings"][0]{"image": featuredMedia.asset->url, "alt": featuredMedia.alt}`
-		const press = /* groq */ `*[_type == 'press']|order(publishedAt desc){
-			...
-		}`
-
-		const query = `{
-			"settings": ${siteSettings},
-			"press": ${press}
-		}`
-
-		const data = await client.fetch(query)
-
-		return {
-			props: {
-				data,
-			},
-		}
-	}
-</script>
-
 <script>
-	export const prerender = true
+  export const prerender = true;
 
-	export let data
-	const { settings, press } = data
+  export let data;
+  const { settings, press } = data.data;
 
-	import Container from '$lib/components/Container.svelte'
+  import Container from "$lib/components/Container.svelte";
 </script>
 
 <Container>
-	<section>
-		<h1>Press</h1>
-		<ul>
-			{#each press as item}
-				<li><a href={item.link}>{item.title}</a></li>
-			{/each}
-		</ul>
-	</section>
+  <section>
+    <h1>Press</h1>
+    <ul>
+      {#each press as item}
+        <li><a href={item.link}>{item.title}</a></li>
+      {/each}
+    </ul>
+  </section>
 </Container>
 
 <!-- <span>Press</span>
@@ -474,9 +450,9 @@
                     Anniversary" />
                 </a> -->
 <style>
-	section {
-		padding: 0 var(--containerPadding);
-		max-width: 40rem;
-		margin: 0 auto;
-	}
+  section {
+    padding: 0 var(--containerPadding);
+    max-width: 40rem;
+    margin: 0 auto;
+  }
 </style>
