@@ -1,5 +1,4 @@
 <script>
-  export const prerender = true;
   export let data;
   const { post } = data;
   const { title, image, alt, body, publishedAt, author, cta, tags } = post;

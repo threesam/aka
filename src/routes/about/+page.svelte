@@ -1,5 +1,4 @@
 <script>
-  export const prerender = true;
   export let data;
   const { aka, author, image } = data.data;
   import { blur } from "svelte/transition";
