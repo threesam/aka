@@ -1,7 +1,6 @@
 import client from "@mailchimp/mailchimp_marketing";
 import { env } from "$env/dynamic/private";
 
-// configure mailchimp client
 client.setConfig({
   apiKey: env.MAILCHIMP_API_KEY,
   server: env.MAILCHIMP_SERVER_PREFIX,
