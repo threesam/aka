@@ -1,8 +1,9 @@
-import Image from './Image.svelte'
-import Author from './Author.svelte'
-import Video from './Video.svelte'
-import Link from './Link.svelte'
-import Cta from './Cta.svelte'
+import Image from "./Image.svelte";
+import Author from "./Author.svelte";
+import Video from "./Video.svelte";
+import Link from "./Link.svelte";
+import Line from "./Line.svelte";
+import Cta from "./Cta.svelte";
 
 export default {
   marks: {
@@ -25,14 +26,14 @@ export default {
       component: Image,
       childNodes: children,
       props: {
-        url: node
+        url: node,
       },
     }),
     videoUrl: ({ node, children }) => ({
       component: Video,
       childNodes: children,
       props: {
-        url: node.url
+        url: node.url,
       },
     }),
     cta: ({ node, children }) => ({
@@ -42,7 +43,7 @@ export default {
         url: node.url,
         text: node.text,
         secondary: node.secondary,
-        external: node.external
+        external: node.external,
       },
     }),
     authorReference: ({ children, node: { author } }) => ({
@@ -52,5 +53,12 @@ export default {
         author,
       },
     }),
+    lineBreak: ({ children, node: { type } }) => ({
+      component: Line,
+      childNodes: children,
+      props: {
+        type,
+      },
+    }),
   },
-}
+};
