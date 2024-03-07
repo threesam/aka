@@ -21,7 +21,6 @@ export async function GET({ url }) {
 
 export async function POST({ request }) {
   const { email } = await request.json();
-  console.log("email: ", email);
 
   let event;
   // create member
@@ -44,6 +43,5 @@ export async function POST({ request }) {
     }
   }
 
-  console.log({ email, event });
   return new Response(JSON.stringify({ email, event }, null, 2));
 }
